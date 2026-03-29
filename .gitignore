@@ -1,0 +1,62 @@
+.husky/_
+.DS_Store
+node_modules
+.worktrees
+.sst
+.env
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+# use vscode workspaces with peacock to have many vscodes with the same repo:
+*.code-workspace
+.codex
+*~
+playground
+tmp
+dist
+ts-dist
+storybook-static
+.turbo
+**/.serena
+.serena/
+/result
+refs
+Session.vim
+opencode.json
+a.out
+target
+.scripts
+.direnv/
+
+# Local dev files
+opencode-dev
+logs/
+*.bun-build
+
+# Telemetry ID
+telemetry-id
+tsconfig.tsbuildinfo
+
+# Analysis and reverse engineering folders
+KILO_CODE_REVERSE_ENGINEERING_CORPUS/
+EXECUTION_COMPLETION/
+.dave/
+
+# Development notes and version manifests
+START_V*_FROM_HERE.md
+V*_*.md
+V*_*.json
+
+# Archive and backup files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Local configuration and state
+.opencode/
+opencode-dev
+opencode.json

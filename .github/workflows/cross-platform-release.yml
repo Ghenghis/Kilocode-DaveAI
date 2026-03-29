@@ -1,0 +1,387 @@
+name: cross-platform-release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.2.3)'
+        required: false
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+env:
+  KILO_VERSION: ${{ inputs.version || github.event.release.tag_name }}
+
+jobs:
+  # Build CLI - Linux
+  build-cli-linux:
+    name: build-cli-linux
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build CLI
+        run: |
+          ./packages/opencode/script/build.ts
+        env:
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-cli-linux
+          path: packages/opencode/dist
+
+  # Build CLI - Windows
+  build-cli-windows:
+    name: build-cli-windows
+    runs-on: blacksmith-4vcpu-windows-2025
+    defaults:
+      run:
+        shell: bash
+    env:
+      GIT_AUTOCRLF: input
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build CLI
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          ./packages/opencode/script/build.ts
+        env:
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-cli-windows
+          path: packages/opencode/dist
+
+  # Build CLI - macOS
+  build-cli-macos:
+    name: build-cli-macos
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build CLI
+        run: |
+          ./packages/opencode/script/build.ts
+        env:
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-cli-macos
+          path: packages/opencode/dist
+
+  # Build VSIX - Linux
+  build-vsix-linux:
+    name: build-vsix-linux
+    needs: build-cli-linux
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install vsce
+        run: bun install -g @vscode/vsce
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: kilo-cli-linux
+          path: packages/opencode/dist
+
+      - name: Build VSIX
+        run: |
+          bun script/build.ts
+        working-directory: ./packages/kilo-vscode
+        env:
+          CLI_DIST_DIR: ../../packages/opencode/dist
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-vsix-linux
+          path: packages/kilo-vscode/out
+
+  # Build VSIX - Windows
+  build-vsix-windows:
+    name: build-vsix-windows
+    needs: build-cli-windows
+    runs-on: blacksmith-4vcpu-windows-2025
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install vsce
+        run: bun install -g @vscode/vsce
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: kilo-cli-windows
+          path: packages/opencode/dist
+
+      - name: Build VSIX
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          bun script/build.ts
+        working-directory: ./packages/kilo-vscode
+        env:
+          CLI_DIST_DIR: ../../packages/opencode/dist
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-vsix-windows
+          path: packages/kilo-vscode/out
+
+  # Build VSIX - macOS
+  build-vsix-macos:
+    name: build-vsix-macos
+    needs: build-cli-macos
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install vsce
+        run: bun install -g @vscode/vsce
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: kilo-cli-macos
+          path: packages/opencode/dist
+
+      - name: Build VSIX
+        run: |
+          bun script/build.ts
+        working-directory: ./packages/kilo-vscode
+        env:
+          CLI_DIST_DIR: ../../packages/opencode/dist
+          KILO_VERSION: ${{ env.KILO_VERSION }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-vsix-macos
+          path: packages/kilo-vscode/out
+
+  # Package desktop - Linux
+  package-desktop-linux:
+    name: package-desktop-linux
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build repo
+        run: bun run build:repo
+
+      - name: Package desktop
+        run: bun run package:desktop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-desktop-linux
+          path: |
+            packages/desktop-electron/dist/**
+            packages/desktop-electron/release/**
+
+  # Package desktop - Windows
+  package-desktop-windows:
+    name: package-desktop-windows
+    runs-on: blacksmith-4vcpu-windows-2025
+    defaults:
+      run:
+        shell: bash
+    env:
+      GIT_AUTOCRLF: input
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build repo
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          bun run build:repo
+
+      - name: Package desktop
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          bun run package:desktop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-desktop-windows
+          path: |
+            packages/desktop-electron/dist/**
+            packages/desktop-electron/release/**
+
+  # Package desktop - macOS
+  package-desktop-macos:
+    name: package-desktop-macos
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build repo
+        run: bun run build:repo
+
+      - name: Package desktop
+        run: bun run package:desktop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kilo-desktop-macos
+          path: |
+            packages/desktop-electron/dist/**
+            packages/desktop-electron/release/**
+
+  # Create Release with all artifacts
+  create-release:
+    name: create-release
+    needs:
+      - build-cli-linux
+      - build-cli-windows
+      - build-cli-macos
+      - build-vsix-linux
+      - build-vsix-windows
+      - build-vsix-macos
+      - package-desktop-linux
+      - package-desktop-windows
+      - package-desktop-macos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          files: |
+            artifacts/kilo-cli-linux/**
+            artifacts/kilo-cli-windows/**
+            artifacts/kilo-cli-macos/**
+            artifacts/kilo-vsix-linux/**
+            artifacts/kilo-vsix-windows/**
+            artifacts/kilo-vsix-macos/**
+            artifacts/kilo-desktop-linux/**
+            artifacts/kilo-desktop-windows/**
+            artifacts/kilo-desktop-macos/**
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Publish to npm
+  publish-npm:
+    name: publish-npm
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-bun
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Download CLI artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: kilo-cli-linux
+          path: packages/opencode/dist
+
+      - name: Publish to npm
+        run: |
+          npm publish
+        working-directory: ./packages/opencode
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+  # Publish VSIX to Marketplace
+  publish-vscode:
+    name: publish-vscode
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+
+      - name: Download VSIX artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: kilo-vsix-*
+          path: vsix
+
+      - name: Publish to VS Code Marketplace
+        run: |
+          for f in vsix/**/*.vsix; do
+            vsce publish --packagePath "$f"
+          done
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_TOKEN }}

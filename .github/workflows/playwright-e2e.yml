@@ -1,0 +1,27 @@
+name: playwright-e2e
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-bun
+      - name: Install Playwright browsers for app
+        run: bunx playwright install --with-deps chromium
+        working-directory: packages/app
+      - name: Run app E2E
+        run: bun run test:e2e:app
+      - name: Run vscode visual tests
+        run: bun run test:e2e:vscode
+      - name: Upload Playwright reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-reports
+          path: |
+            packages/app/playwright-report/**
+            packages/kilo-vscode/test-results/**

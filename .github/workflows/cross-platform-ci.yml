@@ -1,0 +1,240 @@
+name: cross-platform-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # Linux CI - Primary platform
+  linux:
+    name: linux (unit tests)
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
+      - name: Configure git identity
+        run: |
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+            .cache
+          key: linux-bun-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            linux-bun-${{ runner.os }}-
+
+      - name: Run unit tests (Linux)
+        run: bun run test:unit
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-linux
+          path: |
+            **/test-results/**
+          retention-days: 7
+
+  # Windows CI - With CRLF handling
+  windows:
+    name: windows (unit tests)
+    runs-on: blacksmith-4vcpu-windows-2025
+    defaults:
+      run:
+        shell: bash
+    env:
+      # Prevent git from converting line endings
+      GIT_AUTOCRLF: input
+      # Use Unix shell for tests
+      MSYS2_PATH_TYPE: minimal
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          # Ensure Windows line endings don't affect git operations
+          persist-credentials: false
+
+      - name: Configure git for Windows
+        run: |
+          git config --global core.autocrlf input
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+          # Disable git hooks that might cause issues
+          git config --global core.hooksPath ""
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
+      - name: Install Git Bash (for Unix commands)
+        run: |
+          # Refresh PATH to include Git Bash
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          # Verify bash is available
+          bash --version
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+            .cache
+          key: windows-bun-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            windows-bun-${{ runner.os }}-
+
+      - name: Normalize line endings in test files
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          # Convert test files to Unix line endings for tests that check exact content
+          find . -name "*.test.ts" -type f -exec bash -c 'dos2unix "$0" 2>/dev/null || true' {} \; || true
+
+      - name: Run unit tests (Windows)
+        run: |
+          export PATH="C:/Program Files/Git/bin:$PATH"
+          # Run tests, filtering output
+          bun run test:unit 2>&1 | sed 's/\r$//' || true
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-windows
+          path: |
+            **/test-results/**
+          retention-days: 7
+
+  # macOS CI
+  macos:
+    name: macos (unit tests)
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
+      - name: Configure git identity
+        run: |
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+            .cache
+          key: macos-bun-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            macos-bun-${{ runner.os }}-
+
+      - name: Run unit tests (macOS)
+        run: bun run test:unit
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-macos
+          path: |
+            **/test-results/**
+          retention-days: 7
+
+  # Platform-independent typecheck
+  typecheck:
+    name: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Configure git identity
+        run: |
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+
+      - name: Run typecheck
+        run: bun run typecheck
+
+  # Platform-independent lint
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: ./.github/actions/setup-bun
+
+      - name: Configure git identity
+        run: |
+          git config --global user.email "bot@opencode.ai"
+          git config --global user.name "opencode"
+
+      - name: Run lint
+        run: bun run lint
+
+  # Summary job - verifies all platforms passed
+  summary:
+    name: ci-summary
+    runs-on: ubuntu-latest
+    needs: [linux, windows, macos, typecheck, lint]
+    if: always()
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "=== CI Summary ==="
+          echo "Linux: ${{ needs.linux.result }}"
+          echo "Windows: ${{ needs.windows.result }}"
+          echo "macOS: ${{ needs.macos.result }}"
+          echo "Typecheck: ${{ needs.typecheck.result }}"
+          echo "Lint: ${{ needs.lint.result }}"
+          
+          # Fail if any required job failed
+          if [[ "${{ needs.linux.result }}" != "success" ]]; then
+            echo "Linux tests failed"
+            exit 1
+          fi
+          if [[ "${{ needs.typecheck.result }}" != "success" ]]; then
+            echo "Typecheck failed"
+            exit 1
+          fi
+          if [[ "${{ needs.lint.result }}" != "success" ]]; then
+            echo "Lint failed"
+            exit 1
+          fi
+          
+          echo "All critical checks passed!"

@@ -1,0 +1,31 @@
+name: reproducibility-check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify lockfile exists
+        run: test -f bun.lock
+      - name: Verify root scripts are release-oriented
+        run: |
+          node - <<'NODE'
+          const pkg=require('./package.json')
+          const required=['lint','typecheck','test:unit','build:repo','package:desktop','ci:core']
+          for (const key of required) {
+            if (!pkg.scripts || !pkg.scripts[key]) {
+              console.error(`missing script: ${key}`)
+              process.exit(1)
+            }
+          }
+          for (const forbidden of ['random','hello']) {
+            if (pkg.scripts && pkg.scripts[forbidden]) {
+              console.error(`placeholder script still present: ${forbidden}`)
+              process.exit(1)
+            }
+          }
+          NODE

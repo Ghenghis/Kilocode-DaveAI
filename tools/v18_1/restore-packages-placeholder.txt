@@ -1,0 +1,3 @@
+This file exists only to mark the expected tools/v18_1 path.
+Restore the real `packages/` tree separately as documented in:
+EXECUTION_COMPLETION/10_RESTORE_PACKAGES_FOLDER.md
