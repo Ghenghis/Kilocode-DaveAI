@@ -43,7 +43,7 @@
     "@kobalte/core": "catalog:",
     "@kilocode/sdk": "workspace:*",
     "@opencode-ai/ui": "workspace:*",
-    "@opencode-ai/util": "workspace:*",
+    "@kilocode/util": "workspace:*",
     "@shikijs/transformers": "3.9.2",
     "@solid-primitives/active-element": "2.1.3",
     "@solid-primitives/audio": "1.4.2",
