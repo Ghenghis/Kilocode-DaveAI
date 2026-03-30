@@ -217,7 +217,7 @@ jobs:
           bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install Dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Build Package
         run: |
@@ -260,7 +260,7 @@ jobs:
           bun-version: ${{ env.BUN_VERSION }}
 
       - name: Install Dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Build Extension
         run: |
