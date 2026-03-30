@@ -4,17 +4,48 @@
   "version": "7.1.9",
   "type": "module",
   "license": "MIT",
-  "description": "Kilo-specific i18n translations and overrides",
+  "description": "Internationalization support for Kilo Code",
   "exports": {
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "devDependencies": {
     "@tsconfig/node22": "catalog:",
     "@types/bun": "catalog:",
     "typescript": "catalog:",
     "@typescript/native-preview": "catalog:"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    "locales/**/*"
+  ],
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "localization",
+    "translations"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/kilo-i18n"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

@@ -1,0 +1,344 @@
+name: 🚀 Release Automation
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 7.1.9)'
+        required: true
+        type: string
+      create_github_release:
+        description: 'Create GitHub release'
+        required: false
+        type: boolean
+        default: true
+      publish_npm:
+        description: 'Publish to NPM'
+        required: false
+        type: boolean
+        default: true
+      publish_vscode:
+        description: 'Publish VS Code extension'
+        required: false
+        type: boolean
+        default: true
+
+env:
+  NODE_VERSION: '20'
+  BUN_VERSION: '1.3.10'
+
+jobs:
+  # Pre-release validation
+  validate:
+    name: 🔍 Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_prerelease: ${{ steps.version.outputs.is_prerelease }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Extract Version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION="${{ github.event.inputs.version }}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [[ "$VERSION" =~ -alpha|-beta|-rc ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+          echo "Release version: $VERSION"
+
+      - name: Validate Release
+        run: |
+          bun run validate:release
+          bun run validate:tests
+
+      - name: Run Test Suite
+        run: |
+          bun run ci:core
+          bun run test:playwright
+
+  # Build all packages
+  build:
+    name: 🔨 Build Packages
+    runs-on: ubuntu-latest
+    needs: validate
+    strategy:
+      matrix:
+        package:
+          - opencode
+          - kilo-gateway
+          - kilo-telemetry
+          - kilo-i18n
+          - plugin
+          - util
+          - kilo-ui
+          - app
+          - desktop
+          - desktop-electron
+          - storybook
+          - kilo-docs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Package
+        run: |
+          bun run --cwd packages/${{ matrix.package }} build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.package }}
+          path: packages/${{ matrix.package }}/dist/
+          retention-days: 7
+
+  # Build VS Code Extension
+  build-vscode:
+    name: 🔨 Build VS Code Extension
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Extension
+        run: |
+          bun run extension
+
+      - name: Package Extension
+        run: |
+          cd packages/kilo-vscode
+          npx vsce package --out ${{ github.workspace }}/kilo-code-${{ needs.validate.outputs.version }}.vsix
+
+      - name: Upload Extension Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extension
+          path: kilo-code-${{ needs.validate.outputs.version }}.vsix
+          retention-days: 7
+
+  # Generate Release Artifacts
+  generate-artifacts:
+    name: 📦 Generate Release Artifacts
+    runs-on: ubuntu-latest
+    needs: [validate, build, build-vscode]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: build-*
+          merge-multiple: true
+
+      - name: Download VS Code Extension
+        uses: actions/download-artifact@v4
+        with:
+          name: vscode-extension
+
+      - name: Generate Artifacts
+        run: |
+          bun run generate:artifacts
+
+      - name: Upload Release Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: release/
+          retention-days: 30
+
+  # Create GitHub Release
+  create-release:
+    name: 🎉 Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate, generate-artifacts]
+    if: github.event.inputs.create_github_release != 'false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Release Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: release/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          name: Release ${{ needs.validate.outputs.version }}
+          body_path: release/GITHUB_RELEASE.md
+          draft: false
+          prerelease: ${{ needs.validate.outputs.is_prerelease }}
+          files: |
+            release/CHECKSUMS.sha256
+            release/release-manifest.json
+            release/RELEASE_INFO.md
+            release/*.vsix
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Publish to NPM
+  publish-npm:
+    name: 📦 Publish to NPM
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    if: github.event.inputs.publish_npm != 'false'
+    strategy:
+      matrix:
+        package:
+          - '@kilocode/cli'
+          - '@kilocode/kilo-gateway'
+          - '@kilocode/kilo-telemetry'
+          - '@kilocode/kilo-i18n'
+          - '@kilocode/plugin'
+          - '@kilocode/util'
+          - '@kilocode/kilo-ui'
+          - '@opencode-ai/app'
+          - '@opencode-ai/desktop'
+          - '@opencode-ai/desktop-electron'
+          - '@opencode-ai/storybook'
+          - '@kilocode/kilo-docs'
+          - '@kilocode/sdk'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ matrix.package }}
+          path: packages/${{ matrix.package }}/dist/
+
+      - name: Publish to NPM
+        run: |
+          cd packages/${{ matrix.package }}
+          bun publish --tag ${{ needs.validate.outputs.is_prerelease == 'true' && 'next' || 'latest' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # Publish VS Code Extension
+  publish-vscode:
+    name: 📦 Publish VS Code Extension
+    runs-on: ubuntu-latest
+    needs: [validate, build-vscode]
+    if: github.event.inputs.publish_vscode != 'false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download VS Code Extension
+        uses: actions/download-artifact@v4
+        with:
+          name: vscode-extension
+
+      - name: Publish to VS Code Marketplace
+        run: |
+          npx vsce publish --packagePath kilo-code-${{ needs.validate.outputs.version }}.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+  # Update Documentation
+  update-docs:
+    name: 📚 Update Documentation
+    runs-on: ubuntu-latest
+    needs: [validate, create-release]
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Update Version in Docs
+        run: |
+          # Update version in documentation
+          sed -i "s/version: .*/version: ${{ needs.validate.outputs.version }}/" docs/_config.yml
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/_config.yml
+          git commit -m "📚 Update documentation version to ${{ needs.validate.outputs.version }}"
+          git push
+
+  # Post-release Notifications
+  notify:
+    name: 📢 Post-Release Notifications
+    runs-on: ubuntu-latest
+    needs: [validate, create-release, publish-npm, publish-vscode]
+    if: always()
+    steps:
+      - name: Notify Success
+        if: needs.publish-npm.result == 'success' && needs.publish-vscode.result == 'success'
+        run: |
+          echo "🎉 Release ${{ needs.validate.outputs.version }} completed successfully!"
+          echo "✅ GitHub release created"
+          echo "✅ NPM packages published"
+          echo "✅ VS Code extension published"
+
+      - name: Notify Partial Success
+        if: needs.publish-npm.result == 'success' || needs.publish-vscode.result == 'success'
+        run: |
+          echo "⚠️ Release ${{ needs.validate.outputs.version }} partially completed"
+          echo "NPM Status: ${{ needs.publish-npm.result }}"
+          echo "VS Code Status: ${{ needs.publish-vscode.result }}"
+
+      - name: Notify Failure
+        if: needs.publish-npm.result == 'failure' || needs.publish-vscode.result == 'failure'
+        run: |
+          echo "❌ Release ${{ needs.validate.outputs.version }} failed"
+          echo "NPM Status: ${{ needs.publish-npm.result }}"
+          echo "VS Code Status: ${{ needs.publish-vscode.result }}"
+          exit 1

@@ -1,7 +1,7 @@
 {
   "name": "@opencode-ai/app",
   "version": "7.1.9",
-  "description": "",
+  "description": "Web application for Kilo Code",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -9,18 +9,20 @@
     "./index.css": "./src/index.css"
   },
   "scripts": {
-    "typecheck": "tsgo -b",
+    "typecheck": "bun run --bun tsc --noEmit",
     "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
     "serve": "vite preview",
-    "test": "bun run test:unit",
+    "test": "bun test",
     "test:unit": "bun test --preload ./happydom.ts ./src",
     "test:unit:watch": "bun test --watch --preload ./happydom.ts ./src",
     "test:e2e": "playwright test",
     "test:e2e:local": "bun script/e2e-local.ts",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report e2e/playwright-report"
+    "test:e2e:report": "playwright show-report e2e/playwright-report",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "license": "MIT",
   "devDependencies": {
@@ -71,5 +73,31 @@
     "@kilocode/kilo-ui": "workspace:*",
     "@kilocode/kilo-i18n": "workspace:*"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "public/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "web",
+    "app",
+    "frontend",
+    "interface"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/app"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  }
 }

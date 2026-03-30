@@ -4,17 +4,22 @@
   "version": "7.1.9",
   "type": "module",
   "license": "MIT",
-  "description": "Telemetry for Kilo CLI - PostHog analytics integration",
+  "description": "Telemetry and analytics for Kilo Code",
   "exports": {
     ".": "./src/index.ts"
   },
   "files": [
-    "dist"
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "typecheck": "tsgo --noEmit",
-    "build": "tsc",
-    "test": "bun test"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "test": "bun test",
+    "dev": "bun run src/index.ts",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "posthog-node": "4.4.0",
@@ -31,5 +36,25 @@
     "@types/bun": "catalog:",
     "typescript": "catalog:",
     "@typescript/native-preview": "catalog:"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "telemetry",
+    "analytics",
+    "monitoring",
+    "metrics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/kilo-telemetry"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

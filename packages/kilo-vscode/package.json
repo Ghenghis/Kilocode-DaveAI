@@ -11,11 +11,11 @@
   "publisher": "kilocode",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kilo-Org/kilocode.git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
     "directory": "packages/kilo-vscode"
   },
   "engines": {
-    "vscode": "^1.105.1"
+    "vscode": "^1.85.0"
   },
   "license": "MIT",
   "author": {

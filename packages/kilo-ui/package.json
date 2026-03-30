@@ -110,7 +110,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "typecheck": "bun run --bun tsc --noEmit",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "@kobalte/core": "0.13.11",
@@ -125,5 +131,31 @@
     "motion-dom": "12.34.3",
     "motion-utils": "12.29.2",
     "strip-ansi": "7.1.2"
+  },
+  "description": "UI component library for Kilo Code",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "react",
+    "design-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/kilo-ui"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

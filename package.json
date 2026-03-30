@@ -37,7 +37,8 @@
     "ci:release": "bun run ci:core && bun run build:repo && bun run package:desktop",
     "validate:release": "node scripts/validate-release.js",
     "validate:tests": "node scripts/validate-tests-simple.js",
-    "generate:artifacts": "node scripts/generate-artifacts.js"
+    "generate:artifacts": "node scripts/generate-artifacts.js",
+    "configure:packages": "node scripts/configure-packages.js"
   },
   "workspaces": {
     "packages": [

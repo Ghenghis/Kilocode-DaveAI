@@ -5,15 +5,21 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "typecheck": "tsgo --noEmit",
-    "build": "tsc"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "exports": {
     ".": "./src/index.ts",
     "./tool": "./src/tool.ts"
   },
   "files": [
-    "dist"
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
   ],
   "dependencies": {
     "@kilocode/sdk": "workspace:*",
@@ -28,7 +34,23 @@
   "peerDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kilo-Org/kilocode",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
     "directory": "packages/plugin"
+  },
+  "description": "Plugin system for Kilo Code extensions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "plugin",
+    "extension",
+    "modular",
+    "architecture"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

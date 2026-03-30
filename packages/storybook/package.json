@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build": "storybook build"
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "typecheck": "bun run --bun tsc --noEmit",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "devDependencies": {
     "@tailwindcss/vite": "catalog:",
@@ -28,5 +33,32 @@
   },
   "version": "7.1.9",
   "dependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "description": "Storybook for Kilo Code components",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "stories/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "storybook",
+    "components",
+    "documentation",
+    "design"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/storybook"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  }
 }

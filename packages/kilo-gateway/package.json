@@ -4,27 +4,29 @@
   "version": "7.1.9",
   "type": "module",
   "license": "MIT",
-  "description": "Unified Kilo Gateway package for OpenCode - authentication, provider, and API integration",
+  "description": "API Gateway for Kilo Code services",
   "keywords": [
-    "kilo",
-    "kilocode",
-    "opencode",
-    "auth",
-    "plugin",
-    "provider",
-    "ai",
-    "llm"
+    "api",
+    "gateway",
+    "microservices",
+    "routing"
   ],
   "exports": {
     ".": "./src/index.ts",
     "./tui": "./src/tui.ts"
   },
   "files": [
-    "dist"
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "typecheck": "tsgo --noEmit",
-    "build": "tsc"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "@kilocode/plugin": "workspace:*",
@@ -62,5 +64,19 @@
     "@opentui/solid": {
       "optional": true
     }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/kilo-gateway"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

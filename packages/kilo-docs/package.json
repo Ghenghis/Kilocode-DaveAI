@@ -3,10 +3,13 @@
   "version": "7.1.9",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack --port 3002",
-    "build": "next build --webpack",
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
     "start": "next start",
-    "test": "vitest run"
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "typecheck": "bun run --bun tsc --noEmit",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "@docsearch/css": "^4",
@@ -32,5 +35,32 @@
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vitest": "^3.2.3"
+  },
+  "description": "Documentation site for Kilo Code",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "docs/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "documentation",
+    "docs",
+    "site",
+    "content"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/kilo-docs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

@@ -1,0 +1,227 @@
+{
+  "@kilocode/cli": {
+    "version": "7.1.9",
+    "description": "AI-powered development CLI with enterprise features",
+    "path": "packages/opencode",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/opencode"
+    },
+    "keywords": [
+      "ai",
+      "cli",
+      "development",
+      "automation",
+      "enterprise"
+    ]
+  },
+  "@kilocode/kilo-gateway": {
+    "version": "7.1.9",
+    "description": "API Gateway for Kilo Code services",
+    "path": "packages/kilo-gateway",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-gateway"
+    },
+    "keywords": [
+      "api",
+      "gateway",
+      "microservices",
+      "routing"
+    ]
+  },
+  "@kilocode/kilo-telemetry": {
+    "version": "7.1.9",
+    "description": "Telemetry and analytics for Kilo Code",
+    "path": "packages/kilo-telemetry",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-telemetry"
+    },
+    "keywords": [
+      "telemetry",
+      "analytics",
+      "monitoring",
+      "metrics"
+    ]
+  },
+  "@kilocode/kilo-i18n": {
+    "version": "7.1.9",
+    "description": "Internationalization support for Kilo Code",
+    "path": "packages/kilo-i18n",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-i18n"
+    },
+    "keywords": [
+      "i18n",
+      "internationalization",
+      "localization",
+      "translations"
+    ]
+  },
+  "@kilocode/plugin": {
+    "version": "7.1.9",
+    "description": "Plugin system for Kilo Code extensions",
+    "path": "packages/plugin",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/plugin"
+    },
+    "keywords": [
+      "plugin",
+      "extension",
+      "modular",
+      "architecture"
+    ]
+  },
+  "@kilocode/util": {
+    "version": "7.1.9",
+    "description": "Shared utilities for Kilo Code projects",
+    "path": "packages/util",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/util"
+    },
+    "keywords": [
+      "utilities",
+      "helpers",
+      "common",
+      "shared"
+    ]
+  },
+  "@kilocode/kilo-ui": {
+    "version": "7.1.9",
+    "description": "UI component library for Kilo Code",
+    "path": "packages/kilo-ui",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-ui"
+    },
+    "keywords": [
+      "ui",
+      "components",
+      "react",
+      "design-system"
+    ]
+  },
+  "@opencode-ai/app": {
+    "version": "7.1.9",
+    "description": "Web application for Kilo Code",
+    "path": "packages/app",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/app"
+    },
+    "keywords": [
+      "web",
+      "app",
+      "frontend",
+      "interface"
+    ]
+  },
+  "@opencode-ai/desktop": {
+    "version": "7.1.9",
+    "description": "Desktop application built with Tauri",
+    "path": "packages/desktop",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/desktop"
+    },
+    "keywords": [
+      "desktop",
+      "tauri",
+      "native",
+      "application"
+    ]
+  },
+  "@opencode-ai/desktop-electron": {
+    "version": "7.1.9",
+    "description": "Electron-based desktop application",
+    "path": "packages/desktop-electron",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/desktop-electron"
+    },
+    "keywords": [
+      "desktop",
+      "electron",
+      "native",
+      "application"
+    ]
+  },
+  "@opencode-ai/storybook": {
+    "version": "7.1.9",
+    "description": "Storybook for Kilo Code components",
+    "path": "packages/storybook",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/storybook"
+    },
+    "keywords": [
+      "storybook",
+      "components",
+      "documentation",
+      "design"
+    ]
+  },
+  "@kilocode/kilo-docs": {
+    "version": "7.1.9",
+    "description": "Documentation site for Kilo Code",
+    "path": "packages/kilo-docs",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-docs"
+    },
+    "keywords": [
+      "documentation",
+      "docs",
+      "site",
+      "content"
+    ]
+  },
+  "@kilocode/sdk": {
+    "version": "7.1.9",
+    "description": "SDK for Kilo Code integration",
+    "path": "packages/sdk/js",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/sdk/js"
+    },
+    "keywords": [
+      "sdk",
+      "api",
+      "integration",
+      "client"
+    ]
+  },
+  "kilo-code": {
+    "version": "7.1.9",
+    "description": "VS Code extension for Kilo Code",
+    "path": "packages/kilo-vscode",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+      "directory": "packages/kilo-vscode"
+    },
+    "keywords": [
+      "vscode",
+      "extension",
+      "ai",
+      "development"
+    ]
+  }
+}

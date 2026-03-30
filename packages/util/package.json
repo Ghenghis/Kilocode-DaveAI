@@ -1,5 +1,5 @@
 {
-  "name": "@opencode-ai/util",
+  "name": "@kilocode/util",
   "version": "7.1.9",
   "private": true,
   "type": "module",
@@ -8,7 +8,12 @@
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "zod": "catalog:"
@@ -16,5 +21,31 @@
   "devDependencies": {
     "typescript": "catalog:",
     "@types/bun": "catalog:"
+  },
+  "description": "Shared utilities for Kilo Code projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "utilities",
+    "helpers",
+    "common",
+    "shared"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/util"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

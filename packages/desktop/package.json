@@ -5,12 +5,15 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "typecheck": "tsgo -b",
+    "typecheck": "bun run --bun tsc --noEmit",
     "predev": "bun ./scripts/predev.ts",
-    "dev": "vite",
-    "build": "bun run typecheck && vite build",
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "test": "bun test",
+    "lint": "bun run --bun lint",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "dependencies": {
     "@opencode-ai/app": "workspace:*",
@@ -40,5 +43,31 @@
     "@typescript/native-preview": "catalog:",
     "typescript": "~5.6.2",
     "vite": "catalog:"
+  },
+  "description": "Desktop application built with Tauri",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "desktop",
+    "tauri",
+    "native",
+    "application"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/desktop"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
   }
 }

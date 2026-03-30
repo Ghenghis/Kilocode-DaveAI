@@ -6,16 +6,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "typecheck": "tsgo --noEmit",
-    "test": "bun test --timeout 30000 --no-coverage",
-    "build": "bun run script/build.ts",
-    "dev": "bun run --conditions=browser ./src/index.ts",
-    "lint": "eslint src --ext .ts,.tsx",
-    "db": "bun drizzle-kit"
+    "typecheck": "bun run --bun tsc --noEmit",
+    "test": "bun test",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "lint": "bun run --bun lint",
+    "db": "bun drizzle-kit",
+    "prepublishOnly": "bun run build && bun run test"
   },
   "bin": {
-    "kilo": "./bin/kilo",
-    "kilocode": "./bin/kilo"
+    "kilo": "dist/cli.js"
   },
   "exports": {
     "./*": "./src/*.ts"
@@ -140,5 +140,32 @@
   "overrides": {
     "drizzle-orm": "1.0.0-beta.16-ea816b6"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "description": "AI-powered development CLI with enterprise features",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ai",
+    "cli",
+    "development",
+    "automation",
+    "enterprise"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ghenghis/Kilocode-DaveAI.git",
+    "directory": "packages/opencode"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  }
 }
