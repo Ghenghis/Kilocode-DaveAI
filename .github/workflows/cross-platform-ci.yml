@@ -222,7 +222,7 @@ jobs:
           echo "macOS: ${{ needs.macos.result }}"
           echo "Typecheck: ${{ needs.typecheck.result }}"
           echo "Lint: ${{ needs.lint.result }}"
-          
+
           # Fail if any required job failed
           if [[ "${{ needs.linux.result }}" != "success" ]]; then
             echo "Linux tests failed"
@@ -236,5 +236,5 @@ jobs:
             echo "Lint failed"
             exit 1
           fi
-          
+
           echo "All critical checks passed!"

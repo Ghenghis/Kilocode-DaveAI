@@ -1989,7 +1989,14 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
       if (!response.ok) throw new Error(`OpenAI-compatible TTS failed (${response.status})`)
       const ab = await response.arrayBuffer()
       const data = Buffer.from(ab).toString("base64")
-      const mimeType = responseFormat === "wav" ? "audio/wav" : responseFormat === "flac" ? "audio/flac" : responseFormat === "opus" ? "audio/ogg" : "audio/mpeg"
+      const mimeType =
+        responseFormat === "wav"
+          ? "audio/wav"
+          : responseFormat === "flac"
+            ? "audio/flac"
+            : responseFormat === "opus"
+              ? "audio/ogg"
+              : "audio/mpeg"
       this.postMessage({ type: "speechAudioChunk", requestId, mimeType, data })
     } catch (error) {
       this.postMessage({ type: "speechError", requestId, error: getErrorMessage(error) || "Speech synthesis failed" })

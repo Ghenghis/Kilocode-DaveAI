@@ -1,6 +1,7 @@
 # Unit and Integration Test Matrix
 
 ## Required coverage buckets
+
 - core agent orchestration
 - one-writer enforcement
 - provider registry
@@ -10,7 +11,9 @@
 - release utility functions
 
 ## Expectations
+
 Every failing test must map to:
+
 - subsystem
 - owner
 - likely root cause

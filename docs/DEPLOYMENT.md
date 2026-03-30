@@ -3,6 +3,7 @@
 ## Overview
 
 Kilo Code can be deployed in multiple configurations:
+
 - **Cloud**: Using Kilo's hosted services
 - **Self-hosted**: Running your own infrastructure
 
@@ -22,16 +23,16 @@ npx @kilocode/cli
 
 Download pre-built binaries from [Releases](https://github.com/Kilo-Org/kilocode/releases):
 
-| Platform | Architecture | File |
-|----------|--------------|------|
-| Windows | x64 | `kilo-windows-x64.zip` |
-| Windows | x64-baseline | `kilo-windows-x64-baseline.zip` |
-| Linux | x64 (glibc) | `kilo-linux-x64.tar.gz` |
-| Linux | x64 (musl) | `kilo-linux-x64-musl.tar.gz` |
-| Linux | arm64 (glibc) | `kilo-linux-arm64.tar.gz` |
-| Linux | arm64 (musl) | `kilo-linux-arm64-musl.tar.gz` |
-| macOS | x64 | `kilo-darwin-x64.zip` |
-| macOS | arm64 | `kilo-darwin-arm64.zip` |
+| Platform | Architecture  | File                            |
+| -------- | ------------- | ------------------------------- |
+| Windows  | x64           | `kilo-windows-x64.zip`          |
+| Windows  | x64-baseline  | `kilo-windows-x64-baseline.zip` |
+| Linux    | x64 (glibc)   | `kilo-linux-x64.tar.gz`         |
+| Linux    | x64 (musl)    | `kilo-linux-x64-musl.tar.gz`    |
+| Linux    | arm64 (glibc) | `kilo-linux-arm64.tar.gz`       |
+| Linux    | arm64 (musl)  | `kilo-linux-arm64-musl.tar.gz`  |
+| macOS    | x64           | `kilo-darwin-x64.zip`           |
+| macOS    | arm64         | `kilo-darwin-arm64.zip`         |
 
 ### VS Code Extension
 
@@ -47,11 +48,11 @@ Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/item
 
 ### Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `KILO_API_URL` | `https://api.kilo.ai` | Kilo API endpoint |
+| Variable                  | Default                          | Description             |
+| ------------------------- | -------------------------------- | ----------------------- |
+| `KILO_API_URL`            | `https://api.kilo.ai`            | Kilo API endpoint       |
 | `KILO_SESSION_INGEST_URL` | `https://ingest.kilosessions.ai` | Session export endpoint |
-| `KILO_MODELS_URL` | `https://models.dev` | Model metadata endpoint |
+| `KILO_MODELS_URL`         | `https://models.dev`             | Model metadata endpoint |
 
 ### CLI Deployment
 
@@ -223,6 +224,7 @@ kilo auth status
 ### Installation Issues
 
 **npm permission error:**
+
 ```bash
 npm install -g @kilocode/cli --unsafe-perm
 ```
@@ -233,11 +235,13 @@ Ensure the binary is in your PATH.
 ### Connection Issues
 
 **API unreachable:**
+
 ```bash
 KILO_API_URL=https://api.kilo.ai kilo doctor
 ```
 
 **Authentication failed:**
+
 ```bash
 kilo auth login
 ```

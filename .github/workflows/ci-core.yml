@@ -16,6 +16,8 @@ jobs:
         run: bun run lint
       - name: Typecheck
         run: bun run typecheck
+      - name: Format Check
+        run: bun run format
       - name: Unit tests
         run: bun run test:unit
       - name: Upload logs on failure

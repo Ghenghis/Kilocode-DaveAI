@@ -65,13 +65,30 @@ export const VscodeSessionTurn: Component<VscodeSessionTurnProps> = (props) => {
   const emptyParts: SDKPart[] = []
   const emptyDiffs: FileDiff[] = []
   const [speechSettings, setSpeechSettings] = createSignal<SpeechSettings>({
-    enabled: true, autoSpeakAssistant: false, location: "local", provider: "browser", hasAzureKey: false, hasOpenAICompatibleKey: false,
-    browserVoice: "", browserLang: "en-GB", browserRate: 1, browserPitch: 1,
-    azureRegion: "westus", azureVoice: "en-GB-MaisieNeural", azureFormat: "audio-24khz-48kbitrate-mono-mp3",
-    openaiCompatibleBaseUrl: "http://127.0.0.1:8000/v1", openaiCompatibleModel: "tts-1", openaiCompatibleVoice: "alloy", openaiCompatibleResponseFormat: "mp3",
+    enabled: true,
+    autoSpeakAssistant: false,
+    location: "local",
+    provider: "browser",
+    hasAzureKey: false,
+    hasOpenAICompatibleKey: false,
+    browserVoice: "",
+    browserLang: "en-GB",
+    browserRate: 1,
+    browserPitch: 1,
+    azureRegion: "westus",
+    azureVoice: "en-GB-MaisieNeural",
+    azureFormat: "audio-24khz-48kbitrate-mono-mp3",
+    openaiCompatibleBaseUrl: "http://127.0.0.1:8000/v1",
+    openaiCompatibleModel: "tts-1",
+    openaiCompatibleVoice: "alloy",
+    openaiCompatibleResponseFormat: "mp3",
   })
-  const unsubscribeSpeech = vscode.onMessage((message) => { if (message.type === "speechSettingsLoaded") setSpeechSettings(message.settings as SpeechSettings) })
-  createEffect(() => { vscode.postMessage({ type: "requestSpeechSettings" } as any) })
+  const unsubscribeSpeech = vscode.onMessage((message) => {
+    if (message.type === "speechSettingsLoaded") setSpeechSettings(message.settings as SpeechSettings)
+  })
+  createEffect(() => {
+    vscode.postMessage({ type: "requestSpeechSettings" } as any)
+  })
   onCleanup(unsubscribeSpeech)
 
   const allMessages = createMemo(() => {
@@ -146,7 +163,7 @@ export const VscodeSessionTurn: Component<VscodeSessionTurnProps> = (props) => {
 
   const assistantPlainText = createMemo(() => {
     return assistantMessages()
-      .flatMap((msg) => ((data.store.part?.[msg.id] ?? emptyParts) as SDKPart[]))
+      .flatMap((msg) => (data.store.part?.[msg.id] ?? emptyParts) as SDKPart[])
       .filter((part) => part.type === "text")
       .map((part) => (part as SDKPart & { text: string }).text.trim())
       .filter(Boolean)
@@ -154,7 +171,9 @@ export const VscodeSessionTurn: Component<VscodeSessionTurnProps> = (props) => {
   })
 
   const assistantSpeechSignature = createMemo(() => {
-    const ids = assistantMessages().map((msg) => msg.id).join(",")
+    const ids = assistantMessages()
+      .map((msg) => msg.id)
+      .join(",")
     const text = assistantPlainText().trim()
     return `${props.messageID}::${ids}::${text}`
   })
@@ -220,8 +239,15 @@ export const VscodeSessionTurn: Component<VscodeSessionTurnProps> = (props) => {
           <Show when={assistantMessages().length > 0}>
             <div class="vscode-session-turn-assistant">
               <div style={{ display: "flex", gap: "8px", "justify-content": "flex-end", "margin-bottom": "8px" }}>
-                <button class="button" onClick={() => void speechController.speak(assistantPlainText(), speechSettings())}>Speak</button>
-                <button class="button" onClick={() => speechController.stop()}>Stop</button>
+                <button
+                  class="button"
+                  onClick={() => void speechController.speak(assistantPlainText(), speechSettings())}
+                >
+                  Speak
+                </button>
+                <button class="button" onClick={() => speechController.stop()}>
+                  Stop
+                </button>
               </div>
               <For each={assistantMessages()}>
                 {(msg) => <AssistantMessage message={msg} showAssistantCopyPartID={showAssistantCopyPartID()} />}

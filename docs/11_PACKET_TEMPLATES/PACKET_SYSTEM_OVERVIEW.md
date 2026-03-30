@@ -2,6 +2,7 @@
 
 Every meaningful failure or pass must produce artifacts.
 Required packet families:
+
 - issue packets
 - blocker packets
 - proof packets

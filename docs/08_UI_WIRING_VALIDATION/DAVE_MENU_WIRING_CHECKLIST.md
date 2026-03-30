@@ -1,6 +1,7 @@
 # Dave Menu Wiring Checklist
 
 Validate sections:
+
 - Modules
 - Backends
 - Prompt Intelligence
@@ -12,6 +13,7 @@ Validate sections:
 - Speech
 
 Each section must:
+
 - render
 - hydrate
 - persist

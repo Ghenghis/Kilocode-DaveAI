@@ -1,1 +1,10 @@
 packages/desktop/src/bindings.ts
+packages/kilo-vscode/src/services/autocomplete/continuedev/**
+packages/opencode/migration/**
+packages/opencode/src/provider/models-snapshot.ts
+packages/sdk/js/src/gen/client/types.gen.ts
+packages/sdk/js/src/v2/gen/client/types.gen.ts
+packages/sdk/openapi.json
+packages/ui/src/assets/fonts/*.woff
+packages/ui/src/assets/icons/file-types/*.svg
+packages/ui/src/assets/icons/provider/*.svg

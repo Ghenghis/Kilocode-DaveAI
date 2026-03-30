@@ -46,7 +46,11 @@ class SpeechController {
   }
 
   async speak(text: string, settings: SpeechSettings) {
-    const clean = text.replace(/```[\s\S]*?```/g, " ").replace(/`([^`]+)`/g, "$1").replace(/\s+/g, " ").trim()
+    const clean = text
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\s+/g, " ")
+      .trim()
     if (!settings.enabled || !clean) return
     this.stop()
     if (settings.provider === "browser") {
@@ -55,7 +59,8 @@ class SpeechController {
       utterance.rate = settings.browserRate || 1
       utterance.pitch = settings.browserPitch || 1
       const voices = window.speechSynthesis?.getVoices?.() ?? []
-      const voice = voices.find((v) => v.name === settings.browserVoice) ?? voices.find((v) => v.lang === utterance.lang)
+      const voice =
+        voices.find((v) => v.name === settings.browserVoice) ?? voices.find((v) => v.lang === utterance.lang)
       if (voice) utterance.voice = voice
       window.speechSynthesis?.speak(utterance)
       return

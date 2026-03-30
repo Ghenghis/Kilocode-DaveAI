@@ -27,6 +27,7 @@
 **Description:** Manages the lifecycle of the CLI backend server process.
 
 **Features:**
+
 - Server process spawning and lifecycle
 - Port management and allocation
 - Health check monitoring
@@ -34,14 +35,15 @@
 - Graceful shutdown
 
 **Configuration:**
+
 ```typescript
 interface ServerConfig {
-  port?: number                    // Auto-assign if not specified
-  host?: string                   // Default: localhost
-  maxRetries?: number             // Connection retry attempts
-  retryDelay?: number             // Delay between retries (ms)
-  healthCheckInterval?: number     // Health check frequency
-  shutdownTimeout?: number        // Graceful shutdown timeout
+  port?: number // Auto-assign if not specified
+  host?: string // Default: localhost
+  maxRetries?: number // Connection retry attempts
+  retryDelay?: number // Delay between retries (ms)
+  healthCheckInterval?: number // Health check frequency
+  shutdownTimeout?: number // Graceful shutdown timeout
 }
 ```
 
@@ -52,6 +54,7 @@ interface ServerConfig {
 **Description:** Handles WebSocket and HTTP connections to the CLI server.
 
 **Features:**
+
 - WebSocket connection management
 - SSE (Server-Sent Events) support
 - Request/response multiplexing
@@ -63,6 +66,7 @@ interface ServerConfig {
 **Location:** `packages/kilo-vscode/src/services/cli-backend/server-utils.ts`
 
 **Features:**
+
 - Port availability checking
 - Server URL construction
 - Process ID management
@@ -78,6 +82,7 @@ interface ServerConfig {
 **Description:** Adapts the SDK for SSE-based communication with the CLI server.
 
 **Features:**
+
 - SSE event parsing
 - Message deserialization
 - Stream handling
@@ -90,6 +95,7 @@ interface ServerConfig {
 **Description:** Auto-generated TypeScript SDK for CLI server API integration.
 
 **API Endpoints:**
+
 ```typescript
 // Session management
 POST   /api/session/create
@@ -128,6 +134,7 @@ DELETE /api/providers/:id
 **Description:** Routes requests to appropriate AI providers based on configuration.
 
 **Features:**
+
 - Multi-provider support
 - Provider failover
 - Load balancing
@@ -135,6 +142,7 @@ DELETE /api/providers/:id
 - Latency-based routing
 
 **Supported Providers:**
+
 - OpenAI
 - Anthropic
 - Azure OpenAI
@@ -150,11 +158,11 @@ DELETE /api/providers/:id
 interface Provider {
   id: string
   name: string
-  type: 'openai' | 'anthropic' | 'azure' | 'google' | 'local' | 'custom'
+  type: "openai" | "anthropic" | "azure" | "google" | "local" | "custom"
   apiKey?: string
   endpoint?: string
   models: Model[]
-  priority?: number              // Higher = preferred
+  priority?: number // Higher = preferred
   enabled?: boolean
   capabilities?: ProviderCapabilities
 }
@@ -172,6 +180,7 @@ interface ProviderCapabilities {
 **Location:** `packages/kilo-gateway/src/tui.ts`
 
 **Features:**
+
 - Terminal user interface for provider management
 - Interactive provider configuration
 - Status display
@@ -198,11 +207,7 @@ interface Session {
   history: Message[]
 }
 
-type SessionStatus = 
-  | 'active' 
-  | 'paused' 
-  | 'completed' 
-  | 'error'
+type SessionStatus = "active" | "paused" | "completed" | "error"
 ```
 
 ### 4.2 Worktree State Manager
@@ -210,6 +215,7 @@ type SessionStatus =
 **Location:** `packages/kilo-vscode/src/agent-manager/WorktreeStateManager.ts`
 
 **Features:**
+
 - Worktree-specific session state
 - State persistence
 - State restoration on reload
@@ -220,6 +226,7 @@ type SessionStatus =
 **Location:** `packages/kilo-vscode/src/agent-manager/SessionTerminalManager.ts`
 
 **Features:**
+
 - Terminal per session
 - Terminal multiplexing
 - Terminal lifecycle management
@@ -256,6 +263,7 @@ interface ToolContext {
 **Description:** Executes shell commands in the terminal.
 
 **Features:**
+
 - Bash/Shell command execution
 - Working directory control
 - Environment variable passing
@@ -264,16 +272,16 @@ interface ToolContext {
 
 ### 5.3 Built-in Tools
 
-| Tool | Description |
-|------|-------------|
-| `read` | Read file contents |
+| Tool    | Description              |
+| ------- | ------------------------ |
+| `read`  | Read file contents       |
 | `write` | Write/edit file contents |
-| `glob` | Find files by pattern |
-| `grep` | Search file contents |
-| `bash` | Execute shell commands |
-| `web` | Web search |
-| `edit` | Apply edits to files |
-| `goto` | Navigate to location |
+| `glob`  | Find files by pattern    |
+| `grep`  | Search file contents     |
+| `bash`  | Execute shell commands   |
+| `web`   | Web search               |
+| `edit`  | Apply edits to files     |
+| `goto`  | Navigate to location     |
 
 ---
 
@@ -286,6 +294,7 @@ interface ToolContext {
 **Description:** Main provider for agent management in VS Code.
 
 **Features:**
+
 - Session creation/deletion
 - Worktree management
 - Branch operations
@@ -297,6 +306,7 @@ interface ToolContext {
 **Location:** `packages/kilo-vscode/src/agent-manager/GitOps.ts`
 
 **Features:**
+
 - Git status polling
 - Branch creation/switching
 - Commit operations
@@ -308,6 +318,7 @@ interface ToolContext {
 **Location:** `packages/kilo-vscode/src/agent-manager/GitStatsPoller.ts`
 
 **Features:**
+
 - Periodic git stats updates
 - Branch tracking
 - Change detection
@@ -367,4 +378,4 @@ kilo run <prompt>
 
 ---
 
-*Document generated by Agent-04 (CLI Backend & Server)*
+_Document generated by Agent-04 (CLI Backend & Server)_

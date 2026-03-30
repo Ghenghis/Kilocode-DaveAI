@@ -1,6 +1,7 @@
 # Per-Feature Playwright Checklist
 
 For each feature:
+
 - open entry surface
 - change setting/state
 - verify UI updates

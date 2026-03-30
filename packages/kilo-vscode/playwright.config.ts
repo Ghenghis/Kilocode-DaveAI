@@ -22,6 +22,18 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"], viewport: { width: 420, height: 720 } },
     },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"], viewport: { width: 420, height: 720 } },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"], viewport: { width: 420, height: 720 } },
+    },
+    {
+      name: "edge",
+      use: { ...devices["Desktop Edge"], viewport: { width: 420, height: 720 } },
+    },
   ],
   webServer: {
     command: "bunx storybook build -o ./storybook-static && bunx http-server ./storybook-static -p 6007 --silent",

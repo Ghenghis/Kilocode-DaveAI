@@ -7,9 +7,11 @@ This plan outlines a comprehensive feature discovery and documentation strategy 
 ## 1. Project Overview
 
 ### Objective
+
 Perform an exhaustive comparison between KiloCode-DaveAI and the stock Kilo-Org/kilocode repository (version 7.1.9), identifying all new features, enhancements, and additions. Document findings in organized, professional-grade markdown files.
 
 ### Scope
+
 - **Primary Target**: Compare against https://github.com/Kilo-Org/kilocode
 - **Agent Count**: 20 agents total
   - 15 specialized agents (unique scan areas)
@@ -20,17 +22,17 @@ Perform an exhaustive comparison between KiloCode-DaveAI and the stock Kilo-Org/
 
 ### Primary Packages to Scan
 
-| Package | Path | Primary Focus |
-|---------|------|---------------|
-| `@kilocode/cli` | `packages/opencode/` | Core CLI engine, agents, tools, sessions, server, TUI |
-| `kilo-code` | `packages/kilo-vscode/` | VS Code extension, Agent Manager, sidebar chat |
-| `@kilocode/kilo-gateway` | `packages/kilo-gateway/` | Kilo auth, provider routing, API integration |
-| `@kilocode/kilo-telemetry` | `packages/kilo-telemetry/` | PostHog analytics + OpenTelemetry |
-| `@kilocode/kilo-i18n` | `packages/kilo-i18n/` | Internationalization / translations |
-| `@kilocode/kilo-ui` | `packages/kilo-ui/` | SolidJS component library |
-| `@opencode-ai/app` | `packages/app/` | Shared SolidJS web UI |
-| `@opencode-ai/desktop` | `packages/desktop/` | Tauri desktop app shell |
-| `@kilocode/plugin` | `packages/plugin/` | Plugin/tool interface definitions |
+| Package                    | Path                       | Primary Focus                                         |
+| -------------------------- | -------------------------- | ----------------------------------------------------- |
+| `@kilocode/cli`            | `packages/opencode/`       | Core CLI engine, agents, tools, sessions, server, TUI |
+| `kilo-code`                | `packages/kilo-vscode/`    | VS Code extension, Agent Manager, sidebar chat        |
+| `@kilocode/kilo-gateway`   | `packages/kilo-gateway/`   | Kilo auth, provider routing, API integration          |
+| `@kilocode/kilo-telemetry` | `packages/kilo-telemetry/` | PostHog analytics + OpenTelemetry                     |
+| `@kilocode/kilo-i18n`      | `packages/kilo-i18n/`      | Internationalization / translations                   |
+| `@kilocode/kilo-ui`        | `packages/kilo-ui/`        | SolidJS component library                             |
+| `@opencode-ai/app`         | `packages/app/`            | Shared SolidJS web UI                                 |
+| `@opencode-ai/desktop`     | `packages/desktop/`        | Tauri desktop app shell                               |
+| `@kilocode/plugin`         | `packages/plugin/`         | Plugin/tool interface definitions                     |
 
 ### Key Feature Areas Identified
 
@@ -58,33 +60,33 @@ Redundant Verification Agents: 5
 
 ### Primary Agent Assignments (15 Specialized)
 
-| Agent ID | Focus Area | Primary Packages | Secondary Coverage |
-|----------|-----------|------------------|-------------------|
-| Agent-01 | **UI Components** | `kilo-ui/`, `app/src/pages/`, `webview-ui/src/components/` | `desktop-electron/src/renderer/` |
-| Agent-02 | **Agent Manager Core** | `kilo-vscode/src/agent-manager/` | `webview-ui/agent-manager/` |
-| Agent-03 | **Autocomplete System** | `kilo-vscode/src/services/autocomplete/` | `kilo-ui/components/` |
-| Agent-04 | **CLI Backend & Server** | `opencode/src/server/`, `kilo-vscode/src/services/cli-backend/` | `sdk/js/src/` |
-| Agent-05 | **Provider System** | `KiloProvider.ts`, `kilo-provider-utils.ts`, `provider-actions.ts` | `kilo-gateway/src/` |
-| Agent-06 | **Webview & Chat UI** | `webview-ui/src/`, `app/src/pages/session.tsx` | `kilo-ui/` |
-| Agent-07 | **Settings & Configuration** | `SettingsEditorProvider.ts`, settings panels | `opencode/src/config/` |
-| Agent-08 | **Marketplace & Extensions** | `marketplace/`, `plugin/` | `kilo-vscode/` |
-| Agent-09 | **Browser Automation** | `browser-automation-service.ts` | `webview-ui/` |
-| Agent-10 | **Legacy Migration** | `legacy-migration/` | `kilo-provider/handlers/` |
-| Agent-11 | **Code Actions & Editor** | `code-actions/`, `commit-message/` | `services/` |
-| Agent-12 | **Telemetry & Analytics** | `kilo-telemetry/`, `telemetry/` | `opencode/src/telemetry/` |
-| Agent-13 | **Desktop Electron** | `desktop-electron/src/` | `desktop/` |
-| Agent-14 | **Internationalization** | `kilo-i18n/`, i18n directories | `webview-ui/src/i18n/` |
-| Agent-15 | **Gateway & Auth** | `kilo-gateway/src/`, auth handlers | `kilo-provider/handlers/auth.ts` |
+| Agent ID | Focus Area                   | Primary Packages                                                   | Secondary Coverage               |
+| -------- | ---------------------------- | ------------------------------------------------------------------ | -------------------------------- |
+| Agent-01 | **UI Components**            | `kilo-ui/`, `app/src/pages/`, `webview-ui/src/components/`         | `desktop-electron/src/renderer/` |
+| Agent-02 | **Agent Manager Core**       | `kilo-vscode/src/agent-manager/`                                   | `webview-ui/agent-manager/`      |
+| Agent-03 | **Autocomplete System**      | `kilo-vscode/src/services/autocomplete/`                           | `kilo-ui/components/`            |
+| Agent-04 | **CLI Backend & Server**     | `opencode/src/server/`, `kilo-vscode/src/services/cli-backend/`    | `sdk/js/src/`                    |
+| Agent-05 | **Provider System**          | `KiloProvider.ts`, `kilo-provider-utils.ts`, `provider-actions.ts` | `kilo-gateway/src/`              |
+| Agent-06 | **Webview & Chat UI**        | `webview-ui/src/`, `app/src/pages/session.tsx`                     | `kilo-ui/`                       |
+| Agent-07 | **Settings & Configuration** | `SettingsEditorProvider.ts`, settings panels                       | `opencode/src/config/`           |
+| Agent-08 | **Marketplace & Extensions** | `marketplace/`, `plugin/`                                          | `kilo-vscode/`                   |
+| Agent-09 | **Browser Automation**       | `browser-automation-service.ts`                                    | `webview-ui/`                    |
+| Agent-10 | **Legacy Migration**         | `legacy-migration/`                                                | `kilo-provider/handlers/`        |
+| Agent-11 | **Code Actions & Editor**    | `code-actions/`, `commit-message/`                                 | `services/`                      |
+| Agent-12 | **Telemetry & Analytics**    | `kilo-telemetry/`, `telemetry/`                                    | `opencode/src/telemetry/`        |
+| Agent-13 | **Desktop Electron**         | `desktop-electron/src/`                                            | `desktop/`                       |
+| Agent-14 | **Internationalization**     | `kilo-i18n/`, i18n directories                                     | `webview-ui/src/i18n/`           |
+| Agent-15 | **Gateway & Auth**           | `kilo-gateway/src/`, auth handlers                                 | `kilo-provider/handlers/auth.ts` |
 
 ### Redundant Verification Agents (5 Agents)
 
-| Agent ID | Overlap Target | Verification Focus |
-|----------|---------------|-------------------|
-| Agent-16 | Agent-01 & Agent-06 | UI/Webview overlap verification |
-| Agent-17 | Agent-02 & Agent-05 | Agent Manager/Provider overlap |
+| Agent ID | Overlap Target      | Verification Focus                |
+| -------- | ------------------- | --------------------------------- |
+| Agent-16 | Agent-01 & Agent-06 | UI/Webview overlap verification   |
+| Agent-17 | Agent-02 & Agent-05 | Agent Manager/Provider overlap    |
 | Agent-18 | Agent-03 & Agent-11 | Autocomplete/Code Actions overlap |
-| Agent-19 | Agent-04 & Agent-12 | CLI Backend/Telemetry overlap |
-| Agent-20 | Agent-07 & Agent-08 | Settings/Marketplace overlap |
+| Agent-19 | Agent-04 & Agent-12 | CLI Backend/Telemetry overlap     |
+| Agent-20 | Agent-07 & Agent-08 | Settings/Marketplace overlap      |
 
 ## 4. Feature Categories for Documentation
 
@@ -173,30 +175,38 @@ docs/14_FEATURE_DISCOVERY/
 **Implementation Location:** [File paths]
 
 ### Description
+
 [Detailed description of the feature]
 
 ### How It Works
+
 [Internal implementation details]
 
 ### Usage
+
 [How to use this feature]
 
 ### Configuration Options
+
 [Any configurable parameters]
 
 ### Dependencies
+
 [Required dependencies]
 
 ### Edge Cases
+
 [Error handling and edge cases]
 
 ### Related Features
+
 [Cross-references to related features]
 ```
 
 ## 6. Agent Scanning Methodology
 
 ### Phase 1: Initial Scan (Agents 1-15)
+
 1. Clone/analyze target directories
 2. Identify all exported functions, classes, interfaces
 3. Document feature purposes from comments and tests
@@ -204,6 +214,7 @@ docs/14_FEATURE_DISCOVERY/
 5. Output preliminary findings
 
 ### Phase 2: Verification Scan (Agents 16-20)
+
 1. Re-scan overlapping areas
 2. Verify findings from Phase 1
 3. Identify any missed features
@@ -211,6 +222,7 @@ docs/14_FEATURE_DISCOVERY/
 5. Flag conflicting interpretations
 
 ### Phase 3: Compilation
+
 1. Merge all agent outputs
 2. Deduplicate findings
 3. Organize by category
@@ -229,6 +241,7 @@ docs/14_FEATURE_DISCOVERY/
 - [ ] Analyze API changes and additions
 
 ### Comparison Techniques
+
 1. Git diff against upstream tags
 2. File existence comparison
 3. Function signature diff
@@ -238,6 +251,7 @@ docs/14_FEATURE_DISCOVERY/
 ## 8. Implementation Priority
 
 ### Priority 1 (Critical - Must Document)
+
 - Agent Manager features
 - Worktree management
 - Multi-session orchestration
@@ -245,6 +259,7 @@ docs/14_FEATURE_DISCOVERY/
 - CLI backend
 
 ### Priority 2 (High - Important)
+
 - Autocomplete system
 - Code actions
 - Settings system
@@ -252,6 +267,7 @@ docs/14_FEATURE_DISCOVERY/
 - Marketplace integration
 
 ### Priority 3 (Medium - Enhance Understanding)
+
 - Telemetry system
 - Desktop integration
 - i18n coverage
@@ -268,13 +284,13 @@ docs/14_FEATURE_DISCOVERY/
 
 ## 10. Timeline Phases
 
-| Phase | Task | Duration |
-|-------|------|----------|
-| 1 | Agent setup and repo structure analysis | 1 cycle |
-| 2 | Phase 1: Primary agent scanning | 1 cycle |
-| 3 | Phase 2: Verification scanning | 1 cycle |
-| 4 | Phase 3: Compilation and organization | 1 cycle |
-| 5 | Review and quality check | 1 cycle |
+| Phase | Task                                    | Duration |
+| ----- | --------------------------------------- | -------- |
+| 1     | Agent setup and repo structure analysis | 1 cycle  |
+| 2     | Phase 1: Primary agent scanning         | 1 cycle  |
+| 3     | Phase 2: Verification scanning          | 1 cycle  |
+| 4     | Phase 3: Compilation and organization   | 1 cycle  |
+| 5     | Review and quality check                | 1 cycle  |
 
 ## 11. Next Steps
 
@@ -288,6 +304,6 @@ docs/14_FEATURE_DISCOVERY/
 
 ---
 
-*Plan Generated: [Current Date]*
-*Mode: Architect*
-*Status: Awaiting Approval*
+_Plan Generated: [Current Date]_
+_Mode: Architect_
+_Status: Awaiting Approval_

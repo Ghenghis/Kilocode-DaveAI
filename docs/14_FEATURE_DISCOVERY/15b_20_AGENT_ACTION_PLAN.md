@@ -3,54 +3,54 @@
 **Document:** 20_AGENT_ACTION_PLAN  
 **Version:** 1.0  
 **Created:** 2026-03-29  
-**Author:** Master Planning Agent  
+**Author:** Master Planning Agent
 
 ---
 
 ## Gap Summary
 
-| Metric | Value |
-|--------|-------|
-| Total Source Files | ~1,308 |
-| Documented Files | ~160 |
-| Missing Documentation | ~1,148 |
-| **Current Coverage** | **12.2%** |
-| **Gap** | **87.8%** |
+| Metric                | Value     |
+| --------------------- | --------- |
+| Total Source Files    | ~1,308    |
+| Documented Files      | ~160      |
+| Missing Documentation | ~1,148    |
+| **Current Coverage**  | **12.2%** |
+| **Gap**               | **87.8%** |
 
 ### Required for 100%
 
-| Artifact Type | Current | Required | Shortfall |
-|--------------|---------|----------|-----------|
-| Markdown Docs | ~100 | ~815 | ~715 |
-| SVG Diagrams | ~9 | ~104 | ~95 |
-| **Total** | **~109** | **~919** | **~810** |
+| Artifact Type | Current  | Required | Shortfall |
+| ------------- | -------- | -------- | --------- |
+| Markdown Docs | ~100     | ~815     | ~715      |
+| SVG Diagrams  | ~9       | ~104     | ~95       |
+| **Total**     | **~109** | **~919** | **~810**  |
 
 ---
 
 ## Agent Deployment Matrix
 
-| Agent | Package | Target | Markdowns | Diagrams | Overlap Partners |
-|-------|---------|--------|-----------|----------|-----------------|
-| Agent-01 | opencode | server/ | 25 | 5 | 02, 03, 10 |
-| Agent-02 | opencode | agent/ | 30 | 6 | 01, 04, 07 |
-| Agent-03 | opencode | session/ | 20 | 4 | 01, 02 |
-| Agent-04 | opencode | tools/ | 35 | 5 | 02, 05 |
-| Agent-05 | opencode | auth/ | 20 | 4 | 01, 04, 14 |
-| Agent-06 | opencode | config/ | 15 | 3 | 01 |
-| Agent-07 | kilo-vscode | src/ | 40 | 8 | 08, 09, 13 |
-| Agent-08 | kilo-vscode | webview-ui/src/ | 50 | 10 | 07, 09, 13, 16 |
-| Agent-09 | kilo-vscode | agent-manager/ | 30 | 6 | 07, 08 |
-| Agent-10 | sdk | js/src/ | 35 | 7 | 01, 02 |
-| Agent-11 | desktop | desktop-electron/ | 25 | 5 | 12 |
-| Agent-12 | desktop | desktop/src/ | 20 | 4 | 11 |
-| Agent-13 | kilo-ui | src/ | 45 | 9 | 07, 08, 16 |
-| Agent-14 | kilo-gateway | src/ | 20 | 4 | 05, 10 |
-| Agent-15 | kilo-telemetry | src/ | 15 | 3 | 01 |
-| Agent-16 | kilo-i18n | src/ | 25 | 3 | 08, 13 |
-| Agent-17 | scripts | github/, scripts/ | 20 | 5 | 18 |
-| Agent-18 | nix | nix/, containers/ | 15 | 4 | 17 |
-| Agent-19 | tests | packages/*/test/ | 30 | 4 | 20 |
-| Agent-20 | e2e | packages/*/e2e/ | 20 | 5 | 19 |
+| Agent    | Package        | Target            | Markdowns | Diagrams | Overlap Partners |
+| -------- | -------------- | ----------------- | --------- | -------- | ---------------- |
+| Agent-01 | opencode       | server/           | 25        | 5        | 02, 03, 10       |
+| Agent-02 | opencode       | agent/            | 30        | 6        | 01, 04, 07       |
+| Agent-03 | opencode       | session/          | 20        | 4        | 01, 02           |
+| Agent-04 | opencode       | tools/            | 35        | 5        | 02, 05           |
+| Agent-05 | opencode       | auth/             | 20        | 4        | 01, 04, 14       |
+| Agent-06 | opencode       | config/           | 15        | 3        | 01               |
+| Agent-07 | kilo-vscode    | src/              | 40        | 8        | 08, 09, 13       |
+| Agent-08 | kilo-vscode    | webview-ui/src/   | 50        | 10       | 07, 09, 13, 16   |
+| Agent-09 | kilo-vscode    | agent-manager/    | 30        | 6        | 07, 08           |
+| Agent-10 | sdk            | js/src/           | 35        | 7        | 01, 02           |
+| Agent-11 | desktop        | desktop-electron/ | 25        | 5        | 12               |
+| Agent-12 | desktop        | desktop/src/      | 20        | 4        | 11               |
+| Agent-13 | kilo-ui        | src/              | 45        | 9        | 07, 08, 16       |
+| Agent-14 | kilo-gateway   | src/              | 20        | 4        | 05, 10           |
+| Agent-15 | kilo-telemetry | src/              | 15        | 3        | 01               |
+| Agent-16 | kilo-i18n      | src/              | 25        | 3        | 08, 13           |
+| Agent-17 | scripts        | github/, scripts/ | 20        | 5        | 18               |
+| Agent-18 | nix            | nix/, containers/ | 15        | 4        | 17               |
+| Agent-19 | tests          | packages/\*/test/ | 30        | 4        | 20               |
+| Agent-20 | e2e            | packages/\*/e2e/  | 20        | 5        | 19               |
 
 ---
 
@@ -93,6 +93,7 @@
   - Type relationships
 
 ### Diagrams Required
+
 1. `server-architecture.svg` - Full server architecture
 2. `request-lifecycle.svg` - Request processing flow
 3. `middleware-chain.svg` - Middleware execution order
@@ -100,6 +101,7 @@
 5. `error-handling.svg` - Error propagation
 
 ### Verification Criteria
+
 - [ ] All routes documented with parameters
 - [ ] All middleware documented with purpose
 - [ ] All types documented with examples
@@ -146,6 +148,7 @@
   - Serialization
 
 ### Diagrams Required
+
 1. `agent-lifecycle.svg` - Agent state machine
 2. `planning-loop.svg` - Planning algorithm
 3. `tool-invocation.svg` - Tool execution flow
@@ -154,6 +157,7 @@
 6. `message-flow.svg` - Agent communication
 
 ### Verification Criteria
+
 - [ ] All agent states documented
 - [ ] Planning algorithm fully specified
 - [ ] Tool use patterns documented
@@ -190,12 +194,14 @@
   - Restoration
 
 ### Diagrams Required
+
 1. `session-state.svg` - Session state machine
 2. `persistence.svg` - Data persistence flow
 3. `history-management.svg` - History operations
 4. `context-snapshot.svg` - Context snapshots
 
 ### Verification Criteria
+
 - [ ] Session lifecycle documented
 - [ ] Persistence mechanism documented
 - [ ] History operations documented
@@ -239,6 +245,7 @@
   - Parameter parsing
 
 ### Diagrams Required
+
 1. `tool-architecture.svg` - Tool system overview
 2. `tool-registry.svg` - Tool discovery/loading
 3. `execution-flow.svg` - Tool execution
@@ -246,6 +253,7 @@
 5. `sandboxing.svg` - Security sandbox
 
 ### Verification Criteria
+
 - [ ] Tool interface documented
 - [ ] All built-in tools documented
 - [ ] Registry mechanism documented
@@ -280,12 +288,14 @@
   - Encryption
 
 ### Diagrams Required
+
 1. `auth-flow.svg` - Authentication flow
 2. `oauth-sequence.svg` - OAuth sequence
 3. `security-architecture.svg` - Security layers
 4. `token-lifecycle.svg` - Token management
 
 ### Verification Criteria
+
 - [ ] All auth flows documented
 - [ ] Security mechanisms documented
 - [ ] Token handling documented
@@ -315,11 +325,13 @@
   - Override logic
 
 ### Diagrams Required
+
 1. `config-sources.svg` - Configuration flow
 2. `schema.svg` - Config schema
 3. `merge-priority.svg` - Merge logic
 
 ### Verification Criteria
+
 - [ ] All config sources documented
 - [ ] Schema fully specified
 - [ ] Merge logic documented
@@ -356,6 +368,7 @@
   - Folder management
 
 ### Diagrams Required
+
 1. `extension-architecture.svg`
 2. `webview-communication.svg`
 3. `command-registry.svg`
@@ -366,6 +379,7 @@
 8. `statusbar-items.svg`
 
 ### Verification Criteria
+
 - [ ] Extension lifecycle documented
 - [ ] All commands documented
 - [ ] Webview integration documented
@@ -412,6 +426,7 @@
   - CSS variables
 
 ### Diagrams Required
+
 1. `component-hierarchy.svg`
 2. `reactive-flow.svg`
 3. `chat-flow.svg`
@@ -424,6 +439,7 @@
 10. `error-display.svg`
 
 ### Verification Criteria
+
 - [ ] All components documented
 - [ ] All hooks documented
 - [ ] State management documented
@@ -460,6 +476,7 @@
   - Dialog components
 
 ### Diagrams Required
+
 1. `worktree-lifecycle.svg`
 2. `multi-session.svg`
 3. `review-annotations.svg`
@@ -468,6 +485,7 @@
 6. `navigation-flow.svg`
 
 ### Verification Criteria
+
 - [ ] Worktree operations documented
 - [ ] Session management documented
 - [ ] Review system documented
@@ -507,6 +525,7 @@
   - Streaming
 
 ### Diagrams Required
+
 1. `sdk-architecture.svg`
 2. `api-endpoints.svg`
 3. `type-hierarchy.svg`
@@ -516,6 +535,7 @@
 7. `versioning.svg`
 
 ### Verification Criteria
+
 - [ ] All SDK methods documented
 - [ ] All API endpoints documented
 - [ ] All types documented
@@ -552,6 +572,7 @@
   - Global shortcuts
 
 ### Diagrams Required
+
 1. `electron-architecture.svg`
 2. `ipc-communication.svg`
 3. `window-lifecycle.svg`
@@ -559,6 +580,7 @@
 5. `context-bridge.svg`
 
 ### Verification Criteria
+
 - [ ] Main process documented
 - [ ] Preload documented
 - [ ] IPC contracts documented
@@ -589,12 +611,14 @@
   - Bundle settings
 
 ### Diagrams Required
+
 1. `tauri-commands.svg`
 2. `app-structure.svg`
 3. `window-config.svg`
 4. `bundle-flow.svg`
 
 ### Verification Criteria
+
 - [ ] All commands documented
 - [ ] App structure documented
 - [ ] Build config documented
@@ -630,6 +654,7 @@
   - Icon usage
 
 ### Diagrams Required
+
 1. `component-catalog.svg`
 2. `design-tokens.svg`
 3. `theme-architecture.svg`
@@ -641,6 +666,7 @@
 9. `variant-matrix.svg`
 
 ### Verification Criteria
+
 - [ ] All components documented
 - [ ] Design tokens documented
 - [ ] Theme system documented
@@ -671,12 +697,14 @@
   - Response caching
 
 ### Diagrams Required
+
 1. `gateway-architecture.svg`
 2. `provider-routing.svg`
 3. `auth-flow.svg`
 4. `request-transform.svg`
 
 ### Verification Criteria
+
 - [ ] Gateway architecture documented
 - [ ] All providers documented
 - [ ] Routing logic documented
@@ -707,11 +735,13 @@
   - Log aggregation
 
 ### Diagrams Required
+
 1. `telemetry-architecture.svg`
 2. `event-tracking.svg`
 3. `trace-propagation.svg`
 
 ### Verification Criteria
+
 - [ ] Telemetry system documented
 - [ ] All events documented
 - [ ] Tracing documented
@@ -745,11 +775,13 @@
   - Missing keys
 
 ### Diagrams Required
+
 1. `i18n-architecture.svg`
 2. `translation-flow.svg`
 3. `locale-detection.svg`
 
 ### Verification Criteria
+
 - [ ] i18n system documented
 - [ ] All locales documented
 - [ ] RTL support documented
@@ -779,6 +811,7 @@
   - Changelog
 
 ### Diagrams Required
+
 1. `ci-pipeline.svg`
 2. `build-flow.svg`
 3. `release-process.svg`
@@ -786,6 +819,7 @@
 5. `deployment-targets.svg`
 
 ### Verification Criteria
+
 - [ ] All workflows documented
 - [ ] Build process documented
 - [ ] Release process documented
@@ -810,12 +844,14 @@
   - Deployment
 
 ### Diagrams Required
+
 1. `nix-architecture.svg`
 2. `container-build.svg`
 3. `dependency-resolution.svg`
 4. `deployment-flow.svg`
 
 ### Verification Criteria
+
 - [ ] Nix setup documented
 - [ ] Container build documented
 
@@ -846,12 +882,14 @@
   - CI integration
 
 ### Diagrams Required
+
 1. `test-pyramid.svg`
 2. `test-execution.svg`
 3. `mock-hierarchy.svg`
 4. `coverage-report.svg`
 
 ### Verification Criteria
+
 - [ ] Test infrastructure documented
 - [ ] All test types documented
 - [ ] Mock patterns documented
@@ -883,6 +921,7 @@
   - Diff handling
 
 ### Diagrams Required
+
 1. `e2e-architecture.svg`
 2. `playwright-flow.svg`
 3. `visual-regression.svg`
@@ -890,6 +929,7 @@
 5. `user-journeys.svg`
 
 ### Verification Criteria
+
 - [ ] E2E framework documented
 - [ ] All scenarios documented
 - [ ] Visual testing documented
@@ -898,25 +938,25 @@
 
 ## Total Deliverables Summary
 
-| Metric | Value |
-|--------|-------|
-| Total Markdowns | ~715 |
-| Total Diagrams | ~95 |
-| Total Files | ~810 |
+| Metric                | Value                      |
+| --------------------- | -------------------------- |
+| Total Markdowns       | ~715                       |
+| Total Diagrams        | ~95                        |
+| Total Files           | ~810                       |
 | **Per-Agent Average** | ~40 markdowns, ~5 diagrams |
 
 ## Execution Timeline
 
-| Week | Phase | Activities |
-|------|-------|------------|
-| Week 1 | Parallel Scan | All 20 agents deploy simultaneously |
-| Week 2 | Draft Completion | First drafts of all documentation |
-| Week 3 | Diagram Sprint | Complete all diagram requirements |
-| Week 4 | Validation | Cross-reference validation, gap filling |
+| Week   | Phase            | Activities                              |
+| ------ | ---------------- | --------------------------------------- |
+| Week 1 | Parallel Scan    | All 20 agents deploy simultaneously     |
+| Week 2 | Draft Completion | First drafts of all documentation       |
+| Week 3 | Diagram Sprint   | Complete all diagram requirements       |
+| Week 4 | Validation       | Cross-reference validation, gap filling |
 
 ---
 
-*Document Version: 1.0*  
-*Status: READY FOR EXECUTION*  
-*Total Tasks: 120*  
-*Estimated Completion: 4 weeks with 20 parallel agents*
+_Document Version: 1.0_  
+_Status: READY FOR EXECUTION_  
+_Total Tasks: 120_  
+_Estimated Completion: 4 weeks with 20 parallel agents_

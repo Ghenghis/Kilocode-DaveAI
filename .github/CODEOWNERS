@@ -1,5 +1,91 @@
-# web + desktop packages
-packages/app/      @adamdotdevin
-packages/tauri/    @adamdotdevin
-packages/desktop/src-tauri/  @brendonovich
-packages/desktop/  @adamdotdevin
+# Code Owners Configuration
+
+# Core maintainers - have access to all code
+* @kilo-maintainers
+
+# Web + desktop packages (existing owners)
+packages/app/ @adamdotdevin @kilo-maintainers
+packages/tauri/ @adamdotdevin @kilo-maintainers
+packages/desktop/src-tauri/ @brendonovich @kilo-maintainers
+packages/desktop/ @adamdotdevin @kilo-maintainers
+
+# Package-specific owners
+packages/opencode/ @opencode-team @kilo-maintainers
+packages/kilo-vscode/ @vscode-team @kilo-maintainers
+packages/kilo-ui/ @ui-team @kilo-maintainers
+packages/kilo-gateway/ @backend-team @kilo-maintainers
+packages/kilo-telemetry/ @observability-team @kilo-maintainers
+packages/kilo-i18n/ @ui-team @kilo-maintainers
+packages/sdk/ @api-team @kilo-maintainers
+
+# Application packages
+packages/storybook/ @ui-team @kilo-maintainers
+
+# Shared packages
+packages/util/ @shared-team @kilo-maintainers
+packages/plugin/ @plugin-team @kilo-maintainers
+
+# Test files
+tests/ @qa-team @kilo-maintainers
+test/ @qa-team @kilo-maintainers
+**/*.test.ts @qa-team
+**/*.spec.ts @qa-team
+
+# Documentation
+docs/ @docs-team @kilo-maintainers
+*.md @docs-team
+README.md @docs-team @kilo-maintainers
+CHANGELOG.md @docs-team @kilo-maintainers
+LICENSE @legal-team @kilo-maintainers
+
+# Configuration files
+.github/ @devops-team @kilo-maintainers
+.github/workflows/ @devops-team @kilo-maintainers
+.github/ISSUE_TEMPLATE/ @devops-team @docs-team
+.github/PULL_REQUEST_TEMPLATE.md @devops-team @docs-team
+
+# Build and deployment
+docker/ @devops-team @kilo-maintainers
+Dockerfile* @devops-team
+docker-compose* @devops-team
+*.yml @devops-team
+*.yaml @devops-team
+
+# Package management
+package.json @shared-team @kilo-maintainers
+package-lock.json @shared-team @kilo-maintainers
+bun.lockb @shared-team @kilo-maintainers
+*.config.js @shared-team @kilo-maintainers
+*.config.ts @shared-team @kilo-maintainers
+
+# Security and compliance
+SECURITY.md @security-team @kilo-maintainers
+security/ @security-team @kilo-maintainers
+**/security/** @security-team @kilo-maintainers
+
+# Performance and optimization
+performance/ @performance-team @kilo-maintainers
+**/performance/** @performance-team @kilo-maintainers
+
+# Migration and database
+migration/ @database-team @kilo-maintainers
+**/migration/** @database-team @kilo-maintainers
+**/db/** @database-team @kilo-maintainers
+
+# Infrastructure and monitoring
+infrastructure/ @devops-team @kilo-maintainers
+monitoring/ @observability-team @kilo-maintainers
+
+# Legal and licensing
+LICENSE @legal-team @kilo-maintainers
+**/LICENSE* @legal-team @kilo-maintainers
+**/COPYING* @legal-team @kilo-maintainers
+
+# Emergency overrides for critical issues
+# In case of emergency, @kilo-maintainers can override any restrictions
+**/emergency-fix/** @kilo-maintainers
+**/hotfix/** @kilo-maintainers
+
+# Default fallback
+# If no specific owner is found, fallback to maintainers
+* @kilo-maintainers

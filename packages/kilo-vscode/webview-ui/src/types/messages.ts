@@ -727,7 +727,6 @@ export interface GlobalConfigLoadedMessage {
   config: Config
 }
 
-
 export interface SpeechSettingsLoadedMessage {
   type: "speechSettingsLoaded"
   settings: {
@@ -1639,7 +1638,6 @@ export interface UpdateConfigMessage {
 export interface RequestNotificationSettingsMessage {
   type: "requestNotificationSettings"
 }
-
 
 export interface RequestSpeechSettingsMessage {
   type: "requestSpeechSettings"

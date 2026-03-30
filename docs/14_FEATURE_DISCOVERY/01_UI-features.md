@@ -27,6 +27,7 @@
 **Description:** Primary interactive button component with multiple variants.
 
 **Variants:**
+
 - `default` - Standard button
 - `primary` - Primary action button
 - `secondary` - Secondary action button
@@ -35,10 +36,11 @@
 - `success` - Successconfirmations
 
 **Props:**
+
 ```typescript
 interface ButtonProps {
-  variant?: 'default' | 'primary' | 'secondary' | 'ghost' | 'danger' | 'success'
-  size?: 'sm' | 'md' | 'lg'
+  variant?: "default" | "primary" | "secondary" | "ghost" | "danger" | "success"
+  size?: "sm" | "md" | "lg"
   disabled?: boolean
   loading?: boolean
   onClick?: (e: MouseEvent) => void
@@ -47,6 +49,7 @@ interface ButtonProps {
 ```
 
 **Usage Example:**
+
 ```tsx
 <Button variant="primary" size="md" onClick={handleClick}>
   Submit
@@ -60,20 +63,18 @@ interface ButtonProps {
 **Description:** Text input component with consistent styling.
 
 **Props:**
+
 ```typescript
-interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'onInput'> {
-  type?: 'text' | 'password' | 'email' | 'number' | 'search' | 'tel' | 'url'
+interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "onInput"> {
+  type?: "text" | "password" | "email" | "number" | "search" | "tel" | "url"
   onInput?: (e: InputEvent & { currentTarget: HTMLInputElement }) => void
 }
 ```
 
 **Usage Example:**
+
 ```tsx
-<Input 
-  type="text" 
-  placeholder="Enter your name" 
-  onInput={(e) => setValue(e.currentTarget.value)} 
-/>
+<Input type="text" placeholder="Enter your name" onInput={(e) => setValue(e.currentTarget.value)} />
 ```
 
 ### 1.3 Toast Component
@@ -83,6 +84,7 @@ interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'on
 **Description:** Notification toast component for displaying transient messages.
 
 **Variants:**
+
 - `default` - General information
 - `success` - Success messages
 - `error` - Error messages
@@ -91,6 +93,7 @@ interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'on
 - `loading` - Loading state
 
 **Features:**
+
 - Auto-dismiss timer
 - Manual dismiss button
 - Stacking multiple toasts
@@ -99,10 +102,11 @@ interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'on
 - Action buttons
 
 **Usage Example:**
+
 ```tsx
-toast.success('File saved successfully', {
+toast.success("File saved successfully", {
   duration: 3000,
-  action: { label: 'Undo', onClick: handleUndo }
+  action: { label: "Undo", onClick: handleUndo },
 })
 ```
 
@@ -113,17 +117,20 @@ toast.success('File saved successfully', {
 **Description:** Hover tooltip for additional information.
 
 **Placement Options:**
+
 - `top`, `bottom`, `left`, `right`
 - `top-start`, `top-end`
 - `bottom-start`, `bottom-end`
 
 **Features:**
+
 - Delay configuration
 - Force open state
 - Keyboard accessibility
 - Keybind display support
 
 **Usage Example:**
+
 ```tsx
 <Tooltip content="Save file" placement="top">
   <button>💾</button>
@@ -164,6 +171,7 @@ toast.success('File saved successfully', {
 **Location:** `packages/ui/src/theme/resolve.ts`
 
 **Features:**
+
 - OS theme detection (light/dark)
 - User preference override
 - Runtime theme switching
@@ -175,6 +183,7 @@ toast.success('File saved successfully', {
 **Location:** `packages/ui/src/theme/loader.ts`
 
 **Features:**
+
 - Async theme loading
 - Theme validation
 - Fallback to default
@@ -189,6 +198,7 @@ toast.success('File saved successfully', {
 **Location:** `packages/kilo-ui/src/components/toast.tsx`
 
 **Features:**
+
 - Toast manager singleton
 - Queue-based display
 - Position management (top, bottom, left, right)
@@ -197,23 +207,23 @@ toast.success('File saved successfully', {
 
 ### 3.2 Toast Variants
 
-| Variant | Icon | Color | Use Case |
-|---------|------|-------|----------|
-| `default` | ℹ️ | Blue | General info |
-| `success` | ✓ | Green | Success confirmations |
-| `error` | ✕ | Red | Error messages |
-| `warning` | ⚠ | Yellow | Warnings |
-| `info` | ℹ️ | Blue | Information |
-| `loading` | ⟳ | Blue | Async operations |
+| Variant   | Icon | Color  | Use Case              |
+| --------- | ---- | ------ | --------------------- |
+| `default` | ℹ️   | Blue   | General info          |
+| `success` | ✓    | Green  | Success confirmations |
+| `error`   | ✕    | Red    | Error messages        |
+| `warning` | ⚠    | Yellow | Warnings              |
+| `info`    | ℹ️   | Blue   | Information           |
+| `loading` | ⟳    | Blue   | Async operations      |
 
 ### 3.3 Toast Configuration
 
 ```typescript
 interface ToastConfig {
-  duration?: number      // Auto-dismiss delay (ms)
-  dismissible?: boolean  // Show close button
-  position?: Position    // Screen position
-  maxVisible?: number    // Max simultaneous toasts
+  duration?: number // Auto-dismiss delay (ms)
+  dismissible?: boolean // Show close button
+  position?: Position // Screen position
+  maxVisible?: number // Max simultaneous toasts
   pauseOnHover?: boolean // Pause timer on hover
 }
 ```
@@ -227,16 +237,25 @@ interface ToastConfig {
 **Location:** `packages/kilo-ui/src/components/tooltip.tsx`
 
 **Placement Options:**
+
 ```typescript
-type Placement = 
-  | 'top' | 'bottom' | 'left' | 'right'
-  | 'top-start' | 'top-end'
-  | 'bottom-start' | 'bottom-end'
-  | 'left-start' | 'left-end'
-  | 'right-start' | 'right-end'
+type Placement =
+  | "top"
+  | "bottom"
+  | "left"
+  | "right"
+  | "top-start"
+  | "top-end"
+  | "bottom-start"
+  | "bottom-end"
+  | "left-start"
+  | "left-end"
+  | "right-start"
+  | "right-end"
 ```
 
 **Features:**
+
 - Mouse hover activation
 - Focus activation for accessibility
 - Delay configuration (enter/leave)
@@ -266,6 +285,7 @@ interface TooltipProps {
 **Description:** Main chat message display with history.
 
 **Features:**
+
 - Virtual scrolling for performance
 - Message grouping by date
 - Auto-scroll to latest
@@ -278,6 +298,7 @@ interface TooltipProps {
 **Location:** `packages/app/src/pages/session/composer/`
 
 **Components:**
+
 - `SessionComposerState` - Composer state management
 - `SessionComposerRegion` - Editable region
 - `SessionPermissionDock` - Permission requests
@@ -290,6 +311,7 @@ interface TooltipProps {
 **Location:** `packages/app/src/pages/session.tsx`
 
 **Features:**
+
 - Multi-line input
 - File drag-and-drop
 - Slash commands (`/`, `/terminal`, `/share`)
@@ -303,6 +325,7 @@ interface TooltipProps {
 **Location:** `packages/app/src/pages/session/file-tabs.tsx`
 
 **Features:**
+
 - Tab bar for open files
 - Scroll to tab
 - Tab close button
@@ -313,6 +336,7 @@ interface TooltipProps {
 **Location:** `packages/app/src/pages/session/terminal-panel.tsx`
 
 **Features:**
+
 - Embedded terminal
 - Multiple terminal tabs
 - Terminal label management
@@ -329,6 +353,7 @@ interface TooltipProps {
 **Description:** VS Code settings editor integration.
 
 **Features:**
+
 - Settings tree view
 - Search functionality
 - Settings validation
@@ -337,20 +362,21 @@ interface TooltipProps {
 
 ### 6.2 Settings Categories
 
-| Category | Description |
-|----------|-------------|
-| `agent-behaviour` | Agent behavior settings |
-| `providers` | AI provider configuration |
-| `models` | Model selection and priorities |
-| `appearance` | Theme and UI settings |
-| `keybindings` | Keyboard shortcuts |
-| `advanced` | Advanced configuration |
+| Category          | Description                    |
+| ----------------- | ------------------------------ |
+| `agent-behaviour` | Agent behavior settings        |
+| `providers`       | AI provider configuration      |
+| `models`          | Model selection and priorities |
+| `appearance`      | Theme and UI settings          |
+| `keybindings`     | Keyboard shortcuts             |
+| `advanced`        | Advanced configuration         |
 
 ### 6.3 Provider Configuration UI
 
 **Location:** `webview-ui/src/components/settings/`
 
 **Features:**
+
 - Provider add/remove
 - API key management
 - Endpoint configuration
@@ -367,6 +393,7 @@ interface TooltipProps {
 **Location:** `webview-ui/agent-manager/WorktreeItem.tsx`
 
 **Features:**
+
 - Worktree list display
 - Worktree creation dialog
 - Worktree deletion
@@ -378,6 +405,7 @@ interface TooltipProps {
 **Location:** `webview-ui/agent-manager/MultiModelSelector.tsx`
 
 **Features:**
+
 - Model dropdown
 - Multi-model support
 - Model filtering
@@ -388,6 +416,7 @@ interface TooltipProps {
 **Location:** `webview-ui/agent-manager/review-annotations.ts`
 
 **Features:**
+
 - Inline diff viewer
 - Comment threading
 - Review status indicators
@@ -403,4 +432,4 @@ interface TooltipProps {
 
 ---
 
-*Document generated by Agent-01 (UI Components)*
+_Document generated by Agent-01 (UI Components)_

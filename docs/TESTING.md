@@ -50,6 +50,7 @@ On Windows, some tests may exhibit platform-specific behavior:
 Windows uses CRLF (`\r\n`) line endings while Unix uses LF (`\n`). Some tests involving git operations may fail if not properly configured.
 
 **Symptoms:**
+
 ```
 error: expect(received).toBe(expected)
   "two\r\n"
@@ -60,6 +61,7 @@ error: expect(received).toBe(expected)
 **Solutions:**
 
 1. **Configure git autocrlf** before running tests:
+
    ```bash
    git config --global core.autocrlf input
    ```
@@ -73,6 +75,7 @@ error: expect(received).toBe(expected)
 Some tests assume Unix shell utilities (`/bin/bash`, `pwd`, `echo`). On Windows, these may not be available.
 
 **Symptoms:**
+
 ```
 ENOENT: no such file or directory, uv_spawn '/bin/bash'
 ```
@@ -80,10 +83,11 @@ ENOENT: no such file or directory, uv_spawn '/bin/bash'
 **Solutions:**
 
 1. **Use Git Bash or WSL** - Run tests in a Unix-like environment:
+
    ```bash
    # Using Git Bash
    git bash -c "bun run test:unit"
-   
+
    # Using WSL
    wsl bun run test:unit
    ```
@@ -132,21 +136,21 @@ bun run test:unit 2>&1 | grep -E "(pass|fail)"
 
 The test suite covers:
 
-| Category | Packages | Coverage |
-|----------|----------|----------|
-| Unit Tests | opencode, kilo-vscode, app, kilo-telemetry | Core logic |
-| Integration Tests | kilo-vscode | Git operations, file system |
-| i18n Tests | All packages | Translation completeness |
-| Type Tests | All packages | TypeScript strict mode |
+| Category          | Packages                                   | Coverage                    |
+| ----------------- | ------------------------------------------ | --------------------------- |
+| Unit Tests        | opencode, kilo-vscode, app, kilo-telemetry | Core logic                  |
+| Integration Tests | kilo-vscode                                | Git operations, file system |
+| i18n Tests        | All packages                               | Translation completeness    |
+| Type Tests        | All packages                               | TypeScript strict mode      |
 
 ## CI Pipeline
 
 Tests run automatically on:
 
-| Platform | Runner | Purpose |
-|----------|--------|---------|
-| Linux | blacksmith-4vcpu-ubuntu-2404 | Primary test platform |
-| Windows | blacksmith-4vcpu-windows-2025 | Windows compatibility |
+| Platform | Runner                        | Purpose               |
+| -------- | ----------------------------- | --------------------- |
+| Linux    | blacksmith-4vcpu-ubuntu-2404  | Primary test platform |
+| Windows  | blacksmith-4vcpu-windows-2025 | Windows compatibility |
 
 See `.github/workflows/test.yml` for the CI configuration.
 
@@ -173,15 +177,15 @@ These failures do **not** indicate code defects and are expected on Windows. The
 ### Example: Platform-Aware Test
 
 ```typescript
-import { describe, it, expect } from 'bun:test'
-import path from 'path'
+import { describe, it, expect } from "bun:test"
+import path from "path"
 
-describe('platform-aware test', () => {
-  it('handles paths correctly', () => {
-    const filePath = path.join('some', 'directory', 'file.txt')
+describe("platform-aware test", () => {
+  it("handles paths correctly", () => {
+    const filePath = path.join("some", "directory", "file.txt")
     expect(filePath).toMatch(/\//) // Unix-style on Unix
     // Or normalize for comparison:
-    expect(filePath.replace(/\\/g, '/')).toBe('some/directory/file.txt')
+    expect(filePath.replace(/\\/g, "/")).toBe("some/directory/file.txt")
   })
 })
 ```

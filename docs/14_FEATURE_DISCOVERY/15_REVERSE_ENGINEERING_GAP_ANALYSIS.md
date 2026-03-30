@@ -3,7 +3,7 @@
 **Document:** REVERSE_ENGINEERING_GAP_ANALYSIS  
 **Version:** 1.0  
 **Created:** 2026-03-29  
-**Author:** Master Analysis Agent  
+**Author:** Master Analysis Agent
 
 ---
 
@@ -15,23 +15,23 @@ This document provides a comprehensive gap analysis of the current reverse engin
 
 ### Documentation Coverage Matrix
 
-| Category | Files Scanned | Files Documented | Coverage % | Gap % |
-|----------|-------------|-----------------|-----------|-------|
-| **packages/opencode/** | ~400 | ~45 | 11.25% | 88.75% |
-| **packages/kilo-vscode/** | ~250 | ~35 | 14.0% | 86.0% |
-| **packages/kilo-ui/** | ~120 | ~15 | 12.5% | 87.5% |
-| **packages/app/** | ~180 | ~20 | 11.1% | 88.9% |
-| **packages/desktop-electron/** | ~80 | ~10 | 12.5% | 87.5% |
-| **packages/sdk/** | ~60 | ~8 | 13.3% | 86.7% |
-| **packages/kilo-gateway/** | ~40 | ~5 | 12.5% | 87.5% |
-| **packages/kilo-telemetry/** | ~30 | ~4 | 13.3% | 86.7% |
-| **packages/kilo-i18n/** | ~25 | ~3 | 12.0% | 88.0% |
-| **packages/util/** | ~15 | ~2 | 13.3% | 86.7% |
-| **packages/plugin/** | ~20 | ~2 | 10.0% | 90.0% |
-| **scripts/** | ~50 | ~8 | 16.0% | 84.0% |
-| **github/** | ~10 | ~2 | 20.0% | 80.0% |
-| **nix/** | ~8 | ~1 | 12.5% | 87.5% |
-| **Total** | **~1,308** | **~160** | **12.2%** | **87.8%** |
+| Category                       | Files Scanned | Files Documented | Coverage % | Gap %     |
+| ------------------------------ | ------------- | ---------------- | ---------- | --------- |
+| **packages/opencode/**         | ~400          | ~45              | 11.25%     | 88.75%    |
+| **packages/kilo-vscode/**      | ~250          | ~35              | 14.0%      | 86.0%     |
+| **packages/kilo-ui/**          | ~120          | ~15              | 12.5%      | 87.5%     |
+| **packages/app/**              | ~180          | ~20              | 11.1%      | 88.9%     |
+| **packages/desktop-electron/** | ~80           | ~10              | 12.5%      | 87.5%     |
+| **packages/sdk/**              | ~60           | ~8               | 13.3%      | 86.7%     |
+| **packages/kilo-gateway/**     | ~40           | ~5               | 12.5%      | 87.5%     |
+| **packages/kilo-telemetry/**   | ~30           | ~4               | 13.3%      | 86.7%     |
+| **packages/kilo-i18n/**        | ~25           | ~3               | 12.0%      | 88.0%     |
+| **packages/util/**             | ~15           | ~2               | 13.3%      | 86.7%     |
+| **packages/plugin/**           | ~20           | ~2               | 10.0%      | 90.0%     |
+| **scripts/**                   | ~50           | ~8               | 16.0%      | 84.0%     |
+| **github/**                    | ~10           | ~2               | 20.0%      | 80.0%     |
+| **nix/**                       | ~8            | ~1               | 12.5%      | 87.5%     |
+| **Total**                      | **~1,308**    | **~160**         | **12.2%**  | **87.8%** |
 
 ### Overall Coverage: ~12.2% (CRITICAL GAP: 87.8% MISSING)
 
@@ -41,94 +41,94 @@ This document provides a comprehensive gap analysis of the current reverse engin
 
 ### 1. UI Components (packages/kilo-vscode/webview-ui/, packages/kilo-ui/, packages/ui/)
 
-| Component Type | Total | Documented | Missing | Priority |
-|---------------|-------|-----------|---------|----------|
-| React/Solid Components | ~150 | ~20 | 130 | HIGH |
-| Hooks | ~45 | ~8 | 37 | HIGH |
-| Context Providers | ~15 | ~3 | 12 | MEDIUM |
-| Utils/Helpers | ~60 | ~10 | 50 | MEDIUM |
-| i18n Files | ~18 | ~2 | 16 | MEDIUM |
-| CSS/Styles | ~25 | ~5 | 20 | LOW |
-| Stories (Storybook) | ~40 | ~8 | 32 | MEDIUM |
-| **Subtotal** | **~353** | **~56** | **~297** | |
+| Component Type         | Total    | Documented | Missing  | Priority |
+| ---------------------- | -------- | ---------- | -------- | -------- |
+| React/Solid Components | ~150     | ~20        | 130      | HIGH     |
+| Hooks                  | ~45      | ~8         | 37       | HIGH     |
+| Context Providers      | ~15      | ~3         | 12       | MEDIUM   |
+| Utils/Helpers          | ~60      | ~10        | 50       | MEDIUM   |
+| i18n Files             | ~18      | ~2         | 16       | MEDIUM   |
+| CSS/Styles             | ~25      | ~5         | 20       | LOW      |
+| Stories (Storybook)    | ~40      | ~8         | 32       | MEDIUM   |
+| **Subtotal**           | **~353** | **~56**    | **~297** |          |
 
 ### 2. Backend Services (packages/opencode/src/)
 
-| Service Type | Total | Documented | Missing | Priority |
-|-------------|-------|-----------|---------|----------|
-| Server/Routes | ~50 | ~8 | 42 | HIGH |
-| Agents | ~30 | ~5 | 25 | HIGH |
-| Tools | ~80 | ~12 | 68 | HIGH |
-| Session Management | ~25 | ~4 | 21 | HIGH |
-| Auth Providers | ~15 | ~2 | 13 | HIGH |
-| Config Management | ~20 | ~3 | 17 | MEDIUM |
-| Database/Storage | ~15 | ~2 | 13 | MEDIUM |
-| Middleware | ~20 | ~4 | 16 | HIGH |
-| Event Handlers | ~40 | ~6 | 34 | HIGH |
-| Error Handling | ~25 | ~4 | 21 | MEDIUM |
-| Logging | ~15 | ~2 | 13 | MEDIUM |
-| **Subtotal** | **~335** | **~52** | **~283** | |
+| Service Type       | Total    | Documented | Missing  | Priority |
+| ------------------ | -------- | ---------- | -------- | -------- |
+| Server/Routes      | ~50      | ~8         | 42       | HIGH     |
+| Agents             | ~30      | ~5         | 25       | HIGH     |
+| Tools              | ~80      | ~12        | 68       | HIGH     |
+| Session Management | ~25      | ~4         | 21       | HIGH     |
+| Auth Providers     | ~15      | ~2         | 13       | HIGH     |
+| Config Management  | ~20      | ~3         | 17       | MEDIUM   |
+| Database/Storage   | ~15      | ~2         | 13       | MEDIUM   |
+| Middleware         | ~20      | ~4         | 16       | HIGH     |
+| Event Handlers     | ~40      | ~6         | 34       | HIGH     |
+| Error Handling     | ~25      | ~4         | 21       | MEDIUM   |
+| Logging            | ~15      | ~2         | 13       | MEDIUM   |
+| **Subtotal**       | **~335** | **~52**    | **~283** |          |
 
 ### 3. SDK & API (packages/sdk/, packages/opencode/src/server/)
 
-| Type | Total | Documented | Missing | Priority |
-|------|-------|-----------|---------|----------|
-| API Endpoints | ~60 | ~10 | 50 | HIGH |
-| Type Definitions | ~120 | ~15 | 105 | HIGH |
-| Client SDK | ~40 | ~6 | 34 | HIGH |
-| Server SDK | ~35 | ~5 | 30 | HIGH |
-| RPC Contracts | ~25 | ~4 | 21 | HIGH |
-| WebSocket/SSE | ~10 | ~2 | 8 | MEDIUM |
-| **Subtotal** | **~290** | **~42** | **~248** | |
+| Type             | Total    | Documented | Missing  | Priority |
+| ---------------- | -------- | ---------- | -------- | -------- |
+| API Endpoints    | ~60      | ~10        | 50       | HIGH     |
+| Type Definitions | ~120     | ~15        | 105      | HIGH     |
+| Client SDK       | ~40      | ~6         | 34       | HIGH     |
+| Server SDK       | ~35      | ~5         | 30       | HIGH     |
+| RPC Contracts    | ~25      | ~4         | 21       | HIGH     |
+| WebSocket/SSE    | ~10      | ~2         | 8        | MEDIUM   |
+| **Subtotal**     | **~290** | **~42**    | **~248** |          |
 
 ### 4. Desktop & Extensions (packages/desktop/, packages/extensions/)
 
-| Type | Total | Documented | Missing | Priority |
-|------|-------|-----------|---------|----------|
-| Tauri Commands | ~40 | ~5 | 35 | HIGH |
-| Electron IPC | ~50 | ~6 | 44 | HIGH |
-| Native Modules | ~25 | ~3 | 22 | MEDIUM |
-| Window Management | ~20 | ~3 | 17 | MEDIUM |
-| Menu System | ~30 | ~4 | 26 | HIGH |
-| System Tray | ~15 | ~2 | 13 | MEDIUM |
-| **Subtotal** | **~180** | **~23** | **~157** | |
+| Type              | Total    | Documented | Missing  | Priority |
+| ----------------- | -------- | ---------- | -------- | -------- |
+| Tauri Commands    | ~40      | ~5         | 35       | HIGH     |
+| Electron IPC      | ~50      | ~6         | 44       | HIGH     |
+| Native Modules    | ~25      | ~3         | 22       | MEDIUM   |
+| Window Management | ~20      | ~3         | 17       | MEDIUM   |
+| Menu System       | ~30      | ~4         | 26       | HIGH     |
+| System Tray       | ~15      | ~2         | 13       | MEDIUM   |
+| **Subtotal**      | **~180** | **~23**    | **~157** |          |
 
 ### 5. Infrastructure (github/, nix/, scripts/, .github/)
 
-| Type | Total | Documented | Missing | Priority |
-|------|-------|-----------|---------|----------|
-| GitHub Actions | ~15 | ~4 | 11 | HIGH |
-| Nix Expressions | ~8 | ~2 | 6 | MEDIUM |
-| Build Scripts | ~30 | ~6 | 24 | HIGH |
-| Deploy Scripts | ~15 | ~3 | 12 | MEDIUM |
-| CI/CD Pipelines | ~10 | ~2 | 8 | HIGH |
-| Docker/Containers | ~8 | ~2 | 6 | MEDIUM |
-| **Subtotal** | **~86** | **~19** | **~67** | |
+| Type              | Total   | Documented | Missing | Priority |
+| ----------------- | ------- | ---------- | ------- | -------- |
+| GitHub Actions    | ~15     | ~4         | 11      | HIGH     |
+| Nix Expressions   | ~8      | ~2         | 6       | MEDIUM   |
+| Build Scripts     | ~30     | ~6         | 24      | HIGH     |
+| Deploy Scripts    | ~15     | ~3         | 12      | MEDIUM   |
+| CI/CD Pipelines   | ~10     | ~2         | 8       | HIGH     |
+| Docker/Containers | ~8      | ~2         | 6       | MEDIUM   |
+| **Subtotal**      | **~86** | **~19**    | **~67** |          |
 
-### 6. Tests & Quality (test/, tests/, **/*.test.ts)
+### 6. Tests & Quality (test/, tests/, \*_/_.test.ts)
 
-| Type | Total | Documented | Missing | Priority |
-|------|-------|-----------|---------|----------|
-| Unit Tests | ~120 | ~15 | 105 | MEDIUM |
-| Integration Tests | ~60 | ~8 | 52 | MEDIUM |
-| E2E Tests | ~40 | ~5 | 35 | MEDIUM |
-| Visual Regression | ~30 | ~4 | 26 | LOW |
-| Test Utilities | ~25 | ~3 | 22 | LOW |
-| **Subtotal** | **~275** | **~35** | **~240** | |
+| Type              | Total    | Documented | Missing  | Priority |
+| ----------------- | -------- | ---------- | -------- | -------- |
+| Unit Tests        | ~120     | ~15        | 105      | MEDIUM   |
+| Integration Tests | ~60      | ~8         | 52       | MEDIUM   |
+| E2E Tests         | ~40      | ~5         | 35       | MEDIUM   |
+| Visual Regression | ~30      | ~4         | 26       | LOW      |
+| Test Utilities    | ~25      | ~3         | 22       | LOW      |
+| **Subtotal**      | **~275** | **~35**    | **~240** |          |
 
 ---
 
 ## Missing Documentation Summary
 
-| Category | Total Files | Documented | Missing | Coverage % |
-|----------|-----------|-----------|---------|-----------|
-| UI Components | 353 | 56 | 297 | 15.9% |
-| Backend Services | 335 | 52 | 283 | 15.5% |
-| SDK & API | 290 | 42 | 248 | 14.5% |
-| Desktop & Extensions | 180 | 23 | 157 | 12.8% |
-| Infrastructure | 86 | 19 | 67 | 22.1% |
-| Tests & Quality | 275 | 35 | 240 | 12.7% |
-| **TOTAL** | **~1,519** | **~227** | **~1,292** | **14.9%** |
+| Category             | Total Files | Documented | Missing    | Coverage % |
+| -------------------- | ----------- | ---------- | ---------- | ---------- |
+| UI Components        | 353         | 56         | 297        | 15.9%      |
+| Backend Services     | 335         | 52         | 283        | 15.5%      |
+| SDK & API            | 290         | 42         | 248        | 14.5%      |
+| Desktop & Extensions | 180         | 23         | 157        | 12.8%      |
+| Infrastructure       | 86          | 19         | 67         | 22.1%      |
+| Tests & Quality      | 275         | 35         | 240        | 12.7%      |
+| **TOTAL**            | **~1,519**  | **~227**   | **~1,292** | **14.9%**  |
 
 **Critical Gap: 85.1% of codebase NOT documented**
 
@@ -138,33 +138,33 @@ This document provides a comprehensive gap analysis of the current reverse engin
 
 ### Markdown Files Needed
 
-| Category | Per-File Docs | Total Needed | Current | Shortfall |
-|----------|--------------|-------------|---------|-----------|
-| Component Documentation | 1 per component | ~400 | ~50 | 350 |
-| Service Documentation | 1 per service | ~200 | ~30 | 170 |
-| API Endpoint Documentation | 1 per endpoint | ~60 | ~10 | 50 |
-| Architecture Decision Records | 1 per decision | ~50 | ~5 | 45 |
-| Configuration Guides | 1 per config | ~30 | ~3 | 27 |
-| Deployment Guides | 1 per target | ~20 | ~2 | 18 |
-| Troubleshooting Guides | 1 per error type | ~40 | ~0 | 40 |
-| Migration Guides | 1 per version | ~15 | ~0 | 15 |
-| **Total Markdowns** | | **~815** | **~100** | **~715** |
+| Category                      | Per-File Docs    | Total Needed | Current  | Shortfall |
+| ----------------------------- | ---------------- | ------------ | -------- | --------- |
+| Component Documentation       | 1 per component  | ~400         | ~50      | 350       |
+| Service Documentation         | 1 per service    | ~200         | ~30      | 170       |
+| API Endpoint Documentation    | 1 per endpoint   | ~60          | ~10      | 50        |
+| Architecture Decision Records | 1 per decision   | ~50          | ~5       | 45        |
+| Configuration Guides          | 1 per config     | ~30          | ~3       | 27        |
+| Deployment Guides             | 1 per target     | ~20          | ~2       | 18        |
+| Troubleshooting Guides        | 1 per error type | ~40          | ~0       | 40        |
+| Migration Guides              | 1 per version    | ~15          | ~0       | 15        |
+| **Total Markdowns**           |                  | **~815**     | **~100** | **~715**  |
 
 ### Diagrams Required
 
-| Diagram Type | Count Needed | Current | Shortfall |
-|--------------|-------------|---------|-----------|
-| System Architecture | 5 | 1 | 4 |
-| Component Hierarchy | 10 | 1 | 9 |
-| Data Flow | 15 | 2 | 13 |
-| State Machine | 8 | 0 | 8 |
-| Sequence/Activity | 20 | 2 | 18 |
-| ERD/Database | 5 | 0 | 5 |
-| Network/Deployment | 8 | 1 | 7 |
-| Wireframe/UI Layout | 12 | 0 | 12 |
-| Class/Module | 15 | 1 | 14 |
-| Dependency Graph | 6 | 1 | 5 |
-| **Total Diagrams** | **~104** | **~9** | **~95** |
+| Diagram Type        | Count Needed | Current | Shortfall |
+| ------------------- | ------------ | ------- | --------- |
+| System Architecture | 5            | 1       | 4         |
+| Component Hierarchy | 10           | 1       | 9         |
+| Data Flow           | 15           | 2       | 13        |
+| State Machine       | 8            | 0       | 8         |
+| Sequence/Activity   | 20           | 2       | 18        |
+| ERD/Database        | 5            | 0       | 5         |
+| Network/Deployment  | 8            | 1       | 7         |
+| Wireframe/UI Layout | 12           | 0       | 12        |
+| Class/Module        | 15           | 1       | 14        |
+| Dependency Graph    | 6            | 1       | 5         |
+| **Total Diagrams**  | **~104**     | **~9**  | **~95**   |
 
 ---
 
@@ -172,28 +172,28 @@ This document provides a comprehensive gap analysis of the current reverse engin
 
 ### Agent Assignment Matrix
 
-| Agent | Primary Responsibility | Secondary | Target Directory | Expected Output |
-|-------|----------------------|-----------|-----------------|----------------|
-| Agent-01 | Core Server Architecture | HTTP Server | packages/opencode/src/server/ | 25 markdowns, 5 diagrams |
-| Agent-02 | Agent Runtime & Planning | Tool System | packages/opencode/src/agent/ | 30 markdowns, 6 diagrams |
-| Agent-03 | Session Management | State Store | packages/opencode/src/session/ | 20 markdowns, 4 diagrams |
-| Agent-04 | Tool Implementation | Tool Registry | packages/opencode/src/tools/ | 35 markdowns, 5 diagrams |
-| Agent-05 | Auth & Security | Providers | packages/opencode/src/auth/ | 20 markdowns, 4 diagrams |
-| Agent-06 | Config Management | Env Handling | packages/opencode/src/config/ | 15 markdowns, 3 diagrams |
-| Agent-07 | VS Code Extension UI | Webview | packages/kilo-vscode/src/ | 40 markdowns, 8 diagrams |
-| Agent-08 | Webview Components | Hooks | packages/kilo-vscode/webview-ui/src/ | 50 markdowns, 10 diagrams |
-| Agent-09 | Agent Manager | Worktree | packages/kilo-vscode/src/agent-manager/ | 30 markdowns, 6 diagrams |
-| Agent-10 | SDK & API Contracts | Types | packages/sdk/, packages/opencode/src/server/ | 35 markdowns, 7 diagrams |
-| Agent-11 | Desktop Electron | IPC | packages/desktop-electron/src/ | 25 markdowns, 5 diagrams |
-| Agent-12 | Desktop Tauri | Commands | packages/desktop/src/ | 20 markdowns, 4 diagrams |
-| Agent-13 | UI Component Library | Design System | packages/kilo-ui/src/, packages/ui/src/ | 45 markdowns, 9 diagrams |
-| Agent-14 | Gateway & Routing | Provider Integration | packages/kilo-gateway/src/ | 20 markdowns, 4 diagrams |
-| Agent-15 | Telemetry & Analytics | OTel | packages/kilo-telemetry/src/ | 15 markdowns, 3 diagrams |
-| Agent-16 | i18n & Translations | Localization | packages/kilo-i18n/src/, packages/*/i18n/ | 25 markdowns, 3 diagrams |
-| Agent-17 | Build & CI/CD | GitHub Actions | .github/, github/, scripts/ | 20 markdowns, 5 diagrams |
-| Agent-18 | Nix & DevOps | Containers | nix/, packages/containers/ | 15 markdowns, 4 diagrams |
-| Agent-19 | Testing Infrastructure | Test Utils | packages/*/test/, packages/*/tests/ | 30 markdowns, 4 diagrams |
-| Agent-20 | Integration & E2E | Playwright | packages/*/e2e/, integration/ | 20 markdowns, 5 diagrams |
+| Agent    | Primary Responsibility   | Secondary            | Target Directory                             | Expected Output           |
+| -------- | ------------------------ | -------------------- | -------------------------------------------- | ------------------------- |
+| Agent-01 | Core Server Architecture | HTTP Server          | packages/opencode/src/server/                | 25 markdowns, 5 diagrams  |
+| Agent-02 | Agent Runtime & Planning | Tool System          | packages/opencode/src/agent/                 | 30 markdowns, 6 diagrams  |
+| Agent-03 | Session Management       | State Store          | packages/opencode/src/session/               | 20 markdowns, 4 diagrams  |
+| Agent-04 | Tool Implementation      | Tool Registry        | packages/opencode/src/tools/                 | 35 markdowns, 5 diagrams  |
+| Agent-05 | Auth & Security          | Providers            | packages/opencode/src/auth/                  | 20 markdowns, 4 diagrams  |
+| Agent-06 | Config Management        | Env Handling         | packages/opencode/src/config/                | 15 markdowns, 3 diagrams  |
+| Agent-07 | VS Code Extension UI     | Webview              | packages/kilo-vscode/src/                    | 40 markdowns, 8 diagrams  |
+| Agent-08 | Webview Components       | Hooks                | packages/kilo-vscode/webview-ui/src/         | 50 markdowns, 10 diagrams |
+| Agent-09 | Agent Manager            | Worktree             | packages/kilo-vscode/src/agent-manager/      | 30 markdowns, 6 diagrams  |
+| Agent-10 | SDK & API Contracts      | Types                | packages/sdk/, packages/opencode/src/server/ | 35 markdowns, 7 diagrams  |
+| Agent-11 | Desktop Electron         | IPC                  | packages/desktop-electron/src/               | 25 markdowns, 5 diagrams  |
+| Agent-12 | Desktop Tauri            | Commands             | packages/desktop/src/                        | 20 markdowns, 4 diagrams  |
+| Agent-13 | UI Component Library     | Design System        | packages/kilo-ui/src/, packages/ui/src/      | 45 markdowns, 9 diagrams  |
+| Agent-14 | Gateway & Routing        | Provider Integration | packages/kilo-gateway/src/                   | 20 markdowns, 4 diagrams  |
+| Agent-15 | Telemetry & Analytics    | OTel                 | packages/kilo-telemetry/src/                 | 15 markdowns, 3 diagrams  |
+| Agent-16 | i18n & Translations      | Localization         | packages/kilo-i18n/src/, packages/\*/i18n/   | 25 markdowns, 3 diagrams  |
+| Agent-17 | Build & CI/CD            | GitHub Actions       | .github/, github/, scripts/                  | 20 markdowns, 5 diagrams  |
+| Agent-18 | Nix & DevOps             | Containers           | nix/, packages/containers/                   | 15 markdowns, 4 diagrams  |
+| Agent-19 | Testing Infrastructure   | Test Utils           | packages/_/test/, packages/_/tests/          | 30 markdowns, 4 diagrams  |
+| Agent-20 | Integration & E2E        | Playwright           | packages/\*/e2e/, integration/               | 20 markdowns, 5 diagrams  |
 
 ### Detailed Agent Tasks
 
@@ -206,12 +206,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/ENGINE/SERVER/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`, `*.tsx`
 - Exclude: `*.test.ts`, `*.d.ts`
 - Priority: High (critical path)
 
 ### Documentation Requirements
+
 1. **Server Entry Point** (`index.ts`, `server.ts`)
    - Architecture diagram
    - Request lifecycle
@@ -233,6 +235,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Response formats
 
 ### Diagrams Required
+
 - `server-architecture.svg` - Full server architecture
 - `request-lifecycle.svg` - Request processing flow
 - `middleware-chain.svg` - Middleware execution order
@@ -240,12 +243,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `error-handling.svg` - Error propagation
 
 ### Overlap Coordination
+
 - Agent-02: Tool system access
 - Agent-03: Session context
 - Agent-05: Auth middleware
 - Agent-10: API types
 
 ### Verification Criteria
+
 - [ ] All route handlers documented
 - [ ] All middleware documented
 - [ ] All API endpoints documented
@@ -262,12 +267,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/ENGINE/AGENT_RUNTIME/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`, `*.tsx`
 - Exclude: `*.test.ts`
 - Priority: Critical
 
 ### Documentation Requirements
+
 1. **Agent Core** (`agent.ts`, `runner.ts`)
    - Agent lifecycle diagram
    - State machine
@@ -289,6 +296,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - State persistence
 
 ### Diagrams Required
+
 - `agent-lifecycle.svg` - Agent state machine
 - `planning-loop.svg` - Planning algorithm
 - `tool-invocation.svg` - Tool execution flow
@@ -297,12 +305,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `message-flow.svg` - Agent communication
 
 ### Overlap Coordination
+
 - Agent-01: Server context
 - Agent-03: Session state
 - Agent-04: Tool registry
 - Agent-07: VS Code integration
 
 ### Verification Criteria
+
 - [ ] All agent states documented
 - [ ] Planning algorithm fully specified
 - [ ] Tool use patterns documented
@@ -318,11 +328,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/ENGINE/SESSION/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`
 - Exclude: `*.test.ts`
 
 ### Documentation Requirements
+
 1. **Session Store**
    - Data structures
    - Persistence
@@ -339,15 +351,18 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Search/filter
 
 ### Diagrams Required
+
 - `session-state.svg` - Session state machine
 - `persistence.svg` - Data persistence flow
 - `history-management.svg` - History operations
 
 ### Overlap Coordination
+
 - Agent-02: Agent context
 - Agent-01: Server session handling
 
 ### Verification Criteria
+
 - [ ] All session types documented
 - [ ] State transitions documented
 - [ ] Persistence mechanism documented
@@ -361,12 +376,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/ENGINE/TOOLS/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`
 - Exclude: `*.test.ts`
 - Priority: High
 
 ### Documentation Requirements
+
 1. **Tool Base** (`tool.ts`, `base.ts`)
    - Tool interface
    - Tool metadata
@@ -388,6 +405,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Result handling
 
 ### Diagrams Required
+
 - `tool-architecture.svg` - Tool system overview
 - `tool-registry.svg` - Tool discovery/loading
 - `execution-flow.svg` - Tool execution
@@ -395,10 +413,12 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `sandboxing.svg` - Security sandbox
 
 ### Overlap Coordination
+
 - Agent-02: Tool usage
 - Agent-05: Security context
 
 ### Verification Criteria
+
 - [ ] Tool interface documented
 - [ ] All built-in tools documented
 - [ ] Registry mechanism documented
@@ -413,12 +433,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/SECURITY/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`
 - Exclude: `*.test.ts`
 - Priority: Critical
 
 ### Documentation Requirements
+
 1. **Auth Providers**
    - Provider interfaces
    - OAuth flows
@@ -435,16 +457,19 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Encryption
 
 ### Diagrams Required
+
 - `auth-flow.svg` - Authentication flow
 - `oauth-sequence.svg` - OAuth sequence
 - `security-architecture.svg` - Security layers
 - `token-lifecycle.svg` - Token management
 
 ### Overlap Coordination
+
 - Agent-01: Server auth
 - Agent-14: Gateway auth
 
 ### Verification Criteria
+
 - [ ] All auth providers documented
 - [ ] Security flows documented
 - [ ] Token handling documented
@@ -458,6 +483,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/SYSTEM/CONFIG/`
 
 ### Documentation Requirements
+
 1. **Config Sources**
    - File loading
    - Env vars
@@ -473,10 +499,12 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Override logic
 
 ### Diagrams Required
+
 - `config-sources.svg` - Configuration flow
 - `schema.svg` - Config schema
 
 ### Verification Criteria
+
 - [ ] All config sources documented
 - [ ] Schema fully specified
 - [ ] Merge logic documented
@@ -490,11 +518,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/UI/VSCODE_EXTENSION/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`, `*.tsx`
 - Exclude: `*.test.ts`
 
 ### Documentation Requirements
+
 1. **Extension Entry** (`extension.ts`)
    - Activation
    - Deactivation
@@ -513,11 +543,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Keybindings
 
 ### Diagrams Required
+
 - `extension-architecture.svg`
 - `webview-communication.svg`
 - `command-registry.svg`
 
 ### Verification Criteria
+
 - [ ] Extension lifecycle documented
 - [ ] All commands documented
 - [ ] Webview integration documented
@@ -531,11 +563,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/UI/WEBVIEW/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`, `*.tsx`
 - Exclude: `*.test.ts`, `*.stories.tsx`
 
 ### Documentation Requirements
+
 1. **App Root** (`App.tsx`)
    - Component hierarchy
    - Provider setup
@@ -558,6 +592,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Stores
 
 ### Diagrams Required
+
 - `component-hierarchy.svg` - Full tree
 - `reactive-flow.svg` - Signal propagation
 - `chat-flow.svg` - Chat interaction
@@ -570,11 +605,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `error-display.svg` - Error handling UI
 
 ### Overlap Coordination
+
 - Agent-07: Extension integration
 - Agent-13: Shared components
 - Agent-16: i18n
 
 ### Verification Criteria
+
 - [ ] All components documented
 - [ ] All hooks documented
 - [ ] State management documented
@@ -589,6 +626,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/UI/AGENT_MANAGER/`
 
 ### Documentation Requirements
+
 1. **Worktree Management**
    - Creation/deletion
    - Switching
@@ -603,11 +641,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Comments
 
 ### Diagrams Required
+
 - `worktree-lifecycle.svg`
 - `multi-session.svg`
 - `review-annotations.svg`
 
 ### Verification Criteria
+
 - [ ] Worktree operations documented
 - [ ] Session management documented
 - [ ] Review system documented
@@ -621,11 +661,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/WIRING/SDK/`
 
 ### Scanning Parameters
+
 - Recursive depth: Unlimited
 - File patterns: `*.ts`
 - Exclude: `src/gen/` (auto-generated)
 
 ### Documentation Requirements
+
 1. **Client SDK**
    - Initialization
    - Methods
@@ -645,6 +687,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Streaming
 
 ### Diagrams Required
+
 - `sdk-architecture.svg`
 - `api-endpoints.svg`
 - `type-hierarchy.svg`
@@ -654,10 +697,12 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `versioning.svg`
 
 ### Overlap Coordination
+
 - Agent-01: Server routes
 - Agent-02: Agent types
 
 ### Verification Criteria
+
 - [ ] All SDK methods documented
 - [ ] All API endpoints documented
 - [ ] All types documented
@@ -672,6 +717,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/DESKTOP/ELECTRON/`
 
 ### Documentation Requirements
+
 1. **Main Process**
    - Entry point
    - Window management
@@ -691,6 +737,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Shortcuts
 
 ### Diagrams Required
+
 - `electron-architecture.svg`
 - `ipc-communication.svg`
 - `window-lifecycle.svg`
@@ -698,6 +745,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `context-bridge.svg`
 
 ### Verification Criteria
+
 - [ ] Main process documented
 - [ ] Preload documented
 - [ ] IPC contracts documented
@@ -712,6 +760,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/DESKTOP/TAURI/`
 
 ### Documentation Requirements
+
 1. **Tauri Commands**
    - Command definitions
    - Parameters
@@ -721,11 +770,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - System tray
 
 ### Diagrams Required
+
 - `tauri-commands.svg`
 - `app-structure.svg`
 - `window-config.svg`
 
 ### Verification Criteria
+
 - [ ] All commands documented
 - [ ] App structure documented
 
@@ -738,6 +789,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/UI/COMPONENTS/`
 
 ### Documentation Requirements
+
 1. **Core Components**
    - Button, Input, Select
    - Modal, Dropdown
@@ -758,6 +810,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Spacing
 
 ### Diagrams Required
+
 - `component-catalog.svg`
 - `design-tokens.svg`
 - `theme-architecture.svg`
@@ -769,10 +822,12 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `variant-matrix.svg`
 
 ### Overlap Coordination
+
 - Agent-08: Webview usage
 - Agent-16: i18n support
 
 ### Verification Criteria
+
 - [ ] All components documented
 - [ ] Design tokens documented
 - [ ] Theme system documented
@@ -787,6 +842,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/WIRING/GATEWAY/`
 
 ### Documentation Requirements
+
 1. **Provider Integration**
    - Provider interfaces
    - Routing logic
@@ -800,12 +856,14 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Request transformation
 
 ### Diagrams Required
+
 - `gateway-architecture.svg`
 - `provider-routing.svg`
 - `auth-flow.svg`
 - `request-transform.svg`
 
 ### Verification Criteria
+
 - [ ] Gateway architecture documented
 - [ ] All providers documented
 - [ ] Routing logic documented
@@ -819,6 +877,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/TELEMETRY/`
 
 ### Documentation Requirements
+
 1. **PostHog Integration**
    - Events
    - Properties
@@ -833,11 +892,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Structured logging
 
 ### Diagrams Required
+
 - `telemetry-architecture.svg`
 - `event-tracking.svg`
 - `trace-propagation.svg`
 
 ### Verification Criteria
+
 - [ ] Telemetry system documented
 - [ ] All events documented
 - [ ] Tracing documented
@@ -851,6 +912,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/I18N/`
 
 ### Documentation Requirements
+
 1. **i18n Core**
    - Translation system
    - Locale detection
@@ -864,11 +926,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Layout mirroring
 
 ### Diagrams Required
+
 - `i18n-architecture.svg`
 - `translation-flow.svg`
 - `locale-detection.svg`
 
 ### Verification Criteria
+
 - [ ] i18n system documented
 - [ ] All locales documented
 - [ ] RTL support documented
@@ -882,6 +946,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/CI_CD/`
 
 ### Documentation Requirements
+
 1. **GitHub Actions**
    - Workflows
    - Jobs
@@ -896,6 +961,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Publishing
 
 ### Diagrams Required
+
 - `ci-pipeline.svg`
 - `build-flow.svg`
 - `release-process.svg`
@@ -903,6 +969,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `deployment-targets.svg`
 
 ### Verification Criteria
+
 - [ ] All workflows documented
 - [ ] Build process documented
 - [ ] Release process documented
@@ -916,6 +983,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/DEVOPS/`
 
 ### Documentation Requirements
+
 1. **Nix Expressions**
    - Package definitions
    - Overlays
@@ -925,11 +993,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - Build process
 
 ### Diagrams Required
+
 - `nix-architecture.svg`
 - `container-build.svg`
 - `dependency-resolution.svg`
 
 ### Verification Criteria
+
 - [ ] Nix setup documented
 - [ ] Container build documented
 
@@ -942,6 +1012,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/TESTING/`
 
 ### Documentation Requirements
+
 1. **Unit Tests**
    - Test utilities
    - Mock patterns
@@ -955,11 +1026,13 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - CI integration
 
 ### Diagrams Required
+
 - `test-pyramid.svg`
 - `test-execution.svg`
 - `mock-hierarchy.svg`
 
 ### Verification Criteria
+
 - [ ] Test infrastructure documented
 - [ ] All test types documented
 - [ ] Mock patterns documented
@@ -973,6 +1046,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 **Output Location:** `Source/OPERATIONS/E2E/`
 
 ### Documentation Requirements
+
 1. **Playwright Tests**
    - Page objects
    - Test scenarios
@@ -986,6 +1060,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
    - User journeys
 
 ### Diagrams Required
+
 - `e2e-architecture.svg`
 - `playwright-flow.svg`
 - `visual-regression.svg`
@@ -993,6 +1068,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 - `user-journeys.svg`
 
 ### Verification Criteria
+
 - [ ] E2E framework documented
 - [ ] All scenarios documented
 - [ ] Visual testing documented
@@ -1003,17 +1079,17 @@ This document provides a comprehensive gap analysis of the current reverse engin
 
 ### Documentation Deliverables
 
-| Deliverable | Target | Produced | Status |
-|-------------|--------|----------|--------|
-| Markdown Files | ~815 | ~100 | 12.3% |
-| Architecture Diagrams | ~15 | ~3 | 20% |
-| Component Diagrams | ~10 | ~1 | 10% |
-| Flow Diagrams | ~35 | ~4 | 11.4% |
-| Sequence Diagrams | ~20 | ~1 | 5% |
-| State Diagrams | ~8 | ~0 | 0% |
-| ERD/Database | ~5 | ~0 | 0% |
-| UI Wireframes | ~12 | ~0 | 0% |
-| **Total** | **~920** | **~109** | **11.8%** |
+| Deliverable           | Target   | Produced | Status    |
+| --------------------- | -------- | -------- | --------- |
+| Markdown Files        | ~815     | ~100     | 12.3%     |
+| Architecture Diagrams | ~15      | ~3       | 20%       |
+| Component Diagrams    | ~10      | ~1       | 10%       |
+| Flow Diagrams         | ~35      | ~4       | 11.4%     |
+| Sequence Diagrams     | ~20      | ~1       | 5%        |
+| State Diagrams        | ~8       | ~0       | 0%        |
+| ERD/Database          | ~5       | ~0       | 0%        |
+| UI Wireframes         | ~12      | ~0       | 0%        |
+| **Total**             | **~920** | **~109** | **11.8%** |
 
 ### Critical Gaps Identified
 
@@ -1026,6 +1102,7 @@ This document provides a comprehensive gap analysis of the current reverse engin
 ### Agent Productivity Requirements
 
 To complete in 1 iteration:
+
 - Each agent produces: ~40 markdowns, ~5 diagrams
 - Total production: ~800 markdowns, ~100 diagrams
 - Time estimate: Per agent ~8-12 hours
@@ -1039,11 +1116,11 @@ To complete in 1 iteration:
 ```typescript
 // scripts/validate-coverage.ts
 interface ValidationResult {
-  category: string;
-  total: number;
-  documented: number;
-  coverage: number;
-  missing: string[];
+  category: string
+  total: number
+  documented: number
+  coverage: number
+  missing: string[]
 }
 
 function validateDocumentationCoverage(): ValidationResult[] {
@@ -1097,6 +1174,6 @@ function validateDocumentationCoverage(): ValidationResult[] {
 
 ---
 
-*Document Version: 1.0*  
-*Last Updated: 2026-03-29*  
-*Status: ACTION REQUIRED - 85.1% Documentation Gap*
+_Document Version: 1.0_  
+_Last Updated: 2026-03-29_  
+_Status: ACTION REQUIRED - 85.1% Documentation Gap_

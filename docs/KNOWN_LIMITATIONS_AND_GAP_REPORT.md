@@ -10,6 +10,7 @@ This repository has been hardened for release, but these items still require liv
 - `.github/publish-python-sdk.yml` remains intentionally misplaced/commented and should be moved or deleted
 
 ## Structural findings from audit
+
 - root `package.json` previously contained placeholder scripts (`random`, `hello`) and a failing root test stub; replaced with release-oriented scripts
 - `.github/actions/setup-bun/action.yml` used `bun.lockb` cache hashing while repo uses `bun.lock`; corrected
 - release workflows were incomplete for cross-platform desktop packaging; added

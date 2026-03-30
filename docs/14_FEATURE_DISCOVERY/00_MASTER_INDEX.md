@@ -21,37 +21,38 @@
 
 ### Primary Agents (15 Specialized)
 
-| Agent | Focus Area | Primary Packages |
-|-------|-----------|------------------|
-| 01 | UI Components | `kilo-ui/`, `app/src/pages/`, `webview-ui/src/components/` |
-| 02 | Agent Manager Core | `kilo-vscode/src/agent-manager/` |
-| 03 | Autocomplete System | `kilo-vscode/src/services/autocomplete/` |
-| 04 | CLI Backend & Server | `opencode/src/server/`, `kilo-vscode/src/services/cli-backend/` |
-| 05 | Provider System | `KiloProvider.ts`, `kilo-provider-utils.ts`, `provider-actions.ts` |
-| 06 | Webview & Chat UI | `webview-ui/src/`, `app/src/pages/session.tsx` |
-| 07 | Settings & Configuration | `SettingsEditorProvider.ts`, settings panels |
-| 08 | Marketplace & Extensions | `marketplace/`, `plugin/` |
-| 09 | Browser Automation | `browser-automation-service.ts` |
-| 10 | Legacy Migration | `legacy-migration/` |
-| 11 | Code Actions & Editor | `code-actions/`, `commit-message/` |
-| 12 | Telemetry & Analytics | `kilo-telemetry/`, `telemetry/` |
-| 13 | Desktop Electron | `desktop-electron/src/` |
-| 14 | Internationalization | `kilo-i18n/`, i18n directories |
-| 15 | Gateway & Auth | `kilo-gateway/src/`, auth handlers |
+| Agent | Focus Area               | Primary Packages                                                   |
+| ----- | ------------------------ | ------------------------------------------------------------------ |
+| 01    | UI Components            | `kilo-ui/`, `app/src/pages/`, `webview-ui/src/components/`         |
+| 02    | Agent Manager Core       | `kilo-vscode/src/agent-manager/`                                   |
+| 03    | Autocomplete System      | `kilo-vscode/src/services/autocomplete/`                           |
+| 04    | CLI Backend & Server     | `opencode/src/server/`, `kilo-vscode/src/services/cli-backend/`    |
+| 05    | Provider System          | `KiloProvider.ts`, `kilo-provider-utils.ts`, `provider-actions.ts` |
+| 06    | Webview & Chat UI        | `webview-ui/src/`, `app/src/pages/session.tsx`                     |
+| 07    | Settings & Configuration | `SettingsEditorProvider.ts`, settings panels                       |
+| 08    | Marketplace & Extensions | `marketplace/`, `plugin/`                                          |
+| 09    | Browser Automation       | `browser-automation-service.ts`                                    |
+| 10    | Legacy Migration         | `legacy-migration/`                                                |
+| 11    | Code Actions & Editor    | `code-actions/`, `commit-message/`                                 |
+| 12    | Telemetry & Analytics    | `kilo-telemetry/`, `telemetry/`                                    |
+| 13    | Desktop Electron         | `desktop-electron/src/`                                            |
+| 14    | Internationalization     | `kilo-i18n/`, i18n directories                                     |
+| 15    | Gateway & Auth           | `kilo-gateway/src/`, auth handlers                                 |
 
 ### Verification Agents (5 Redundant - 25% Overlap)
 
-| Agent | Overlap Targets | Verification Focus |
-|-------|----------------|-------------------|
-| 16 | Agent-01 & Agent-06 | UI/Webview overlap |
-| 17 | Agent-02 & Agent-05 | Agent Manager/Provider overlap |
-| 18 | Agent-03 & Agent-11 | Autocomplete/Code Actions overlap |
-| 19 | Agent-04 & Agent-12 | CLI Backend/Telemetry overlap |
-| 20 | Agent-07 & Agent-08 | Settings/Marketplace overlap |
+| Agent | Overlap Targets     | Verification Focus                |
+| ----- | ------------------- | --------------------------------- |
+| 16    | Agent-01 & Agent-06 | UI/Webview overlap                |
+| 17    | Agent-02 & Agent-05 | Agent Manager/Provider overlap    |
+| 18    | Agent-03 & Agent-11 | Autocomplete/Code Actions overlap |
+| 19    | Agent-04 & Agent-12 | CLI Backend/Telemetry overlap     |
+| 20    | Agent-07 & Agent-08 | Settings/Marketplace overlap      |
 
 ## Feature Categories Summary
 
 ### UI Features
+
 - Component library (SolidJS)
 - Theme system with 14+ themes
 - Toast notifications
@@ -61,6 +62,7 @@
 - Agent Manager UI
 
 ### Backend Features
+
 - CLI server management
 - SDK integration
 - Provider routing
@@ -69,6 +71,7 @@
 - Agent orchestration
 
 ### Chat Features
+
 - Real-time messaging
 - Message timeline
 - Slash commands
@@ -77,6 +80,7 @@
 - Review annotations
 
 ### Settings Features
+
 - Provider configuration
 - Model selection
 - Theme customization
@@ -85,6 +89,7 @@
 - Workspace settings
 
 ### Menu Features
+
 - VS Code menu integration
 - Context menus
 - Status bar items
@@ -92,6 +97,7 @@
 - Command palette
 
 ### Special Features
+
 - Agent Manager with worktree isolation
 - Multi-session orchestration
 - Legacy Continue migration
@@ -101,14 +107,14 @@
 
 ## Documentation Status
 
-| Category | Status | Agent Assigned | Findings Count |
-|----------|--------|---------------|---------------|
-| UI Features | 🔄 In Progress | Agent-01 | TBD |
-| Backend Features | ⏳ Pending | Agent-04 | TBD |
-| Chat Features | ⏳ Pending | Agent-06 | TBD |
-| Settings Features | ⏳ Pending | Agent-07 | TBD |
-| Menu Features | ⏳ Pending | Agent-01/06 | TBD |
-| Special Features | ⏳ Pending | Agent-02/09/10 | TBD |
+| Category          | Status         | Agent Assigned | Findings Count |
+| ----------------- | -------------- | -------------- | -------------- |
+| UI Features       | 🔄 In Progress | Agent-01       | TBD            |
+| Backend Features  | ⏳ Pending     | Agent-04       | TBD            |
+| Chat Features     | ⏳ Pending     | Agent-06       | TBD            |
+| Settings Features | ⏳ Pending     | Agent-07       | TBD            |
+| Menu Features     | ⏳ Pending     | Agent-01/06    | TBD            |
+| Special Features  | ⏳ Pending     | Agent-02/09/10 | TBD            |
 
 ## Key Differentiators from Upstream
 
@@ -133,4 +139,4 @@ KiloCode-DaveAI includes these Kilo-specific features not found in stock Kilo-Or
 
 ---
 
-*This index is maintained by the feature discovery team. Last updated: 2026-03-29*
+_This index is maintained by the feature discovery team. Last updated: 2026-03-29_

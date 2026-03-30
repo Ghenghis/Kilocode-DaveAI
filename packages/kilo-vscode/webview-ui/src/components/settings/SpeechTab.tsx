@@ -117,97 +117,265 @@ const SpeechTab: Component = () => {
     await speechController.speak(sample, currentSettings())
   }
 
-  return <div>
-    <Card>
-      <SettingsRow title="Enable assistant speech" description="Adds speak and stop controls for assistant replies.">
-        <Switch checked={enabled()} onChange={(checked) => { setEnabled(checked); save("speech.enabled", checked) }} hideLabel>Enable assistant speech</Switch>
-      </SettingsRow>
-      <SettingsRow title="Auto-speak completed replies" description="Automatically speak the latest completed assistant reply.">
-        <Switch checked={autoSpeakAssistant()} onChange={(checked) => { setAutoSpeakAssistant(checked); save("speech.autoSpeakAssistant", checked) }} hideLabel>Auto-speak completed replies</Switch>
-      </SettingsRow>
-      <SettingsRow title="Location" description="Choose whether speech runs locally or through a cloud provider.">
-        <Select options={locationOptions} current={locationOptions.find((o) => o.value === location())} value={(o) => o.value} label={(o) => o.label} onSelect={(o) => { if (!o) return; setLocation(o.value as any); save("speech.location", o.value); const next = providerOptions[o.value as "local" | "cloud"][0]?.value; if (next) { setProvider(next as any); save("speech.provider", next) } }} variant="secondary" size="small" triggerVariant="settings" />
-      </SettingsRow>
-      <SettingsRow title="Provider" description="Select the speech provider inside the chosen location group." last>
-        <Select options={providerOptions[location()]} current={providerOptions[location()].find((o) => o.value === provider())} value={(o) => o.value} label={(o) => o.label} onSelect={(o) => { if (!o) return; setProvider(o.value as any); save("speech.provider", o.value) }} variant="secondary" size="small" triggerVariant="settings" />
-      </SettingsRow>
-    </Card>
-
-    <Show when={provider() === "browser"}>
+  return (
+    <div>
       <Card>
-        <SettingsRow title="Browser voice name" description="Optional exact voice name from speechSynthesis.getVoices().">
-          <Input value={browserVoice()} onInput={(e) => setBrowserVoice(e.currentTarget.value)} onBlur={() => save("speech.browserVoice", browserVoice())} />
+        <SettingsRow title="Enable assistant speech" description="Adds speak and stop controls for assistant replies.">
+          <Switch
+            checked={enabled()}
+            onChange={(checked) => {
+              setEnabled(checked)
+              save("speech.enabled", checked)
+            }}
+            hideLabel
+          >
+            Enable assistant speech
+          </Switch>
         </SettingsRow>
-        <SettingsRow title="Language" description="BCP-47 language tag for browser speech.">
-          <Input value={browserLang()} onInput={(e) => setBrowserLang(e.currentTarget.value)} onBlur={() => save("speech.browserLang", browserLang())} />
+        <SettingsRow
+          title="Auto-speak completed replies"
+          description="Automatically speak the latest completed assistant reply."
+        >
+          <Switch
+            checked={autoSpeakAssistant()}
+            onChange={(checked) => {
+              setAutoSpeakAssistant(checked)
+              save("speech.autoSpeakAssistant", checked)
+            }}
+            hideLabel
+          >
+            Auto-speak completed replies
+          </Switch>
         </SettingsRow>
-        <SettingsRow title="Rate" description="Browser speech rate between 0.5 and 2.0.">
-          <Input value={browserRate()} onInput={(e) => setBrowserRate(e.currentTarget.value)} onBlur={() => save("speech.browserRate", Number(browserRate()) || 1)} />
+        <SettingsRow title="Location" description="Choose whether speech runs locally or through a cloud provider.">
+          <Select
+            options={locationOptions}
+            current={locationOptions.find((o) => o.value === location())}
+            value={(o) => o.value}
+            label={(o) => o.label}
+            onSelect={(o) => {
+              if (!o) return
+              setLocation(o.value as any)
+              save("speech.location", o.value)
+              const next = providerOptions[o.value as "local" | "cloud"][0]?.value
+              if (next) {
+                setProvider(next as any)
+                save("speech.provider", next)
+              }
+            }}
+            variant="secondary"
+            size="small"
+            triggerVariant="settings"
+          />
         </SettingsRow>
-        <SettingsRow title="Pitch" description="Browser speech pitch between 0.0 and 2.0." last>
-          <Input value={browserPitch()} onInput={(e) => setBrowserPitch(e.currentTarget.value)} onBlur={() => save("speech.browserPitch", Number(browserPitch()) || 1)} />
+        <SettingsRow title="Provider" description="Select the speech provider inside the chosen location group." last>
+          <Select
+            options={providerOptions[location()]}
+            current={providerOptions[location()].find((o) => o.value === provider())}
+            value={(o) => o.value}
+            label={(o) => o.label}
+            onSelect={(o) => {
+              if (!o) return
+              setProvider(o.value as any)
+              save("speech.provider", o.value)
+            }}
+            variant="secondary"
+            size="small"
+            triggerVariant="settings"
+          />
         </SettingsRow>
       </Card>
-    </Show>
 
-    <Show when={provider() === "azure"}>
+      <Show when={provider() === "browser"}>
+        <Card>
+          <SettingsRow
+            title="Browser voice name"
+            description="Optional exact voice name from speechSynthesis.getVoices()."
+          >
+            <Input
+              value={browserVoice()}
+              onInput={(e) => setBrowserVoice(e.currentTarget.value)}
+              onBlur={() => save("speech.browserVoice", browserVoice())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Language" description="BCP-47 language tag for browser speech.">
+            <Input
+              value={browserLang()}
+              onInput={(e) => setBrowserLang(e.currentTarget.value)}
+              onBlur={() => save("speech.browserLang", browserLang())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Rate" description="Browser speech rate between 0.5 and 2.0.">
+            <Input
+              value={browserRate()}
+              onInput={(e) => setBrowserRate(e.currentTarget.value)}
+              onBlur={() => save("speech.browserRate", Number(browserRate()) || 1)}
+            />
+          </SettingsRow>
+          <SettingsRow title="Pitch" description="Browser speech pitch between 0.0 and 2.0." last>
+            <Input
+              value={browserPitch()}
+              onInput={(e) => setBrowserPitch(e.currentTarget.value)}
+              onBlur={() => save("speech.browserPitch", Number(browserPitch()) || 1)}
+            />
+          </SettingsRow>
+        </Card>
+      </Show>
+
+      <Show when={provider() === "azure"}>
+        <Card>
+          <SettingsRow
+            title="Azure region"
+            description="Matches your Azure Speech resource region, for example westus."
+          >
+            <Input
+              value={azureRegion()}
+              onInput={(e) => setAzureRegion(e.currentTarget.value)}
+              onBlur={() => save("speech.azureRegion", azureRegion())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Azure voice" description="Default is en-GB-MaisieNeural.">
+            <Input
+              value={azureVoice()}
+              onInput={(e) => setAzureVoice(e.currentTarget.value)}
+              onBlur={() => save("speech.azureVoice", azureVoice())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Azure format" description="Output format used by Azure REST synthesis.">
+            <Input
+              value={azureFormat()}
+              onInput={(e) => setAzureFormat(e.currentTarget.value)}
+              onBlur={() => save("speech.azureFormat", azureFormat())}
+            />
+          </SettingsRow>
+          <SettingsRow
+            title="Azure API key"
+            description={
+              hasAzureKey()
+                ? "A key is already stored securely in VS Code SecretStorage."
+                : "Stored securely in VS Code SecretStorage."
+            }
+            last
+          >
+            <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+              <Input
+                type="password"
+                value={azureKey()}
+                onInput={(e) => setAzureKey(e.currentTarget.value)}
+                placeholder={hasAzureKey() ? "Saved" : "Paste Azure Speech key"}
+              />
+              <button
+                class="button"
+                onClick={() => {
+                  if (azureKey().trim()) saveSecret("azureApiKey", azureKey().trim())
+                  setAzureKey("")
+                }}
+              >
+                Save
+              </button>
+              <button class="button" onClick={() => clearSecret("azureApiKey")}>
+                Clear
+              </button>
+            </div>
+          </SettingsRow>
+        </Card>
+      </Show>
+
+      <Show when={provider() === "openaiCompatible"}>
+        <Card>
+          <SettingsRow
+            title="Base URL"
+            description="Supports local or cloud OpenAI-compatible /audio/speech endpoints."
+          >
+            <Input
+              value={openaiBaseUrl()}
+              onInput={(e) => setOpenaiBaseUrl(e.currentTarget.value)}
+              onBlur={() => save("speech.openaiCompatibleBaseUrl", openaiBaseUrl())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Model" description="Speech model name exposed by the endpoint.">
+            <Input
+              value={openaiModel()}
+              onInput={(e) => setOpenaiModel(e.currentTarget.value)}
+              onBlur={() => save("speech.openaiCompatibleModel", openaiModel())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Voice" description="Voice identifier exposed by the endpoint.">
+            <Input
+              value={openaiVoice()}
+              onInput={(e) => setOpenaiVoice(e.currentTarget.value)}
+              onBlur={() => save("speech.openaiCompatibleVoice", openaiVoice())}
+            />
+          </SettingsRow>
+          <SettingsRow title="Response format" description="mp3 is the safest default.">
+            <Input
+              value={openaiFormat()}
+              onInput={(e) => setOpenaiFormat(e.currentTarget.value)}
+              onBlur={() => save("speech.openaiCompatibleResponseFormat", openaiFormat())}
+            />
+          </SettingsRow>
+          <SettingsRow
+            title="API key"
+            description={
+              hasOpenAIKey()
+                ? "A key is already stored securely in VS Code SecretStorage."
+                : "Optional. Stored securely in VS Code SecretStorage."
+            }
+            last
+          >
+            <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+              <Input
+                type="password"
+                value={openaiKey()}
+                onInput={(e) => setOpenAIKey(e.currentTarget.value)}
+                placeholder={hasOpenAIKey() ? "Saved" : "Optional bearer token"}
+              />
+              <button
+                class="button"
+                onClick={() => {
+                  saveSecret("openaiCompatibleApiKey", openaiKey().trim())
+                  setOpenAIKey("")
+                }}
+              >
+                Save
+              </button>
+              <button class="button" onClick={() => clearSecret("openaiCompatibleApiKey")}>
+                Clear
+              </button>
+            </div>
+          </SettingsRow>
+        </Card>
+      </Show>
+
       <Card>
-        <SettingsRow title="Azure region" description="Matches your Azure Speech resource region, for example westus.">
-          <Input value={azureRegion()} onInput={(e) => setAzureRegion(e.currentTarget.value)} onBlur={() => save("speech.azureRegion", azureRegion())} />
+        <SettingsRow
+          title="Test text"
+          description="Use this to verify the currently selected provider, voice, and output format."
+        >
+          <Input value={testText()} onInput={(e) => setTestText(e.currentTarget.value)} />
         </SettingsRow>
-        <SettingsRow title="Azure voice" description="Default is en-GB-MaisieNeural.">
-          <Input value={azureVoice()} onInput={(e) => setAzureVoice(e.currentTarget.value)} onBlur={() => save("speech.azureVoice", azureVoice())} />
-        </SettingsRow>
-        <SettingsRow title="Azure format" description="Output format used by Azure REST synthesis.">
-          <Input value={azureFormat()} onInput={(e) => setAzureFormat(e.currentTarget.value)} onBlur={() => save("speech.azureFormat", azureFormat())} />
-        </SettingsRow>
-        <SettingsRow title="Azure API key" description={hasAzureKey() ? "A key is already stored securely in VS Code SecretStorage." : "Stored securely in VS Code SecretStorage."} last>
-          <div style={{ display: "flex", gap: "8px", width: "100%" }}>
-            <Input type="password" value={azureKey()} onInput={(e) => setAzureKey(e.currentTarget.value)} placeholder={hasAzureKey() ? "Saved" : "Paste Azure Speech key"} />
-            <button class="button" onClick={() => { if (azureKey().trim()) saveSecret("azureApiKey", azureKey().trim()); setAzureKey("") }}>Save</button>
-            <button class="button" onClick={() => clearSecret("azureApiKey")}>Clear</button>
+        <SettingsRow
+          title="Live test"
+          description="Runs a real speech request using the active provider and your current settings."
+          last
+        >
+          <div
+            style={{ display: "flex", gap: "8px", width: "100%", "justify-content": "flex-end", "flex-wrap": "wrap" }}
+          >
+            <button class="button" onClick={() => setTestText(testVoiceSamples[provider()])}>
+              Use sample
+            </button>
+            <button class="button" onClick={() => void runTest()}>
+              Test speech
+            </button>
+            <button class="button" onClick={() => speechController.stop()}>
+              Stop
+            </button>
           </div>
         </SettingsRow>
       </Card>
-    </Show>
-
-    <Show when={provider() === "openaiCompatible"}>
-      <Card>
-        <SettingsRow title="Base URL" description="Supports local or cloud OpenAI-compatible /audio/speech endpoints.">
-          <Input value={openaiBaseUrl()} onInput={(e) => setOpenaiBaseUrl(e.currentTarget.value)} onBlur={() => save("speech.openaiCompatibleBaseUrl", openaiBaseUrl())} />
-        </SettingsRow>
-        <SettingsRow title="Model" description="Speech model name exposed by the endpoint.">
-          <Input value={openaiModel()} onInput={(e) => setOpenaiModel(e.currentTarget.value)} onBlur={() => save("speech.openaiCompatibleModel", openaiModel())} />
-        </SettingsRow>
-        <SettingsRow title="Voice" description="Voice identifier exposed by the endpoint.">
-          <Input value={openaiVoice()} onInput={(e) => setOpenaiVoice(e.currentTarget.value)} onBlur={() => save("speech.openaiCompatibleVoice", openaiVoice())} />
-        </SettingsRow>
-        <SettingsRow title="Response format" description="mp3 is the safest default.">
-          <Input value={openaiFormat()} onInput={(e) => setOpenaiFormat(e.currentTarget.value)} onBlur={() => save("speech.openaiCompatibleResponseFormat", openaiFormat())} />
-        </SettingsRow>
-        <SettingsRow title="API key" description={hasOpenAIKey() ? "A key is already stored securely in VS Code SecretStorage." : "Optional. Stored securely in VS Code SecretStorage."} last>
-          <div style={{ display: "flex", gap: "8px", width: "100%" }}>
-            <Input type="password" value={openaiKey()} onInput={(e) => setOpenAIKey(e.currentTarget.value)} placeholder={hasOpenAIKey() ? "Saved" : "Optional bearer token"} />
-            <button class="button" onClick={() => { saveSecret("openaiCompatibleApiKey", openaiKey().trim()); setOpenAIKey("") }}>Save</button>
-            <button class="button" onClick={() => clearSecret("openaiCompatibleApiKey")}>Clear</button>
-          </div>
-        </SettingsRow>
-      </Card>
-    </Show>
-
-    <Card>
-      <SettingsRow title="Test text" description="Use this to verify the currently selected provider, voice, and output format.">
-        <Input value={testText()} onInput={(e) => setTestText(e.currentTarget.value)} />
-      </SettingsRow>
-      <SettingsRow title="Live test" description="Runs a real speech request using the active provider and your current settings." last>
-        <div style={{ display: "flex", gap: "8px", width: "100%", "justify-content": "flex-end", "flex-wrap": "wrap" }}>
-          <button class="button" onClick={() => setTestText(testVoiceSamples[provider()])}>Use sample</button>
-          <button class="button" onClick={() => void runTest()}>Test speech</button>
-          <button class="button" onClick={() => speechController.stop()}>Stop</button>
-        </div>
-      </SettingsRow>
-    </Card>
-  </div>
+    </div>
+  )
 }
 
 export default SpeechTab

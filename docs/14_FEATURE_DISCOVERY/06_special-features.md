@@ -27,6 +27,7 @@
 **Description:** Multi-session orchestration system with git worktree isolation.
 
 **Key Files:**
+
 - `AgentManagerProvider.ts` - Main provider (68KB)
 - `WorktreeManager.ts` - Worktree management (37KB)
 - `WorktreeStateManager.ts` - State persistence (13KB)
@@ -35,20 +36,21 @@
 
 ### 1.2 Agent Manager Features
 
-| Feature | Description |
-|---------|-------------|
-| Multi-session | Multiple concurrent chat sessions |
-| Worktree isolation | Git worktree per session |
-| Branch management | Create/switch branches |
-| Terminal per session | Dedicated terminal per session |
-| State persistence | Save/restore session state |
-| Git stats | Real-time git statistics |
+| Feature              | Description                       |
+| -------------------- | --------------------------------- |
+| Multi-session        | Multiple concurrent chat sessions |
+| Worktree isolation   | Git worktree per session          |
+| Branch management    | Create/switch branches            |
+| Terminal per session | Dedicated terminal per session    |
+| State persistence    | Save/restore session state        |
+| Git stats            | Real-time git statistics          |
 
 ### 1.3 Worktree Manager
 
 **Location:** `packages/kilo-vscode/src/agent-manager/WorktreeManager.ts`
 
 **Features:**
+
 - Create worktree from branch
 - Delete worktree
 - List worktrees
@@ -72,6 +74,7 @@ interface WorktreeManager {
 ### 2.1 Worktree Creation
 
 **Features:**
+
 - Create from existing branch
 - Create from commit
 - Clone repository
@@ -82,6 +85,7 @@ interface WorktreeManager {
 **Location:** `packages/kilo-vscode/src/agent-manager/WorktreeStateManager.ts`
 
 **Features:**
+
 - Persistent state storage
 - State per worktree
 - State restoration on reload
@@ -92,6 +96,7 @@ interface WorktreeManager {
 **Location:** `webview-ui/agent-manager/WorktreeItem.tsx`
 
 **Features:**
+
 - Tree view display
 - Status indicators
 - Context menu actions
@@ -113,7 +118,7 @@ interface Session {
   branch?: string
   provider?: string
   model?: string
-  status: 'active' | 'paused' | 'completed' | 'error'
+  status: "active" | "paused" | "completed" | "error"
   createdAt: Date
   updatedAt: Date
 }
@@ -122,6 +127,7 @@ interface Session {
 ### 3.2 Session Management
 
 **Features:**
+
 - Create session
 - Delete session
 - Switch session
@@ -133,6 +139,7 @@ interface Session {
 **Location:** `packages/kilo-vscode/src/agent-manager/SessionTerminalManager.ts`
 
 **Features:**
+
 - Terminal per session
 - Terminal multiplexing
 - Terminal state persistence
@@ -149,6 +156,7 @@ interface Session {
 **Description:** Migrates from Continue extension to Kilo Code.
 
 **Features:**
+
 - Settings migration
 - History migration
 - Session migration
@@ -158,11 +166,11 @@ interface Session {
 
 **Location:** `packages/kilo-vscode/src/legacy-migration/`
 
-| Handler | Description |
-|---------|-------------|
-| `legacy-types.ts` | Legacy type definitions |
-| `provider-mapping.ts` | Provider mapping |
-| `migration-service.ts` | Main migration logic |
+| Handler                | Description             |
+| ---------------------- | ----------------------- |
+| `legacy-types.ts`      | Legacy type definitions |
+| `provider-mapping.ts`  | Provider mapping        |
+| `migration-service.ts` | Main migration logic    |
 
 ### 4.3 Migration Flow
 
@@ -181,6 +189,7 @@ interface Session {
 **Location:** `packages/kilo-vscode/src/services/marketplace/detection.ts`
 
 **Features:**
+
 - Detect installed extensions
 - Check for Continue extension
 - Version detection
@@ -190,6 +199,7 @@ interface Session {
 **Location:** `packages/kilo-vscode/src/services/marketplace/api.ts`
 
 **Features:**
+
 - Browse extensions
 - Search extensions
 - Install/uninstall
@@ -200,6 +210,7 @@ interface Session {
 **Location:** `packages/kilo-vscode/src/services/marketplace/installer.ts`
 
 **Features:**
+
 - Download extension
 - Install to VS Code
 - Enable/disable
@@ -216,6 +227,7 @@ interface Session {
 **Description:** Browser control capabilities for web interactions.
 
 **Features:**
+
 - Launch browser
 - Navigate to URL
 - Click elements
@@ -227,7 +239,7 @@ interface Session {
 
 ```typescript
 interface BrowserCommand {
-  action: 'launch' | 'navigate' | 'click' | 'fill' | 'extract' | 'screenshot'
+  action: "launch" | "navigate" | "click" | "fill" | "extract" | "screenshot"
   target?: string
   value?: string
   options?: BrowserOptions
@@ -251,6 +263,7 @@ interface BrowserCommand {
 **Location:** `packages/kilo-telemetry/src/telemetry.ts`
 
 **Features:**
+
 - Event tracking
 - User identification
 - Session tracking
@@ -261,6 +274,7 @@ interface BrowserCommand {
 **Location:** `packages/kilo-telemetry/src/otel-exporter.ts`
 
 **Features:**
+
 - Distributed tracing
 - Trace context propagation
 - Span management
@@ -268,14 +282,14 @@ interface BrowserCommand {
 
 ### 7.3 Event Types
 
-| Event | Description |
-|-------|-------------|
-| `session.create` | Session created |
-| `session.delete` | Session deleted |
-| `chat.message` | Chat message sent |
-| `chat.response` | Chat response received |
-| `tool.execute` | Tool executed |
-| `error` | Error occurred |
+| Event            | Description            |
+| ---------------- | ---------------------- |
+| `session.create` | Session created        |
+| `session.delete` | Session deleted        |
+| `chat.message`   | Chat message sent      |
+| `chat.response`  | Chat response received |
+| `tool.execute`   | Tool executed          |
+| `error`          | Error occurred         |
 
 ### 7.4 Telemetry Configuration
 
@@ -299,4 +313,4 @@ interface TelemetryConfig {
 
 ---
 
-*Document generated by Agent-02/09/10 (Agent Manager, Browser Automation, Legacy Migration)*
+_Document generated by Agent-02/09/10 (Agent Manager, Browser Automation, Legacy Migration)_

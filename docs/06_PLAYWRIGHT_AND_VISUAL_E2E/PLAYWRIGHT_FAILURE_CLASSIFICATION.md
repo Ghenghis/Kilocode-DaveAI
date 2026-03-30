@@ -1,6 +1,7 @@
 # Playwright Failure Classification
 
 Classify each failure:
+
 - selector drift
 - route never rendered
 - data never arrived

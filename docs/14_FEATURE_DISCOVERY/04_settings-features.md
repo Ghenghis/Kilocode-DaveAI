@@ -27,6 +27,7 @@
 **Description:** VS Code settings editor integration for Kilo Code settings.
 
 **Features:**
+
 - Tree-based settings view
 - Search functionality
 - Settings validation
@@ -40,19 +41,19 @@
 interface Settings {
   // Provider settings
   providers: ProviderConfig[]
-  
+
   // Model settings
   models: ModelConfig[]
-  
+
   // Appearance settings
   appearance: AppearanceSettings
-  
+
   // Behavior settings
   behavior: BehaviorSettings
-  
+
   // Keybindings
   keybindings: KeybindingSettings
-  
+
   // Advanced settings
   advanced: AdvancedSettings
 }
@@ -63,6 +64,7 @@ interface Settings {
 **Location:** `packages/app/src/utils/persist.ts`
 
 **Features:**
+
 - Persistent storage
 - Cross-session persistence
 - Default values
@@ -78,6 +80,7 @@ interface Settings {
 **Location:** `webview-ui/src/utils/config-utils.ts`
 
 **Features:**
+
 - Add/remove providers
 - API key management (secure storage)
 - Endpoint configuration
@@ -88,16 +91,17 @@ interface Settings {
 **Location:** `webview-ui/src/components/settings/`
 
 **Settings:**
+
 ```typescript
 interface ProviderSettings {
   id: string
   name: string
-  type: 'openai' | 'anthropic' | 'azure' | 'google' | 'local'
-  apiKey?: string           // Stored securely
-  endpoint?: string        // Custom API endpoint
+  type: "openai" | "anthropic" | "azure" | "google" | "local"
+  apiKey?: string // Stored securely
+  endpoint?: string // Custom API endpoint
   enabled: boolean
-  priority: number          // Higher = preferred
-  models: string[]         // Enabled models
+  priority: number // Higher = preferred
+  models: string[] // Enabled models
   capabilities?: {
     streaming?: boolean
     functionCalling?: boolean
@@ -109,6 +113,7 @@ interface ProviderSettings {
 ### 2.3 Health Check
 
 **Features:**
+
 - Provider connectivity test
 - API key validation
 - Response time measurement
@@ -123,6 +128,7 @@ interface ProviderSettings {
 **Location:** `webview-ui/src/components/shared/ModelSelector.tsx`
 
 **Features:**
+
 - Model dropdown selection
 - Multi-model support
 - Model filtering by provider
@@ -133,20 +139,21 @@ interface ProviderSettings {
 
 ```typescript
 interface ModelConfig {
-  id: string               // e.g., "gpt-4-turbo"
-  provider: string         // Provider ID
+  id: string // e.g., "gpt-4-turbo"
+  provider: string // Provider ID
   enabled: boolean
   priority: number
-  contextWindow?: number   // Context window size
-  maxTokens?: number      // Max response tokens
-  temperature?: number     // Sampling temperature
-  topP?: number           // Top-p sampling
+  contextWindow?: number // Context window size
+  maxTokens?: number // Max response tokens
+  temperature?: number // Sampling temperature
+  topP?: number // Top-p sampling
 }
 ```
 
 ### 3.3 Model Selector Component
 
 **Features:**
+
 - Search/filter models
 - Provider grouping
 - Model comparison view
@@ -162,6 +169,7 @@ interface ModelConfig {
 **Location:** `webview-ui/src/components/settings/ThemeSettings.tsx`
 
 **Features:**
+
 - Theme dropdown
 - Light/dark mode toggle
 - OS theme sync
@@ -171,9 +179,9 @@ interface ModelConfig {
 
 ```typescript
 interface ThemeSettings {
-  theme: string            // Theme ID
-  variant: 'light' | 'dark' | 'auto'
-  accentColor?: string     // Custom accent
+  theme: string // Theme ID
+  variant: "light" | "dark" | "auto"
+  accentColor?: string // Custom accent
   fontSize?: number
   fontFamily?: string
   lineHeight?: number
@@ -182,19 +190,19 @@ interface ThemeSettings {
 
 ### 4.3 Available Themes
 
-| Theme ID | Name | Type |
-|----------|------|------|
-| `aura` | Aura | Dark |
-| `ayu` | Ayu | Both |
-| `catppuccin` | Catppuccin | Dark |
-| `dracula` | Dracula | Dark |
-| `gruvbox` | Gruvbox | Dark |
-| `monokai` | Monokai | Dark |
-| `nord` | Nord | Dark |
-| `oc-2` | Kilo Dark | Dark |
+| Theme ID     | Name         | Type |
+| ------------ | ------------ | ---- |
+| `aura`       | Aura         | Dark |
+| `ayu`        | Ayu          | Both |
+| `catppuccin` | Catppuccin   | Dark |
+| `dracula`    | Dracula      | Dark |
+| `gruvbox`    | Gruvbox      | Dark |
+| `monokai`    | Monokai      | Dark |
+| `nord`       | Nord         | Dark |
+| `oc-2`       | Kilo Dark    | Dark |
 | `onedarkpro` | One Dark Pro | Dark |
-| `solarized` | Solarized | Both |
-| `tokyonight` | Tokyo Night | Dark |
+| `solarized`  | Solarized    | Both |
+| `tokyonight` | Tokyo Night  | Dark |
 
 ---
 
@@ -205,6 +213,7 @@ interface ThemeSettings {
 **Location:** `packages/kilo-vscode/src/agent-manager/format-keybinding.ts`
 
 **Features:**
+
 - Custom keyboard shortcuts
 - Keybinding conflict detection
 - Default keybindings
@@ -214,17 +223,17 @@ interface ThemeSettings {
 
 ```typescript
 interface KeybindingSettings {
-  [command: string]: string  // e.g., "ctrl+shift+p"
+  [command: string]: string // e.g., "ctrl+shift+p"
 }
 ```
 
 ### 5.3 Default Keybindings
 
-| Command | Default Binding | Description |
-|---------|----------------|-------------|
-| `kilo.focus` | `Ctrl+Shift+O` | Focus chat |
-| `kilo.newSession` | `Ctrl+Shift+N` | New session |
-| `kilo.toggleSidebar` | `Ctrl+B` | Toggle sidebar |
+| Command              | Default Binding | Description    |
+| -------------------- | --------------- | -------------- |
+| `kilo.focus`         | `Ctrl+Shift+O`  | Focus chat     |
+| `kilo.newSession`    | `Ctrl+Shift+N`  | New session    |
+| `kilo.toggleSidebar` | `Ctrl+B`        | Toggle sidebar |
 
 ---
 
@@ -233,6 +242,7 @@ interface KeybindingSettings {
 ### 6.1 Feature Flag System
 
 **Features:**
+
 - Enable/disable features
 - A/B testing support
 - Gradual rollouts
@@ -246,11 +256,11 @@ interface FeatureFlags {
   streamingResponses: boolean
   multiModelSupport: boolean
   slashCommands: boolean
-  
+
   // UI features
   compactMode: boolean
   soundEffects: boolean
-  
+
   // Experimental
   experimentalFeatures: boolean
   betaFeatures: boolean
@@ -262,6 +272,7 @@ interface FeatureFlags {
 **Location:** `webview-ui/src/components/settings/ExperimentalSettings.tsx`
 
 **Features:**
+
 - Toggle switches
 - Experimental section
 - Feature descriptions
@@ -276,6 +287,7 @@ interface FeatureFlags {
 **Location:** `packages/app/src/pages/layout/sidebar-workspace.tsx`
 
 **Features:**
+
 - Workspace-specific settings
 - Multi-workspace support
 - Workspace switching
@@ -299,6 +311,7 @@ interface WorkspaceSettings {
 **Location:** `.kilocode/config.json`
 
 **Features:**
+
 - Project-level overrides
 - Shared team settings
 - .gitignore integration
@@ -313,4 +326,4 @@ interface WorkspaceSettings {
 
 ---
 
-*Document generated by Agent-07 (Settings & Configuration)*
+_Document generated by Agent-07 (Settings & Configuration)_

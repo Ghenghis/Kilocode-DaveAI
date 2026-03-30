@@ -4,7 +4,7 @@ description: Configures Windows runner with Unix-like shell environment for cros
 
 inputs:
   shell:
-    description: 'Shell to setup (bash, powershell)'
+    description: "Shell to setup (bash, powershell)"
     required: false
     default: bash
 
@@ -17,7 +17,7 @@ runs:
         git config --global core.autocrlf input
 
     - name: Setup MSYS2 environment
-      if: false  # Disabled for now, Git Bash is sufficient
+      if: false # Disabled for now, Git Bash is sufficient
       shell: bash
       run: |
         # MSYS2 configuration for Unix-like environment
@@ -30,7 +30,7 @@ runs:
         # Verify bash is available
         which bash || echo "bash not found in PATH"
         bash --version || echo "bash version check failed"
-        
+
         # Verify common Unix commands
         which sed || echo "sed not found"
         which grep || echo "grep not found"
@@ -41,7 +41,7 @@ runs:
       run: |
         # Disable git hooks that may cause issues on Windows
         git config --global core.hooksPath ""
-        
+
         # Set safe directory for tests
         git config --global safe.directory '*'
 
@@ -58,6 +58,6 @@ runs:
         # Environment variables for cross-platform compatibility
         echo "MSYS2_PATH_TYPE=minimal" >> $GITHUB_ENV
         echo "GIT_AUTOCRLF=input" >> $GITHUB_ENV
-        
+
         # Force Windows to use Unix-style paths in Git Bash
         echo "CYGWIN=nodosfilewarning" >> $GITHUB_ENV

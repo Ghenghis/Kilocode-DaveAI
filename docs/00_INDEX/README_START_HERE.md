@@ -3,7 +3,9 @@
 This pack is a documentation-first execution layer for agents finishing the remaining KiloCode/Dave work. It is built to reduce the remaining work to deterministic run/fix/rerun loops. It does not falsely claim that runtime proof already happened.
 
 ## What this pack is for
+
 Use this pack when you want agents to:
+
 - restore the canonical repo tree
 - finish remaining wiring without broad rewrites
 - run build, typecheck, unit, Playwright, provider validation, and release workflows
@@ -15,6 +17,7 @@ Use this pack when you want agents to:
 This pack is intentionally documentation-heavy. The goal is to remove ambiguity.
 
 ## Read order
+
 1. `00_INDEX/MASTER_INDEX.md`
 2. `01_MASTER_ACTION_PLAN/V18_2_MASTER_ACTION_PLAN.md`
 3. `02_CANONICAL_REPO/V18_2_CANONICAL_REPO_LAYOUT.md`
@@ -30,6 +33,7 @@ This pack is intentionally documentation-heavy. The goal is to remove ambiguity.
 13. `12_REMAINING_WORK/V18_2_REMAINING_WORK_MASTER.md`
 
 ## Hard rules
+
 - One writer only.
 - No phase jump.
 - No broad rewrite.

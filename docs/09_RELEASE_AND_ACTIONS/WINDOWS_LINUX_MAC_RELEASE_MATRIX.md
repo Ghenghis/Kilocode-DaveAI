@@ -1,6 +1,7 @@
 # Windows Linux macOS Release Matrix
 
 ## Validate on each target
+
 - build completes
 - package completes
 - expected artifact names appear

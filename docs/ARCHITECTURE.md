@@ -78,6 +78,7 @@ Auto-generated TypeScript SDK for the server API. Generated from OpenAPI specs i
 ### packages/kilo-ui/ - @kilocode/kilo-ui
 
 SolidJS component library shared by:
+
 - VS Code extension webview
 - Desktop app
 - Web app
@@ -85,6 +86,7 @@ SolidJS component library shared by:
 ### packages/kilo-gateway/ - @kilocode/kilo-gateway
 
 Kilo-specific gateway handling:
+
 - Authentication
 - Provider routing
 - API integration
@@ -183,14 +185,14 @@ The Agent Manager enables multiple concurrent coding sessions, each isolated in 
 
 ## Platform Support
 
-| Platform | CLI | VS Code Extension | Desktop App |
-|----------|-----|------------------|-------------|
-| Linux x64 | ✅ | ✅ | ✅ |
-| Linux arm64 | ✅ | ✅ | ✅ |
-| macOS x64 | ✅ | ✅ | ✅ |
-| macOS arm64 | ✅ | ✅ | ✅ |
-| Windows x64 | ✅ | ✅ | ✅ |
-| Windows arm64 | ✅ | ✅ | ✅ |
+| Platform      | CLI | VS Code Extension | Desktop App |
+| ------------- | --- | ----------------- | ----------- |
+| Linux x64     | ✅  | ✅                | ✅          |
+| Linux arm64   | ✅  | ✅                | ✅          |
+| macOS x64     | ✅  | ✅                | ✅          |
+| macOS arm64   | ✅  | ✅                | ✅          |
+| Windows x64   | ✅  | ✅                | ✅          |
+| Windows arm64 | ✅  | ✅                | ✅          |
 
 ## Build System
 

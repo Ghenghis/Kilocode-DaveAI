@@ -1,6 +1,7 @@
 # Settings to Backend Bridge
 
 ## Must verify
+
 - persisted config keys
 - message types
 - backend hydration
