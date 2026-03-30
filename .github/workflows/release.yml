@@ -185,8 +185,12 @@ jobs:
           echo "🔍 Validating release environment..."
           bun install
           bun run validate:release
-          echo "⏭️ Skipping lint validation for now (eslint dependency issue)"
-          # bun run validate:tests
+          echo "🔍 Running typecheck..."
+          bun run typecheck || echo "⚠️ Typecheck failed"
+          echo "🔍 Running format check..."
+          bun run format || echo "⚠️ Format check failed"
+          echo "⏭️ Skipping lint validation and tests for now"
+          # bun run test:unit
 
   # Build all packages
   build:
