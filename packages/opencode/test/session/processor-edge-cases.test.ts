@@ -7,6 +7,7 @@ import { Provider } from "@/provider/provider"
 describe("SessionProcessor Edge Cases", () => {
   let mockConfig: any
   let mockModel: Provider.Model
+  let mockAgent: any
   let mockAbortSignal: AbortSignal
 
   beforeEach(() => {
@@ -24,6 +25,11 @@ describe("SessionProcessor Edge Cases", () => {
         name: "Test Provider"
       }
     } as Provider.Model
+
+    mockAgent = {
+      id: "test-agent",
+      name: "Test Agent"
+    }
 
     mockAbortSignal = new AbortController().signal
   })
@@ -266,10 +272,13 @@ describe("SessionProcessor Edge Cases", () => {
   describe("Concurrent Processing", () => {
     it("should handle multiple concurrent processes", async () => {
       const assistantMessage = {
-        role: "assistant",
+        id: "test-msg-1",
+        sessionID: "test-session-1",
+        role: "assistant" as const,
+        time: { created: Date.now() },
         content: "Concurrent response",
         parts: []
-      } as MessageV2.Assistant
+      } as unknown as MessageV2.Assistant
 
       const processor1 = SessionProcessor.create({
         assistantMessage,
@@ -286,6 +295,14 @@ describe("SessionProcessor Edge Cases", () => {
       })
 
       const mockStreamInput = {
+        user: "test-user",
+        sessionID: "test-session-concurrent",
+        model: mockModel,
+        agent: mockAgent,
+        system: "You are a helpful assistant",
+        abort: mockAbortSignal,
+        messages: [],
+        tools: [],
         text: "Concurrent processing",
         toolCalls: [],
         done: true
@@ -305,10 +322,13 @@ describe("SessionProcessor Edge Cases", () => {
   describe("Resource Exhaustion", () => {
     it("should handle memory pressure scenarios", async () => {
       const assistantMessage = {
-        role: "assistant",
+        id: "test-msg-memory",
+        sessionID: "test-session",
+        role: "assistant" as const,
+        time: { created: Date.now() },
         content: "Memory test",
         parts: []
-      } as MessageV2.Assistant
+      } as unknown as MessageV2.Assistant
 
       const processor = SessionProcessor.create({
         assistantMessage,
@@ -330,6 +350,14 @@ describe("SessionProcessor Edge Cases", () => {
       }))
 
       const mockStreamInput = {
+        user: "test-user",
+        sessionID: "test-session",
+        model: mockModel,
+        agent: mockAgent,
+        system: "You are a helpful assistant",
+        abort: mockAbortSignal,
+        messages: [],
+        tools: [],
         text: "Memory pressure test",
         toolCalls: largeToolCalls,
         done: true
