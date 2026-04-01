@@ -1,6 +1,6 @@
 import { createSignal, createMemo, For, Show, Component } from "solid-js"
 import { Card } from "@opencode-ai/ui/card"
-import { Badge } from "@opencode-ai/ui/badge"
+import { Tag } from "@opencode-ai/ui/tag"
 import { Button } from "@opencode-ai/ui/button"
 import { Icon } from "@opencode-ai/ui/icon"
 import { Switch } from "@opencode-ai/ui/switch"
@@ -76,20 +76,20 @@ export const FeatureStatusPanel: Component<FeatureStatusPanelProps> = (props) =>
                 <div class="flex items-center gap-2">
                   <div class={`w-3 h-3 rounded-full ${getStatusColor(feature)}`} />
                   <h3 class="font-medium">{feature.name}</h3>
-                  <Badge variant={feature.category === "provider" ? "default" : "secondary"}>
+                  <Tag>
                     {feature.category}
-                  </Badge>
+                  </Tag>
                 </div>
                 <div class="flex items-center gap-2">
                   <Show when={feature.microSave}>
-                    <Tooltip text="Micro save this feature">
+                    <Tooltip value="Micro save this feature">
                       <Button 
-                        size="sm" 
-                        variant="outline"
+                        size="small" 
+                        variant="ghost"
                         onClick={feature.microSave}
                         class="p-1"
                       >
-                        <Icon name="save" class="w-4 h-4" />
+                        <Icon name="edit-small-2" class="w-4 h-4" />
                       </Button>
                     </Tooltip>
                   </Show>
@@ -145,7 +145,7 @@ export const FeatureStatusPanel: Component<FeatureStatusPanelProps> = (props) =>
             <span>Disabled</span>
           </div>
           <div class="flex items-center gap-2">
-            <Icon name="save" class="w-4 h-4" />
+            <Icon name="edit-small-2" class="w-4 h-4" />
             <span>Micro save</span>
           </div>
         </div>

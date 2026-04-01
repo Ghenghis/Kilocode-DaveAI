@@ -115,7 +115,9 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
                     isAgent: !(last?.role === "user" && hasNonToolCalls),
                   }
                 }
-              } catch {}
+              } catch {
+                // Ignore parse errors - default to non-vision, non-agent
+              }
               return { isVision: false, isAgent: false }
             })
 
@@ -176,6 +178,7 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
                   if (!url.hostname) return "Please enter a valid URL or domain"
                   return undefined
                 } catch {
+                  // URL validation failed - return error message
                   return "Please enter a valid URL (e.g., company.ghe.com or https://company.ghe.com)"
                 }
               },

@@ -195,7 +195,9 @@ export async function createTestProject() {
 export async function cleanupTestProject(directory: string) {
   try {
     execSync("git fsmonitor--daemon stop", { cwd: directory, stdio: "ignore" })
-  } catch {}
+  } catch (err) {
+    console.error("cleanup: git fsmonitor--daemon stop failed", err)
+  }
   await fs.rm(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }).catch(() => undefined)
 }
 

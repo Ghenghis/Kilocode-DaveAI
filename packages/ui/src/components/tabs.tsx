@@ -123,3 +123,6 @@ export const Tabs = Object.assign(TabsRoot, {
   Content: TabsContent,
   SectionTitle: TabsSectionTitle,
 })
+
+// Re-export as named exports for compatibility
+export { TabsList, TabsTrigger, TabsContent }

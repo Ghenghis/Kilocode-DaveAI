@@ -88,7 +88,9 @@ function decodeBase64Utf8(value: string) {
     const bytes = Uint8Array.from(raw, (x) => x.charCodeAt(0))
     if (typeof TextDecoder === "function") return new TextDecoder().decode(bytes)
     return raw
-  } catch {}
+  } catch (err) {
+    console.error("media: failed to decode base64", err)
+  }
 }
 
 export function svgTextFromValue(value: MediaValue) {

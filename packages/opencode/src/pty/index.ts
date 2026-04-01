@@ -96,12 +96,14 @@ export namespace Pty {
       for (const session of sessions.values()) {
         try {
           session.process.kill()
-        } catch {}
+        } catch (err) {
+          log.debug("pty process.kill failed", { error: err })
+        }
         for (const [key, ws] of session.subscribers.entries()) {
           try {
             if (ws.data === key) ws.close()
-          } catch {
-            // ignore
+          } catch (err) {
+            // WebSocket close failure is non-critical during cleanup
           }
         }
       }
@@ -183,7 +185,8 @@ export namespace Pty {
 
         try {
           ws.send(chunk)
-        } catch {
+        } catch (err) {
+          // Failed to send to subscriber - remove it
           session.subscribers.delete(key)
         }
       }
@@ -225,12 +228,14 @@ export namespace Pty {
     log.info("removing session", { id })
     try {
       session.process.kill()
-    } catch {}
+    } catch (err) {
+      log.debug("pty process.kill failed", { error: err })
+    }
     for (const [key, ws] of session.subscribers.entries()) {
       try {
         if (ws.data === key) ws.close()
-      } catch {
-        // ignore
+      } catch (err) {
+        // WebSocket close failure is non-critical during cleanup
       }
     }
     session.subscribers.clear()
@@ -290,7 +295,7 @@ export namespace Pty {
         for (let i = 0; i < data.length; i += BUFFER_CHUNK) {
           ws.send(data.slice(i, i + BUFFER_CHUNK))
         }
-      } catch {
+      } catch (err) {
         cleanup()
         ws.close()
         return
@@ -299,7 +304,7 @@ export namespace Pty {
 
     try {
       ws.send(meta(end))
-    } catch {
+    } catch (err) {
       cleanup()
       ws.close()
       return

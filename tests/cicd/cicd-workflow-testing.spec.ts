@@ -289,7 +289,9 @@ test.describe("CI/CD Workflow Testing", () => {
       // Cleanup
       try {
         execSync("rm -f test.js test.ts test.spec.ts", { cwd: workspaceRoot, stdio: "pipe" })
-      } catch {}
+      } catch (err) {
+        console.error("cleanup: failed to remove test files", err)
+      }
     }
   })
 

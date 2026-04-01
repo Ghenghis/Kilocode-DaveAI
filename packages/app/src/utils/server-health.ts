@@ -22,7 +22,9 @@ function timeoutSignal(timeoutMs: number) {
         signal: timeout.call(AbortSignal, timeoutMs),
         clear: undefined as (() => void) | undefined,
       }
-    } catch {}
+    } catch (err) {
+      console.error("server-health: AbortSignal.timeout not available", err)
+    }
   }
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)

@@ -1,0 +1,41 @@
+[data-component="badge"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-family-sans);
+  font-style: normal;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-normal);
+
+  &[data-variant="default"] {
+    height: 18px;
+    padding: 0 6px;
+    background-color: var(--surface-raised-base);
+    border: 0.5px solid var(--border-weak-base);
+    color: var(--text-base);
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-large);
+  }
+
+  &[data-variant="secondary"] {
+    height: 18px;
+    padding: 0 6px;
+    background-color: var(--surface-base-hover);
+    border: 0.5px solid transparent;
+    color: var(--text-weak);
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-large);
+  }
+
+  &[data-variant="outline"] {
+    height: 18px;
+    padding: 0 6px;
+    background-color: transparent;
+    border: 0.5px solid var(--border-weak-base);
+    color: var(--text-base);
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-large);
+  }
+}

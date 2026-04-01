@@ -89,7 +89,9 @@ export async function installCli(): Promise<string> {
     cmd.on("exit", (code: number | null) => {
       try {
         unlinkSync(tempScript)
-      } catch {}
+      } catch (err) {
+        console.error("cli: failed to remove temp script", err)
+      }
       if (code === 0) {
         const installPath = getCliInstallPath()
         if (installPath) return resolve(installPath)
@@ -108,7 +110,8 @@ export function syncCli() {
   let version = ""
   try {
     version = execFileSync(installPath, ["--version"]).toString().trim()
-  } catch {
+  } catch (err) {
+    console.error("cli: failed to get CLI version", err)
     return
   }
 

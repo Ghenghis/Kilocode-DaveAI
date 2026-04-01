@@ -980,7 +980,9 @@ export namespace MessageV2 {
               },
             ).toObject()
           }
-        } catch {}
+        } catch {
+          // Failed to parse stream error - fall through to unknown error
+        }
         return new NamedError.Unknown({ message: JSON.stringify(e) }, { cause: e }).toObject()
     }
   }

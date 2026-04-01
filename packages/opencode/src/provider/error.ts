@@ -75,7 +75,9 @@ export namespace ProviderError {
         if (errMsg && typeof errMsg === "string") {
           return `${msg}: ${errMsg}`
         }
-      } catch {}
+      } catch {
+        // JSON parse failed, continue with default error message
+      }
 
       // If responseBody is HTML (e.g. from a gateway or proxy error page),
       // provide a human-readable message instead of dumping raw markup
@@ -100,6 +102,7 @@ export namespace ProviderError {
         if (result && typeof result === "object") return result
         return undefined
       } catch {
+        // Invalid JSON string, return undefined
         return undefined
       }
     }

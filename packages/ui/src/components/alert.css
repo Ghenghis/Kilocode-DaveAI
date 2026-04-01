@@ -1,0 +1,79 @@
+[data-component="alert"] {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border-width: 1px;
+  border-style: solid;
+
+  [data-slot="alert-icon"] {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  [data-slot="alert-content"] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  [data-slot="alert-title"] {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-large);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  [data-slot="alert-description"] {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-small);
+    font-style: normal;
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-large);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+
+  &[data-variant="info"] {
+    background-color: color-mix(in srgb, var(--icon-accent-base) 10%, transparent);
+    border-color: var(--icon-accent-base);
+    color: var(--text-base);
+
+    [data-slot="alert-icon"] {
+      color: var(--icon-accent-base);
+    }
+  }
+
+  &[data-variant="warning"] {
+    background-color: color-mix(in srgb, var(--icon-warning-base) 10%, transparent);
+    border-color: var(--icon-warning-base);
+    color: var(--text-base);
+
+    [data-slot="alert-icon"] {
+      color: var(--icon-warning-base);
+    }
+  }
+
+  &[data-variant="error"] {
+    background-color: color-mix(in srgb, var(--icon-danger-base) 10%, transparent);
+    border-color: var(--icon-danger-base);
+    color: var(--text-base);
+
+    [data-slot="alert-icon"] {
+      color: var(--icon-danger-base);
+    }
+  }
+
+  &[data-variant="success"] {
+    background-color: color-mix(in srgb, var(--icon-success-base) 10%, transparent);
+    border-color: var(--icon-success-base);
+    color: var(--text-base);
+
+    [data-slot="alert-icon"] {
+      color: var(--icon-success-base);
+    }
+  }
+}

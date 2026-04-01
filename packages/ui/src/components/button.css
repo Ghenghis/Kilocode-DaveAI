@@ -106,6 +106,98 @@
     }
   }
 
+  &[data-variant="outline"] {
+    border-color: var(--border-base);
+    background-color: transparent;
+    color: var(--text-base);
+    box-shadow: none;
+
+    [data-slot="icon-svg"] {
+      color: var(--icon-base);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--surface-base-hover);
+    }
+    &:focus:not(:disabled) {
+      background-color: transparent;
+    }
+    &:focus-visible:not(:active) {
+      background-color: transparent;
+      box-shadow: var(--shadow-xs-border-focus);
+    }
+    &:active:not(:disabled) {
+      background-color: var(--surface-base-active);
+    }
+    &:disabled {
+      border-color: var(--border-disabled);
+      background-color: transparent;
+      color: var(--text-weak);
+      cursor: not-allowed;
+    }
+  }
+
+  &[data-variant="default"] {
+    border-color: transparent;
+    background-color: var(--surface-raised-base);
+    color: var(--text-base);
+    box-shadow: var(--shadow-xs-border-base);
+
+    [data-slot="icon-svg"] {
+      color: var(--icon-base);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--surface-raised-hover);
+    }
+    &:focus:not(:disabled) {
+      background-color: var(--surface-raised-base);
+    }
+    &:focus-visible:not(:active) {
+      background-color: var(--surface-raised-base);
+      box-shadow: var(--shadow-xs-border-focus);
+    }
+    &:active:not(:disabled) {
+      background-color: var(--surface-raised-active);
+    }
+    &:disabled {
+      border-color: var(--border-disabled);
+      background-color: var(--surface-disabled);
+      color: var(--text-weak);
+      cursor: not-allowed;
+    }
+  }
+
+  &[data-variant="destructive"] {
+    border-color: transparent;
+    background-color: var(--icon-danger-base);
+    color: var(--icon-invert-base);
+    box-shadow: var(--shadow-xs-border-base);
+
+    [data-slot="icon-svg"] {
+      color: var(--icon-invert-base);
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--icon-danger-hover);
+    }
+    &:focus:not(:disabled) {
+      background-color: var(--icon-danger-base);
+    }
+    &:focus-visible:not(:active) {
+      background-color: var(--icon-danger-base);
+      box-shadow: var(--shadow-xs-border-focus);
+    }
+    &:active:not(:disabled) {
+      background-color: var(--icon-danger-active);
+    }
+    &:disabled {
+      background-color: var(--icon-danger-disabled);
+      color: var(--icon-invert-base);
+      cursor: not-allowed;
+    }
+  }
+
   &[data-size="small"] {
     height: 24px;
     padding: 0 8px;

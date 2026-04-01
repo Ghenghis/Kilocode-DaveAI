@@ -2,7 +2,6 @@ import { PostHog } from "posthog-node"
 import { Identity } from "./identity.js"
 import { TelemetryEvent } from "./events.js"
 
-const POSTHOG_API_KEY = "phc_GK2Pxl0HPj5ZPfwhLRjXrtdz8eD7e9MKnXiFrOqnB6z"
 const POSTHOG_HOST = "https://us.i.posthog.com"
 
 export namespace Client {
@@ -10,7 +9,9 @@ export namespace Client {
   let enabled = true
 
   export function init() {
-    client = new PostHog(POSTHOG_API_KEY, {
+    const apiKey = process.env.POSTHOG_API_KEY
+    if (!apiKey) throw new Error("POSTHOG_API_KEY not configured")
+    client = new PostHog(apiKey, {
       host: POSTHOG_HOST,
       disableGeoip: false,
     })

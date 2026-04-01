@@ -40,14 +40,140 @@ async function conflicts() {
 
 async function cleanup() {
   try {
-    await $`git merge --abort`
-  } catch {}
+    await #!/usr/bin/env bun
+
+import { $ } from "bun"
+
+interface PR {
+  number: number
+  title: string
+  author: { login: string }
+  labels: Array<{ name: string }>
+}
+
+interface FailedPR {
+  number: number
+  title: string
+  reason: string
+}
+
+async function commentOnPR(prNumber: number, reason: string) {
+  const body = `⚠️ **Blocking Beta Release**
+
+This PR cannot be merged into the beta branch due to: **${reason}**
+
+Please resolve this issue to include this PR in the next beta release.`
+
   try {
-    await $`git checkout -- .`
-  } catch {}
+    await $`gh pr comment ${prNumber} --body ${body}`
+    console.log(`  Posted comment on PR #${prNumber}`)
+  } catch (err) {
+    console.log(`  Failed to post comment on PR #${prNumber}: ${err}`)
+  }
+}
+
+async function conflicts() {
+  const out = await $`git diff --name-only --diff-filter=U`.text().catch(() => "")
+  return out
+    .split("\n")
+    .map((x) => x.trim())
+    .filter(Boolean)
+}
+
+git merge --abort`
+  } catch (err) {
+    console.error("cleanup: git merge --abort failed", err)
+  }
   try {
-    await $`git clean -fd`
-  } catch {}
+    await #!/usr/bin/env bun
+
+import { $ } from "bun"
+
+interface PR {
+  number: number
+  title: string
+  author: { login: string }
+  labels: Array<{ name: string }>
+}
+
+interface FailedPR {
+  number: number
+  title: string
+  reason: string
+}
+
+async function commentOnPR(prNumber: number, reason: string) {
+  const body = `⚠️ **Blocking Beta Release**
+
+This PR cannot be merged into the beta branch due to: **${reason}**
+
+Please resolve this issue to include this PR in the next beta release.`
+
+  try {
+    await $`gh pr comment ${prNumber} --body ${body}`
+    console.log(`  Posted comment on PR #${prNumber}`)
+  } catch (err) {
+    console.log(`  Failed to post comment on PR #${prNumber}: ${err}`)
+  }
+}
+
+async function conflicts() {
+  const out = await $`git diff --name-only --diff-filter=U`.text().catch(() => "")
+  return out
+    .split("\n")
+    .map((x) => x.trim())
+    .filter(Boolean)
+}
+
+git checkout -- .`
+  } catch (err) {
+    console.error("cleanup: git checkout failed", err)
+  }
+  try {
+    await #!/usr/bin/env bun
+
+import { $ } from "bun"
+
+interface PR {
+  number: number
+  title: string
+  author: { login: string }
+  labels: Array<{ name: string }>
+}
+
+interface FailedPR {
+  number: number
+  title: string
+  reason: string
+}
+
+async function commentOnPR(prNumber: number, reason: string) {
+  const body = `⚠️ **Blocking Beta Release**
+
+This PR cannot be merged into the beta branch due to: **${reason}**
+
+Please resolve this issue to include this PR in the next beta release.`
+
+  try {
+    await $`gh pr comment ${prNumber} --body ${body}`
+    console.log(`  Posted comment on PR #${prNumber}`)
+  } catch (err) {
+    console.log(`  Failed to post comment on PR #${prNumber}: ${err}`)
+  }
+}
+
+async function conflicts() {
+  const out = await $`git diff --name-only --diff-filter=U`.text().catch(() => "")
+  return out
+    .split("\n")
+    .map((x) => x.trim())
+    .filter(Boolean)
+}
+
+git clean -fd`
+  } catch (err) {
+    console.error("cleanup: git clean failed", err)
+  }
 }
 
 async function fix(pr: PR, files: string[]) {

@@ -102,7 +102,9 @@ export function createSpeechRecognition(opts?: {
       if (!recognition) return
       try {
         recognition.start()
-      } catch {}
+      } catch (err) {
+        console.error("speech: failed to start recognition", err)
+      }
     }, 150)
   }
 
@@ -283,7 +285,9 @@ export function createSpeechRecognition(opts?: {
     setStore("interim", "")
     try {
       recognition.start()
-    } catch {}
+    } catch (err) {
+      console.error("speech: failed to start recognition", err)
+    }
   }
 
   const stop = () => {
@@ -298,7 +302,9 @@ export function createSpeechRecognition(opts?: {
     if (opts?.onInterim) opts.onInterim("")
     try {
       recognition.stop()
-    } catch {}
+    } catch (err) {
+      console.error("speech: failed to stop recognition", err)
+    }
   }
 
   onCleanup(() => {
@@ -312,7 +318,9 @@ export function createSpeechRecognition(opts?: {
     if (opts?.onInterim) opts.onInterim("")
     try {
       recognition?.stop()
-    } catch {}
+    } catch (err) {
+      console.error("speech: failed to stop recognition on cleanup", err)
+    }
   })
 
   return {
