@@ -4,6 +4,27 @@
  */
 
 /* ============================================
+   Chat Layout with Left Panel
+   ============================================ */
+
+.chat-view {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Import LeftPanel styles */
+@import url('../components/chat/LeftPanel.css');
+
+/* ============================================
    Task Header Todos
    ============================================ */
 
@@ -184,18 +205,18 @@
 }
 
 /* All direct children share extra space equally, but start from their content size */
-.session-actions-row > * {
+.session-actions-row>* {
   flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
 }
 
 /* Tooltip wrappers fill their flex slot, buttons fill the tooltip wrapper */
-.session-actions-row > [data-component="tooltip-trigger"] {
+.session-actions-row>[data-component="tooltip-trigger"] {
   display: flex;
 }
 
-.session-actions-row > [data-component="tooltip-trigger"] > [data-component="button"] {
+.session-actions-row>[data-component="tooltip-trigger"]>[data-component="button"] {
   flex: 1;
 }
 
@@ -248,6 +269,7 @@
 
 /* Collapse diff stats to icon-only when truly narrow */
 @container (max-width: 300px) {
+
   .session-diff-add,
   .session-diff-del {
     display: none;
@@ -391,6 +413,7 @@
     opacity: 0;
     transform: scale(0.92) translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -402,6 +425,7 @@
     opacity: 0;
     transform: scale(0.5);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -413,6 +437,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -458,15 +483,15 @@
   width: 100%;
 }
 
-.feedback-dialog-actions > [data-component="button"]:nth-child(1) {
+.feedback-dialog-actions>[data-component="button"]:nth-child(1) {
   animation: feedback-dialog-item-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 
-.feedback-dialog-actions > [data-component="button"]:nth-child(2) {
+.feedback-dialog-actions>[data-component="button"]:nth-child(2) {
   animation: feedback-dialog-item-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
-.feedback-dialog-actions > [data-component="button"]:nth-child(3) {
+.feedback-dialog-actions>[data-component="button"]:nth-child(3) {
   animation: feedback-dialog-item-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
 }
 
@@ -1094,6 +1119,7 @@
       stroke: var(--border-focus, var(--vscode-focusBorder, #007fd4));
     }
   }
+
   [data-component="icon-button"] {
     [data-slot="icon-svg"] {
       color: var(--icon-base) !important;
@@ -1531,10 +1557,8 @@
 }
 
 .model-selector-item.active {
-  background: var(
-    --surface-interactive-active,
-    var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground))
-  );
+  background: var(--surface-interactive-active,
+      var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground)));
   color: var(--text-on-interactive-base, var(--vscode-list-activeSelectionForeground));
 }
 
@@ -1631,10 +1655,8 @@
 }
 
 .thinking-selector-item.selected {
-  background: var(
-    --surface-interactive-active,
-    var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground))
-  );
+  background: var(--surface-interactive-active,
+      var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground)));
   color: var(--text-on-interactive-base, var(--vscode-list-activeSelectionForeground));
 }
 
@@ -1677,10 +1699,8 @@
 }
 
 .mode-switcher-item.selected {
-  background: var(
-    --surface-interactive-active,
-    var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground))
-  );
+  background: var(--surface-interactive-active,
+      var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground)));
   color: var(--text-on-interactive-base, var(--vscode-list-activeSelectionForeground));
 }
 
@@ -1842,8 +1862,7 @@
 [data-component="dock-prompt"][data-kind="permission"] {
   animation: permission-slide-in 0.3s ease-out;
   margin: 12px;
-  border: 1px solid
-    color-mix(in srgb, var(--vscode-editorWarning-foreground, #cca700) 40%, var(--vscode-panel-border, transparent));
+  border: 1px solid color-mix(in srgb, var(--vscode-editorWarning-foreground, #cca700) 40%, var(--vscode-panel-border, transparent));
   border-radius: 0.25rem;
   overflow: clip;
 
@@ -2106,7 +2125,7 @@
     padding: 4px 0 8px;
   }
 
-  [data-slot="permission-actions"] > [data-component="button"][data-variant="primary"] {
+  [data-slot="permission-actions"]>[data-component="button"][data-variant="primary"] {
     color: var(--vscode-button-foreground);
     background-color: var(--vscode-button-background);
     border: 1px solid var(--vscode-button-border, transparent);
@@ -2116,7 +2135,7 @@
     }
   }
 
-  [data-slot="permission-actions"] > [data-component="button"][data-variant="ghost"] {
+  [data-slot="permission-actions"]>[data-component="button"][data-variant="ghost"] {
     border: none;
     box-shadow: none;
   }
@@ -2127,6 +2146,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2223,23 +2243,12 @@
 body.vscode-light .session-list [data-slot="list-item"][data-active="true"] [data-slot="list-item-description"],
 body.vscode-light .session-list [data-slot="list-item"][data-selected="true"] [data-slot="list-item-description"],
 body.vscode-light .cloud-session-list [data-slot="list-item"][data-active="true"] [data-slot="list-item-description"],
-body.vscode-light
-  .cloud-session-list
-  [data-slot="list-item"][data-selected="true"]
-  [data-slot="list-item-description"] {
+body.vscode-light .cloud-session-list [data-slot="list-item"][data-selected="true"] [data-slot="list-item-description"] {
   color: var(--text-on-interactive-base, white);
 }
 
-body.vscode-light
-  .session-list
-  [data-slot="list-item"][data-active="true"]
-  [data-slot="session-delete-button"]
-  [data-slot="icon-svg"],
-body.vscode-light
-  .session-list
-  [data-slot="list-item"][data-selected="true"]
-  [data-slot="session-delete-button"]
-  [data-slot="icon-svg"] {
+body.vscode-light .session-list [data-slot="list-item"][data-active="true"] [data-slot="session-delete-button"] [data-slot="icon-svg"],
+body.vscode-light .session-list [data-slot="list-item"][data-selected="true"] [data-slot="session-delete-button"] [data-slot="icon-svg"] {
   color: var(--text-on-interactive-base, white);
 }
 
@@ -2393,6 +2402,7 @@ body.vscode-light
     transform: translateX(20px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -2537,7 +2547,7 @@ body.vscode-light
   padding: 0 4px;
 }
 
-.vscode-session-turn + .vscode-session-turn {
+.vscode-session-turn+.vscode-session-turn {
   margin-top: 12px;
 }
 
@@ -2931,12 +2941,12 @@ body.vscode-light
     gap: 8px;
   }
 
-  [data-slot="question-dock-footer"] > [data-component="button"][data-variant="ghost"] {
+  [data-slot="question-dock-footer"]>[data-component="button"][data-variant="ghost"] {
     border: none;
     box-shadow: none;
   }
 
-  [data-slot="question-footer-actions"] > [data-component="button"][data-variant="primary"] {
+  [data-slot="question-footer-actions"]>[data-component="button"][data-variant="primary"] {
     color: var(--vscode-button-foreground);
     background-color: var(--vscode-button-background);
     border: 1px solid var(--vscode-button-border, transparent);
@@ -2994,6 +3004,7 @@ body.vscode-light
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -3060,7 +3071,7 @@ body.vscode-light
     flex: 0 0 auto;
     max-width: 160px;
 
-    & > * {
+    &>* {
       max-width: 100%;
     }
   }
@@ -3080,6 +3091,7 @@ body.vscode-light
 
 body.vscode-high-contrast,
 body.vscode-high-contrast-light {
+
   /* Buttons */
   .scroll-to-bottom-button,
   .feedback-button,

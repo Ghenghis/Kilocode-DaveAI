@@ -188,12 +188,4 @@ export const Working: Story = {
   ),
 }
 
-export const WithStepsExpanded: Story = {
-  render: () => (
-    <Providers data={baseData}>
-      <div style={{ width: "700px" }}>
-        <SessionTurn sessionID={SESSION_ID} messageID={USER_MSG_ID} stepsExpanded />
-      </div>
-    </Providers>
-  ),
-}
+

@@ -32,11 +32,18 @@ import { Dynamic } from "solid-js/web"
 
 const Home = lazy(() => import("@/pages/home"))
 const Session = lazy(() => import("@/pages/session"))
+const Settings = lazy(() => import("@/pages/settings"))
 const Loading = () => <div class="size-full" />
 
 const HomeRoute = () => (
   <Suspense fallback={<Loading />}>
     <Home />
+  </Suspense>
+)
+
+const SettingsRoute = () => (
+  <Suspense fallback={<Loading />}>
+    <Settings />
   </Suspense>
 )
 
@@ -157,6 +164,7 @@ export function AppInterface(props: {
               root={(routerProps) => <RouterRoot appChildren={props.children}>{routerProps.children}</RouterRoot>}
             >
               <Route path="/" component={HomeRoute} />
+              <Route path="/settings" component={SettingsRoute} />
               <Route path="/:dir" component={DirectoryLayout}>
                 <Route path="/" component={SessionIndexRoute} />
                 <Route path="/session/:id?" component={SessionRoute} />

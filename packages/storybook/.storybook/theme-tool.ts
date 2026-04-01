@@ -9,13 +9,9 @@ export function ThemeTool() {
     const next = mode === "dark" ? "light" : "dark"
     updateGlobals({ theme: next })
   }
-  return createElement(
-    ToggleButton,
-    {
-      title: "Toggle theme",
-      active: mode === "dark",
-      onClick: toggle,
-    },
-    mode === "dark" ? "Dark" : "Light",
-  )
+  return createElement(ToggleButton as any, {
+    title: "Toggle theme",
+    active: mode === "dark",
+    onClick: toggle,
+  }, mode === "dark" ? "Dark" : "Light") as unknown as React.ReactElement
 }

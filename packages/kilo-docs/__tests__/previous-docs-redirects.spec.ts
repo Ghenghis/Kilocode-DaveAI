@@ -85,7 +85,7 @@ describe("previous-docs-redirects", () => {
       }
 
       // Check each redirect source for potential cycles
-      for (const source of redirectMap.keys()) {
+      for (const source of Array.from(redirectMap.keys())) {
         const cycle = detectCycle(source)
         if (cycle) {
           // Avoid duplicate cycle reports by checking if we've already found this cycle

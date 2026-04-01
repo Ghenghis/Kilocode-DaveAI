@@ -1,0 +1,277 @@
+/* LeftPanel Styles - Restores missing items from left sidebar */
+
+.left-panel {
+  width: 200px;
+  background: var(--background-secondary);
+  border-right: 1px solid var(--border-weak-base);
+  padding: 12px 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.left-panel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.left-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--foreground-secondary);
+  cursor: default;
+  padding: 4px 0;
+}
+
+.left-panel-header:hover {
+  color: var(--foreground-primary);
+}
+
+.expand-icon {
+  margin-left: auto;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.left-panel-header:hover .expand-icon {
+  opacity: 1;
+}
+
+/* Voice Controls */
+.voice-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 8px;
+}
+
+.voice-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.voice-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.voice-action-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Status Items */
+.status-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 8px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.status-connected {
+  background: var(--success-foreground);
+}
+
+.status-dot.status-connecting {
+  background: var(--warning-foreground);
+}
+
+.status-dot.status-error {
+  background: var(--destructive-foreground);
+}
+
+.status-dot.status-disconnected {
+  background: var(--muted-foreground);
+}
+
+.status-dot.busy {
+  background: var(--warning-foreground);
+}
+
+.status-dot.idle {
+  background: var(--success-foreground);
+}
+
+.status-dot.has-changes {
+  background: var(--warning-foreground);
+}
+
+.status-dot.no-changes {
+  background: var(--muted-foreground);
+}
+
+.status-text {
+  font-size: 11px;
+  color: var(--foreground-secondary);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 8px;
+}
+
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 11px;
+  height: auto;
+}
+
+.quick-action-btn:hover {
+  background: var(--background-hover);
+}
+
+/* Provider Status */
+.provider-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 8px;
+}
+
+.provider-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.provider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.provider-dot.provider-online {
+  background: var(--success-foreground);
+}
+
+.provider-dot.provider-offline {
+  background: var(--destructive-foreground);
+}
+
+.provider-text {
+  font-size: 11px;
+  color: var(--foreground-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .left-panel {
+    width: 160px;
+    padding: 8px 6px;
+  }
+
+  .quick-action-btn span {
+    display: none;
+  }
+
+  .quick-action-btn {
+    justify-content: center;
+    padding: 6px;
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .left-panel {
+    background: var(--background-secondary);
+    border-right-color: var(--border-weak-base);
+  }
+
+  .left-panel-header {
+    color: var(--foreground-secondary);
+  }
+
+  .left-panel-header:hover {
+    color: var(--foreground-primary);
+  }
+}
+
+/* Animation for expand/collapse */
+.left-panel-section {
+  transition: all 0.2s ease;
+}
+
+.status-items,
+.voice-controls,
+.quick-actions,
+.provider-status {
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+/* Focus styles */
+.quick-action-btn:focus-visible,
+.voice-action-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* Badge styling in quick actions */
+.badge {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.badge.badge-destructive {
+  background: var(--destructive);
+  color: var(--destructive-foreground);
+}
+
+.badge.badge-secondary {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.badge.badge-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.quick-action-btn .badge {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 10px;
+}

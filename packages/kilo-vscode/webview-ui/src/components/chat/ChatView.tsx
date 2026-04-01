@@ -15,6 +15,7 @@ import { PromptInput } from "./PromptInput"
 import { QuestionDock } from "./QuestionDock"
 import { PermissionDock } from "./PermissionDock"
 import { StartupErrorBanner } from "./StartupErrorBanner"
+import { LeftPanel } from "./LeftPanel"
 import { useSession } from "../../context/session"
 import { useVSCode } from "../../context/vscode"
 import { useLanguage } from "../../context/language"
@@ -124,100 +125,119 @@ export const ChatView: Component<ChatViewProps> = (props) => {
 
   return (
     <div class="chat-view">
-      <TaskHeader readonly={props.readonly} />
-      <div class="chat-messages-wrapper">
-        <div class="chat-messages">
-          <MessageList onSelectSession={props.onSelectSession} onShowHistory={props.onShowHistory} />
+      {/* Left Panel - Restores missing items */}
+      <Show when={!props.readonly}>
+        <LeftPanel 
+          onToggleSpeech={(enabled) => {
+            vscode.postMessage({
+              type: "sendMessage",
+              data: {
+                type: "speech",
+                action: "toggleSpeech",
+                enabled
+              }
+            })
+          }}
+        />
+      </Show>
+      
+      {/* Main Chat Area */}
+      <div class="chat-main">
+        <TaskHeader readonly={props.readonly} />
+        <div class="chat-messages-wrapper">
+          <div class="chat-messages">
+            <MessageList onSelectSession={props.onSelectSession} onShowHistory={props.onShowHistory} />
+          </div>
         </div>
-      </div>
 
-      <Show when={dock()}>
-        <div class="chat-input">
-          <Show when={server.connectionState() === "error" && server.errorMessage()}>
-            <StartupErrorBanner errorMessage={server.errorMessage()!} errorDetails={server.errorDetails()!} />
-          </Show>
-          <Show when={questionRequest()} keyed>
-            {(req) => <QuestionDock request={req} />}
-          </Show>
-          <Show when={permissionRequest()} keyed>
-            {(perm) => (
-              <PermissionDock
-                request={perm}
-                responding={session.respondingPermissions().has(perm.id)}
-                onDecide={decide}
-              />
-            )}
-          </Show>
-          <Show when={!props.readonly && hasMessages() && idle() && !blocked()}>
-            <div class="new-task-button-wrapper">
-              <div class="session-actions-row">
-                <Tooltip value="Start a new conversation" placement="top">
-                  <Button
-                    variant="secondary"
-                    size="small"
-                    onClick={() => window.dispatchEvent(new CustomEvent("newTaskRequest"))}
-                    aria-label={language.t("command.session.new.task")}
-                  >
-                    {language.t("command.session.new.task")}
-                  </Button>
-                </Tooltip>
-                <Show when={canContinueInWorktree()}>
-                  <Tooltip value="Continue in isolated worktree" placement="top">
+        <Show when={dock()}>
+          <div class="chat-input">
+            <Show when={server.connectionState() === "error" && server.errorMessage()}>
+              <StartupErrorBanner errorMessage={server.errorMessage()!} errorDetails={server.errorDetails()!} />
+            </Show>
+            <Show when={questionRequest()} keyed>
+              {(req) => <QuestionDock request={req} />}
+            </Show>
+            <Show when={permissionRequest()} keyed>
+              {(perm) => (
+                <PermissionDock
+                  request={perm}
+                  responding={session.respondingPermissions().has(perm.id)}
+                  onDecide={decide}
+                />
+              )}
+            </Show>
+            <Show when={!props.readonly && hasMessages() && idle() && !blocked()}>
+              <div class="new-task-button-wrapper">
+                <div class="session-actions-row">
+                  <Tooltip value="Start a new conversation" placement="top">
                     <Button
-                      variant="ghost"
+                      variant="secondary"
                       size="small"
-                      disabled={transferring()}
-                      onClick={() => {
-                        const sid = id()
-                        if (!sid) return
-                        setTransferring(true)
-                        setTransferDetail("Capturing changes...")
-                        vscode.postMessage({ type: "continueInWorktree", sessionId: sid })
-                      }}
-                      aria-label="Continue in Worktree"
+                      onClick={() => window.dispatchEvent(new CustomEvent("newTaskRequest"))}
+                      aria-label={language.t("command.session.new.task")}
                     >
-                      <Show when={transferring()} fallback={<Icon name="branch" size="small" />}>
-                        <Spinner class="chat-spinner-small" />
-                      </Show>
-                      {transferring() ? transferDetail() : "Worktree"}
+                      {language.t("command.session.new.task")}
                     </Button>
                   </Tooltip>
-                </Show>
-                <Show when={isSidebar()}>
-                  <Tooltip
-                    value={
-                      session.worktreeStats()?.files
-                        ? `${session.worktreeStats()!.files} file${session.worktreeStats()!.files > 1 ? "s" : ""} changed · +${session.worktreeStats()!.additions} -${session.worktreeStats()!.deletions}`
-                        : "No file changes"
-                    }
-                    placement="top"
-                    class="session-diff-wrapper"
-                  >
-                    <button
-                      class="session-diff-badge"
-                      classList={{
-                        "session-diff-badge--empty": !session.worktreeStats()?.files,
-                        "session-diff-badge--has-changes": !!session.worktreeStats()?.files,
-                      }}
-                      onClick={() => vscode.postMessage({ type: "openChanges" })}
-                      aria-label={language.t("command.session.show.changes")}
+                  <Show when={canContinueInWorktree()}>
+                    <Tooltip value="Continue in isolated worktree" placement="top">
+                      <Button
+                        variant="ghost"
+                        size="small"
+                        disabled={transferring()}
+                        onClick={() => {
+                          const sid = id()
+                          if (!sid) return
+                          setTransferring(true)
+                          setTransferDetail("Capturing changes...")
+                          vscode.postMessage({ type: "continueInWorktree", sessionId: sid })
+                        }}
+                        aria-label="Continue in Worktree"
+                      >
+                        <Show when={transferring()} fallback={<Icon name="branch" size="small" />}>
+                          <Spinner class="chat-spinner-small" />
+                        </Show>
+                        {transferring() ? transferDetail() : "Worktree"}
+                      </Button>
+                    </Tooltip>
+                  </Show>
+                  <Show when={isSidebar()}>
+                    <Tooltip
+                      value={
+                        session.worktreeStats()?.files
+                          ? `${session.worktreeStats()!.files} file${session.worktreeStats()!.files > 1 ? "s" : ""} changed · +${session.worktreeStats()!.additions} -${session.worktreeStats()!.deletions}`
+                          : "No file changes"
+                      }
+                      placement="top"
+                      class="session-diff-wrapper"
                     >
-                      <Icon name="layers" size="small" />
-                      <Show when={session.worktreeStats()?.files}>
-                        <span class="session-diff-add">+{session.worktreeStats()!.additions}</span>
-                        <span class="session-diff-del">-{session.worktreeStats()!.deletions}</span>
-                      </Show>
-                    </button>
-                  </Tooltip>
-                </Show>
+                      <button
+                        class="session-diff-badge"
+                        classList={{
+                          "session-diff-badge--empty": !session.worktreeStats()?.files,
+                          "session-diff-badge--has-changes": !!session.worktreeStats()?.files,
+                        }}
+                        onClick={() => vscode.postMessage({ type: "openChanges" })}
+                        aria-label={language.t("command.session.show.changes")}
+                      >
+                        <Icon name="layers" size="small" />
+                        <Show when={session.worktreeStats()?.files}>
+                          <span class="session-diff-add">+{session.worktreeStats()!.additions}</span>
+                          <span class="session-diff-del">-{session.worktreeStats()!.deletions}</span>
+                        </Show>
+                      </button>
+                    </Tooltip>
+                  </Show>
+                </div>
               </div>
-            </div>
-          </Show>
-          <Show when={!props.readonly}>
-            <PromptInput blocked={blocked} />
-          </Show>
-        </div>
-      </Show>
+            </Show>
+            <Show when={!props.readonly}>
+              <PromptInput blocked={blocked} />
+            </Show>
+          </div>
+        </Show>
+      </div>
     </div>
   )
 }
